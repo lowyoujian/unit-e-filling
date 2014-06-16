@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2014 at 09:16 AM
+-- Generation Time: Jun 16, 2014 at 12:41 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -63,6 +63,10 @@ CREATE TABLE IF NOT EXISTS `unit file` (
   `FileStatus` tinyint(1) NOT NULL,
   `HOD in charge` varchar(100) NOT NULL,
   `path` varchar(1000) NOT NULL,
+  `Num of Quizzes` int(11) NOT NULL,
+  `Num of Tests` int(11) NOT NULL,
+  `Num of Labs` int(11) NOT NULL,
+  `Num of Assignments` int(11) NOT NULL,
   PRIMARY KEY (`FileName`,`Year/Trimester`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
