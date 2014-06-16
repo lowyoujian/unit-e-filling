@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2014 at 06:35 AM
+-- Generation Time: Jun 16, 2014 at 09:16 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -23,12 +23,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lecturer`
+--
+
+CREATE TABLE IF NOT EXISTS `lecturer` (
+  `LecturerID` varchar(15) NOT NULL,
+  `LecturerName` varchar(100) NOT NULL,
+  `Faculty` varchar(100) NOT NULL,
+  `Department` varchar(100) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Telephone` varchar(15) NOT NULL,
+  PRIMARY KEY (`LecturerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login`
 --
 
 CREATE TABLE IF NOT EXISTS `login` (
-  `username` varchar(15) NOT NULL,
-  `password` varchar(15) NOT NULL
+  `LecturerID` varchar(15) NOT NULL,
+  `Password` varchar(15) NOT NULL,
+  PRIMARY KEY (`LecturerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -38,15 +55,15 @@ CREATE TABLE IF NOT EXISTS `login` (
 --
 
 CREATE TABLE IF NOT EXISTS `unit file` (
+  `FileName` varchar(100) NOT NULL,
+  `Year/Trimester` varchar(10) NOT NULL,
   `UnitCode` varchar(10) NOT NULL,
   `UnitName` varchar(100) NOT NULL,
-  `Lecturer` varchar(100) NOT NULL,
-  `File Name` varchar(100) NOT NULL,
   `Last Uploaded` date NOT NULL,
-  `File Status` tinyint(1) NOT NULL,
-  `Year/Trimester` varchar(10) NOT NULL,
-  `HOD in Charge` varchar(100) NOT NULL,
-  PRIMARY KEY (`UnitCode`)
+  `FileStatus` tinyint(1) NOT NULL,
+  `HOD in charge` varchar(100) NOT NULL,
+  `path` varchar(1000) NOT NULL,
+  PRIMARY KEY (`FileName`,`Year/Trimester`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
