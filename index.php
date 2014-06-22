@@ -49,6 +49,12 @@ include('upload.php');
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['lectures'] ?></label>
+						<div class="col-sm-3">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="1" placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['quizzes'] ?></label>
 						<div class="col-sm-3">
 							<input type="text" name="" required class="form-control" id="inputEmail3" value="1" placeholder="">
@@ -61,7 +67,7 @@ include('upload.php');
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['labs'] ?></label>
+						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['practicals'] ?></label>
 						<div class="col-sm-3">
 							<input type="text" name="" required class="form-control" id="inputEmail3" value="3" placeholder="">
 						</div>
