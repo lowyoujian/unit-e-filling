@@ -1,8 +1,10 @@
 <!DOCTYPE HTML>
 <html>
+
 <?php 
 include('upload.php');
 ?>
+
 <head>
 	<title>Unit e-Filling</title>	
 
@@ -19,61 +21,61 @@ include('upload.php');
 					<div class="form-group">
 						<label for="unitcode" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="unitcode" required class="form-control" id="inputEmail3" placeholder="UECS 3333">
+							<input type="text" name="unitcode" required class="form-control" id="inputEmail3" value="UECS 3333" placeholder="UECS 3333">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitname'] ?></label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="inputEmail3" placeholder="Web Engineering">
+							<input type="text" class="form-control" id="inputEmail3" value="Web Engineering" placeholder="Web Engineering">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['trimester'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" placeholder="May/2014">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="May/2014" placeholder="May/2014">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['programme'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" placeholder="Software Engineering">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="Software Engineering" placeholder="Software Engineering">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['moderator'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" placeholder="ooieh@utar.my">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="ooieh@utar.my" placeholder="ooieh@utar.my">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['quizzes'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" placeholder="">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="1" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['tests'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" placeholder="">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="2" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['labs'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" placeholder="">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="3" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['assignments'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" placeholder="">
+							<input type="text" name="" required class="form-control" id="inputEmail3" value="4" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputFile" class="col-sm-2 control-label">File input:</label>
 						<div class="col-sm-6">
-							<input type="file" required name="file[]" class="form-control" id="exampleInputFile">
+							<input type="file" required name="file" class="form-control" id="exampleInputFile">
 						</div>
 						<div class="row">
 							<button type="submit" class="btn btn-default">Submit</button>
@@ -86,13 +88,21 @@ include('upload.php');
 				</form>
 			</div>
 		</div>
-	</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Uploaded file</div>
+			<div class="panel-body">
+				
+
+
+			</div>
+		</div>
 
 
 
 
-	
-</body>
-</html>
+
+	</body>
+	</html>
 
 
