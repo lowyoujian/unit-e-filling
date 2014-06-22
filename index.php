@@ -81,6 +81,29 @@ include('upload.php');
 							<button type="submit" class="btn btn-default">Submit</button>
 						</div>
 						
+						
+											
+						<?php 
+for ($x=1; $x<=$_POST["quiz"]; $x++) {
+  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "7-quiz\quiz". "$x<br>";
+} 
+?>
+<?php 
+for ($x=1; $x<=$_POST["test"]; $x++) {
+  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "8-test\\test". "$x<br>";
+} 
+?>
+<?php 
+for ($x=1; $x<=$_POST["lab"]; $x++) {
+  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "9-lab\lab". "$x<br>";
+} 
+?>
+<?php 
+for ($x=1; $x<=$_POST["assignment"]; $x++) {
+  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "10-assignment\assignment". "$x<br>";
+} 
+?>
+						
 
 					</div>
 					
