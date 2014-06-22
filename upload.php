@@ -9,7 +9,8 @@ $upload_form_fields = array(
 	'moderator' => 'Moderator:',
 	'quizzes'   => 'Number of Quizzes:',
 	'tests'     => 'Number of Tests:',
-	'labs'      => 'Number of Labs:',
+	'lectures'     => 'Number of Lectures:',
+	'practicals'      => 'Number of Practicals:',
 	'assignments'=> 'Number of Assignments:' 
 	);
 
