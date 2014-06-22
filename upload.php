@@ -8,6 +8,7 @@ $upload_form_fields = array(
 	'programme' => 'Programme:',
 	'moderator' => 'Moderator:',
 	'quizzes'   => 'Number of Quizzes:',
+	'tutorials'   => 'Number of Tutorials:',
 	'tests'     => 'Number of Tests:',
 	'lectures'     => 'Number of Lectures:',
 	'practicals'      => 'Number of Practicals:',

@@ -1,0 +1,29 @@
+UECS 3333 Web Engineering\1-syllabus\syllabus UECS 3333
+UECS 3333 Web Engineering\2-teaching plan	eaching plan UECS 3333
+UECS 3333 Web Engineering\3-lecture\lecture1
+UECS 3333 Web Engineering\4-tutorial\tutorial1
+UECS 3333 Web Engineering\4-tutorial\solution1
+UECS 3333 Web Engineering\5-assignment\assignment1
+UECS 3333 Web Engineering\5-assignment\solution1
+UECS 3333 Web Engineering\5-assignment\assignment2
+UECS 3333 Web Engineering\5-assignment\solution2
+UECS 3333 Web Engineering\5-assignment\assignment3
+UECS 3333 Web Engineering\5-assignment\solution3
+UECS 3333 Web Engineering\5-assignment\assignment4
+UECS 3333 Web Engineering\5-assignment\solution4
+UECS 3333 Web Engineering\6-practical\practical1
+UECS 3333 Web Engineering\6-practical\solution1
+UECS 3333 Web Engineering\6-practical\practical2
+UECS 3333 Web Engineering\6-practical\solution2
+UECS 3333 Web Engineering\6-practical\practical3
+UECS 3333 Web Engineering\6-practical\solution3
+UECS 3333 Web Engineering\7-quiz\quiz1
+UECS 3333 Web Engineering\7-quiz\solution1
+UECS 3333 Web Engineering\8-test\test1
+UECS 3333 Web Engineering\8-test\solution1
+UECS 3333 Web Engineering\8-test\test2
+UECS 3333 Web Engineering\8-test\solution2
+UECS 3333 Web Engineering\9-exam\main3
+UECS 3333 Web Engineering\10-unit matrix\unit matrix UECS 3333
+UECS 3333 Web Engineering\11-academic report\academic report UECS 3333
+UECS 3333 Web Engineering\12-misc\misc UECS 3333

@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `unit file` (
   `path` varchar(1000) NOT NULL,
   `Num of Quizzes` int(11) NOT NULL,
   `Num of Tests` int(11) NOT NULL,
+  `Num of Tutorials` int(11) NOT NULL,
   `Num of Lectures` int(11) NOT NULL,
   `Num of Practicals` int(11) NOT NULL,
   `Num of Assignments` int(11) NOT NULL,
