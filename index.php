@@ -1,10 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
-<?php 
-include('upload.php');
-?>
-
 <head>
 	<title>Unit e-Filling</title>	
 
@@ -14,118 +9,79 @@ include('upload.php');
 
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading">e-Unitfile</div>
+			<div class="panel-heading">e-Unitfile Login</div>
 			<div class="panel-body">
 
-				<form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
+				<form class="form-horizontal" role="form" action="" method="POST" >
 					<div class="form-group">
-						<label for="unitcode" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
+						<label for="loginid" class="col-sm-2 control-label">Login ID:</label>
 						<div class="col-sm-3">
-							<input type="text" name="unitcode" required class="form-control" id="inputEmail3" value="UECS 3333" placeholder="UECS 3333">
+							<input type="loginid" name="lecturerid" class="form-control" value="ooi" id="logindid" placeholder="ID">
 						</div>
 					</div>
+					
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitname'] ?></label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" id="inputEmail3" value="Web Engineering" placeholder="Web Engineering">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['trimester'] ?></label>
+						<label for="password" class="col-sm-2 control-label">Password:</label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="May/2014" placeholder="May/2014">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['programme'] ?></label>
-						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="Software Engineering" placeholder="Software Engineering">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['moderator'] ?></label>
-						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="ooieh@utar.my" placeholder="ooieh@utar.my">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['quizzes'] ?></label>
-						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="1" placeholder="">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['tests'] ?></label>
-						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="2" placeholder="">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['labs'] ?></label>
-						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="3" placeholder="">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['assignments'] ?></label>
-						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="4" placeholder="">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="exampleInputFile" class="col-sm-2 control-label">File input:</label>
-						<div class="col-sm-6">
-							<input type="file" required name="file" class="form-control" id="exampleInputFile">
+							<input type="password" name="password" class="form-control" value="ooi" id="inputEmail3" placeholder="Password">
+
 						</div>
 						<div class="row">
-							<button type="submit" class="btn btn-default">Submit</button>
+							<button type="submit" class="btn btn-success">Submit</button>
 						</div>
-						
-						
-											
-						<?php 
-for ($x=1; $x<=$_POST["quiz"]; $x++) {
-  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "7-quiz\quiz". "$x<br>";
-} 
-?>
-<?php 
-for ($x=1; $x<=$_POST["test"]; $x++) {
-  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "8-test\\test". "$x<br>";
-} 
-?>
-<?php 
-for ($x=1; $x<=$_POST["lab"]; $x++) {
-  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "9-lab\lab". "$x<br>";
-} 
-?>
-<?php 
-for ($x=1; $x<=$_POST["assignment"]; $x++) {
-  echo $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "10-assignment\assignment". "$x<br>";
-} 
-?>
-						
-
 					</div>
+					
 					
 					
 				</form>
 			</div>
 		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-heading">Uploaded file</div>
-			<div class="panel-body">
-				
+	</div>
 
 
-			</div>
-		</div>
+<?php
+if($_SERVER['REQUEST_METHOD']=="POST")
+{
+	
+	$mysqli = new mysqli('localhost', 'root', '', 'team_project');
+			if ($mysqli->connect_error) {
+				die('Connect Error (' . $mysqli->connect_errno . ') '
+						. $mysqli->connect_error);
+			}
+
+
+	
+	$stmt=$mysqli->prepare("SELECT lecturerid FROM login WHERE lecturerid =? AND password =?");
+	$stmt->bind_param('ss',
+		$_POST['lecturerid'],
+		$_POST['password']);
+	$stmt->execute();
+	$stmt->bind_result($loginid);
+	$stmt->fetch();
+
+	if($loginid == false)
+	{
+		$message = 'Login Failed. Username or password incorrect';
+	}
+	
+	else
+	{
+		session_start();
+		
+		$_SESSION['lecturerid']=$loginid;
+		var_dump($_SESSION['lecturerid']);
+		header('Location:unitcodelist.php');
+	}
+	echo "<div class='container'><span style=color:red>$message</span></div>";
+
+	
+}
+?>
 
 
 
-
-
-	</body>
-	</html>
+	
+</body>
+</html>
 
 
