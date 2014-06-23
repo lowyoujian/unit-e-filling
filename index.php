@@ -16,9 +16,11 @@
 					<div class="form-group">
 						<label for="loginid" class="col-sm-2 control-label">Login ID:</label>
 						<div class="col-sm-3">
+
 							<input type="loginid" name="lecturerid" class="form-control" value="ooi" id="logindid" placeholder="ID">
 						</div>
 					</div>
+					
 					
 					<div class="form-group">
 						<label for="password" class="col-sm-2 control-label">Password:</label>

@@ -10,6 +10,57 @@ include('upload.php');
 	<title>Unit e-Filling</title>	
 
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	
+	<script>
+		function file_generate(){
+			<?php 
+			
+			$file = fopen("test.txt","w"); 
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "1-syllabus\syllabus ". $_POST["unitcodes"]. "\r\n"); 
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "2-teaching plan\teaching plan ". $_POST["unitcodes"]. "\r\n");
+			
+			for ($x=1; $x<=$_POST["lecture"]; $x++) {
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "3-lecture\lecture". "$x\r\n");
+			} 
+
+			for ($x=1; $x<=$_POST["quiz"]; $x++) {
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "4-tutorial\\tutorial". "$x\r\n");
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "4-tutorial\solution". "$x\r\n");
+			} 
+
+			for ($x=1; $x<=$_POST["assignment"]; $x++) {
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "5-assignment\assignment". "$x\r\n");
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "5-assignment\solution". "$x\r\n");
+			} 
+
+			for ($x=1; $x<=$_POST["practical"]; $x++) {
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "6-practical\practical". "$x\r\n");
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "6-practical\solution". "$x\r\n");
+			} 
+
+			for ($x=1; $x<=$_POST["quiz"]; $x++) {
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "7-quiz\quiz". "$x\r\n");
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "7-quiz\solution". "$x\r\n");
+			} 
+
+			for ($x=1; $x<=$_POST["test"]; $x++) {
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "8-test\\test". "$x\r\n");
+				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "8-test\solution". "$x\r\n");
+			} 
+
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "9-exam\main". "$x\r\n");
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "10-unit matrix\unit matrix ". $_POST["unitcodes"]. "\r\n");
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "11-academic report\academic report ". $_POST["unitcodes"]. "\r\n");
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "12-misc\misc ". $_POST["unitcodes"]. "\r\n");
+
+			fclose($file); 
+
+			
+			
+
+			?>
+		}			
+	</script>
 </head>
 <body>
 
@@ -77,8 +128,8 @@ include('upload.php');
 						<label for="exampleInputFile" class="col-sm-2 control-label">File input:</label>
 						<div class="col-sm-6">
 							<input type="file" multiple="multiple" required name="files[]" class="form-control" id="files">
-						<div id="drop_zone">Drop files here</div>
-						<output id="list"></output>
+							<div id="drop_zone">Drop files here</div>
+							<output id="list"></output>
 						</div>
 						<div class="row">
 							
@@ -87,42 +138,42 @@ include('upload.php');
 						</div>				
 					</div>
 					<script>
-  function handleFileSelect(evt) {
+						function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
     // files is a FileList of File objects. List some properties.
     var output = [];
     for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                  '</li>');
+    	output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+    		f.size, ' bytes, last modified: ',
+    		f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+    		'</li>');
     }
     document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-  }
+}
 
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
 </script>
-					
-					
-				</form>
-			</div>
-		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-heading">Uploaded file</div>
-			<div class="panel-body">
-				
 
 
-			</div>
-		</div>
+</form>
+</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">Uploaded file</div>
+	<div class="panel-body">
+		
 
 
+	</div>
+</div>
 
 
 
-	</body>
-	</html>
+
+
+</body>
+</html>
 
 
