@@ -16,8 +16,8 @@ include('upload.php');
 			<?php 
 			
 			$file = fopen("test.txt","w"); 
-			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "1-syllabus\syllabus ". $_POST["unitcodes"]. "\r\n"); 
-			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "2-teaching plan\teaching plan ". $_POST["unitcodes"]. "\r\n");
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "1-syllabus\syllabus ".$_POST["unitcodes"]. "\r\n"); 
+			fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "2-teaching plan\\teaching plan ".$_POST["unitcodes"]. "\r\n");
 			
 			for ($x=1; $x<=$_POST["lecture"]; $x++) {
 				fwrite($file, $_POST["unitcodes"]. " ".$_POST["unitnames"]. "\\". "3-lecture\lecture". "$x\r\n");
@@ -73,13 +73,13 @@ include('upload.php');
 					<div class="form-group">
 						<label for="unitcode" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="unitcode" required class="form-control" id="inputEmail3" value="UECS 3333" placeholder="UECS 3333">
+							<input type="text" name="unitcodes" required class="form-control" id="inputEmail3" value="UECS 3333" placeholder="UECS3333">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitname'] ?></label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="inputEmail3" value="Web Engineering" placeholder="Web Engineering">
+							<input type="text" name="unitnames" class="form-control" id="inputEmail3" value="Web Engineering" placeholder="Web Engineering">
 						</div>
 					</div>
 					<div class="form-group">
@@ -101,27 +101,39 @@ include('upload.php');
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['lectures'] ?></label>
+						<div class="col-sm-3">
+							<input type="text" name="lecture" required class="form-control" id="inputEmail3" value="1" placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['tutorials'] ?></label>
+						<div class="col-sm-3">
+							<input type="text" name="tutorial" required class="form-control" id="inputEmail3" value="1" placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['quizzes'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="1" placeholder="">
+							<input type="text" name="quiz" required class="form-control" id="inputEmail3" value="1" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['tests'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="2" placeholder="">
+							<input type="text" name="test" required class="form-control" id="inputEmail3" value="2" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['labs'] ?></label>
+						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['practicals'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="3" placeholder="">
+							<input type="text" name="practical" required class="form-control" id="inputEmail3" value="3" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['assignments'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="4" placeholder="">
+							<input type="text" name="assignment" required class="form-control" id="inputEmail3" value="4" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
