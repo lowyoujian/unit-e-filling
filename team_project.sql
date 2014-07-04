@@ -8,7 +8,7 @@ CREATE TABLE  `unitFile` (
   `fileStatus` tinyint(1) NOT NULL,
   `hod` varchar(100) NOT NULL,
   `url` varchar(1000) NOT NULL,
-   PRIMARY KEY (`fileName`,`trimester`)
+   PRIMARY KEY (`fileName`,`semester`)
 ) ;
 
 CREATE TABLE IF NOT EXISTS `login` (
@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS `lecturer` (
   `lecturerName` varchar(100) NOT NULL,
   `faculty` varchar(100) NOT NULL,
   `department` varchar(100) NOT NULL,
->>>>>>> 82416125e1a336ba2151840f5433111df18a708b
   `email` varchar(50) NOT NULL,
   `unitcode` varchar(40) NOT NULL,
   `trimester` varchar(50) NOT NULL,
