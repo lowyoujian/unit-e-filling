@@ -17,7 +17,7 @@
 						<label for="loginid" class="col-sm-2 control-label">Login ID:</label>
 						<div class="col-sm-3">
 
-							<input type="loginid" name="lecturerid" class="form-control" value="ooi" id="logindid" placeholder="ID">
+							<input type="loginid" name="lecturerid" class="form-control" value="123456" id="logindid" placeholder="ID">
 						</div>
 					</div>
 					
@@ -25,7 +25,7 @@
 					<div class="form-group">
 						<label for="password" class="col-sm-2 control-label">Password:</label>
 						<div class="col-sm-3">
-							<input type="password" name="password" class="form-control" value="ooi" id="inputEmail3" placeholder="Password">
+							<input type="password" name="password" class="form-control" value="123456" id="inputEmail3" placeholder="Password">
 
 						</div>
 						<div class="row">

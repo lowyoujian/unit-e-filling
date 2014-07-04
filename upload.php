@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Los_Angeles');
+
 
 $input=array();
 $upload_form_fields = array(
@@ -22,47 +24,65 @@ foreach($upload_form_fields as $key => $value)
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
 
-  if ($_FILES["file"]["error"] > 0) {
-    echo "Error: " . $_FILES["file"]["error"] . "<br>";
-  } else {
-    echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-    echo "Type: " . $_FILES["file"]["type"] . "<br>";
-    echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-    echo "Stored in: " . $_FILES["file"]["tmp_name"];
+  $mysqli = new mysqli('localhost', 'root', '', 'team_project');
+  if ($mysqli->connect_error) {
+    die('Connect Error (' . $mysqli->connect_errno . ') '
+      . $mysqli->connect_error);
   }
 
+  $num_files = count($_FILES['file']['name']); 
+  $current_date = "test";
+  $status = "Unknown";
+  $hod = "Mr. Lim";
 
-  $allowedExts = array("zip");
-  $temp = explode(".", $_FILES["file"]["name"]);
-  $extension = end($temp);
+  for($i = 0 ; $i <$num_files; $i++){
+      $dir =  "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i];
+    $date = date('Y-m-d h:i:s ', time());
+    var_dump($date);
 
-  if ((($_FILES["file"]["type"] == "application/zip")
-    || ($_FILES["file"]["type"] == "application/octet-stream")
-    && ($_FILES["file"]["size"] < 500000)
-    && in_array($extension, $allowedExts))) {
-    if ($_FILES["file"]["error"] > 0) {
-      echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+    echo "Upload: " . $_FILES["file"]["name"][$i] . "<br>";
+    echo "Type: " . $_FILES["file"]["type"][$i] . "<br>";
+    echo "Size: " . ($_FILES["file"]["size"][$i] / 1024) . " kB<br>";
+    echo "Temp file: " . $_FILES["file"]["tmp_name"][$i] . "<br>";
+    if (file_exists("upload/" .$_GET["unitcode"] . $_GET["trimester"] . $_FILES["file"]["name"][$i])) {
+      echo $_FILES["file"]["name"][$i] . " already exists. ";
     } else {
-      echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-      echo "Type: " . $_FILES["file"]["type"] . "<br>";
-      echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-      echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
-      if (file_exists("upload/" . $_FILES["file"]["name"])) {
-        echo $_FILES["file"]["name"] . " already exists. ";
-      } else {
-        move_uploaded_file($_FILES["file"]["tmp_name"],
-          "upload/" . $_FILES["file"]["name"]);
-        echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
-      }
+      if (!is_dir("upload/" .$_GET["unitcode"] . $_GET["trimester"]."/")) 
+// is_dir - tells whether the filename is a directory
+      {
+    //mkdir - tells that need to create a directory
+        mkdir("upload/" .$_GET['unitcode'] . $_GET['trimester']."/");
+      }  
+
+
+      $stmt=$mysqli->prepare("INSERT INTO unitfile VAlUES(?,?,?,?,?,?,?,?) ");
+      $stmt->bind_param('ssssssss',
+         $_FILES['file']['name'][$i],
+         $_GET['unitcode'],
+         $_GET['trimester'],
+         $_GET['unitcode'],
+         $date,
+         $status,
+         $hod,
+         $dir
+         );
+      $stmt->execute();
+   
+
+    
+      move_uploaded_file($_FILES["file"]["tmp_name"][$i],
+        "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i]);
+
+      
+      echo "Stored in: " . "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i];
     }
-  } else {
-    echo "Invalid file";
   }
-
-  include "unzip.php";
-
-
-
 }
+
+
+
+
+
+
 
 ?>
