@@ -73,69 +73,91 @@ include('uploadedlist.php');
 
 				<form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="unitcode" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
+						<label for="unitcodes" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="unitcodes" required class="form-control" id="inputEmail3" value="UECS 3333" placeholder="UECS3333">
+							<input type="text" name="unitcodes" required class="form-control" id="unitcodes" value="UECS 3333" placeholder="UECS3333">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitname'] ?></label>
+						<label for="unitnames" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitname'] ?></label>
 						<div class="col-sm-5">
-							<input type="text" name="unitnames" class="form-control" id="inputEmail3" value="Web Engineering" placeholder="Web Engineering">
+							<input type="text" name="unitnames" class="form-control" id="unitnames" value="Web Engineering" placeholder="Web Engineering">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['trimester'] ?></label>
+						<label for="yearandtrimester" class="col-sm-2 control-label"><?php echo $upload_form_fields['trimester'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="May/2014" placeholder="May/2014">
+						    <select name="yearandtrimester">
+					        <option value="102020" >Oct/2020</option>
+							<option value="052020" >May/2020</option>
+							<option value="012020" >Jan/2020</option>
+							<option value="102019" >Oct/2019</option>
+							<option value="052019" >May/2019</option>
+							<option value="012019" >Jan/2019</option>
+							<option value="102018" >Oct/2018</option>
+							<option value="052018" >May/2018</option>
+							<option value="012018" >Jan/2018</option>
+							<option value="102017" >Oct/2017</option>
+							<option value="052017" >May/2017</option>
+							<option value="012017" >Jan/2017</option>
+							<option value="102016" >Oct/2016</option>
+							<option value="052016" >May/2016</option>
+							<option value="012016" >Jan/2016</option>
+							<option value="102015" >Oct/2015</option>
+							<option value="052015" >May/2015</option>
+						    <option value="012015" >Jan/2015</option>
+							<option value="102014" >Oct/2014</option>
+							<option value="052014" selected="selected">May/2014</option>							
+			                <option value="012014" >Jan/2014</option>
+							</select>							
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['programme'] ?></label>
+						<label for="programme" class="col-sm-2 control-label"><?php echo $upload_form_fields['programme'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="Software Engineering" placeholder="Software Engineering">
+							<input type="text" name="" required class="form-control" id="programme" value="Software Engineering" placeholder="Software Engineering">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['moderator'] ?></label>
+						<label for="moderator" class="col-sm-2 control-label"><?php echo $upload_form_fields['moderator'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="" required class="form-control" id="inputEmail3" value="ooieh@utar.my" placeholder="ooieh@utar.my">
+							<input type="text" name="moderator" required class="form-control" id="moderator" value="ooieh@utar.my" placeholder="ooieh@utar.my">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['lectures'] ?></label>
+						<label for="lecture" class="col-sm-2 control-label"><?php echo $upload_form_fields['lectures'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="lecture" required class="form-control" id="inputEmail3" value="1" placeholder="">
+							<input type="text" name="lecture" required class="form-control" id="lecture" value="1" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['tutorials'] ?></label>
+						<label for="tutorial" class="col-sm-2 control-label"><?php echo $upload_form_fields['tutorials'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="tutorial" required class="form-control" id="inputEmail3" value="1" placeholder="">
+							<input type="text" name="tutorial" required class="form-control" id="tutorial" value="1" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['quizzes'] ?></label>
+						<label for="quiz" class="col-sm-2 control-label"><?php echo $upload_form_fields['quizzes'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="quiz" required class="form-control" id="inputEmail3" value="1" placeholder="">
+							<input type="text" name="quiz" required class="form-control" id="quiz" value="1" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['tests'] ?></label>
+						<label for="test" class="col-sm-2 control-label"><?php echo $upload_form_fields['tests'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="test" required class="form-control" id="inputEmail3" value="2" placeholder="">
+							<input type="text" name="test" required class="form-control" id="test" value="2" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['practicals'] ?></label>
+						<label for="practical" class="col-sm-2 control-label"><?php echo $upload_form_fields['practicals'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="practical" required class="form-control" id="inputEmail3" value="3" placeholder="">
+							<input type="text" name="practical" required class="form-control" id="practical" value="3" placeholder="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><?php echo $upload_form_fields['assignments'] ?></label>
+						<label for="assignment" class="col-sm-2 control-label"><?php echo $upload_form_fields['assignments'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="assignment" required class="form-control" id="inputEmail3" value="4" placeholder="">
+							<input type="text" name="assignment" required class="form-control" id="assignment" value="4" placeholder="">
 						</div>
 						<div class="row">
 							
