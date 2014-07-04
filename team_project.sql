@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `lecturerID` varchar(15) NOT NULL,
   `password` varchar(15) NOT NULL,
   PRIMARY KEY (`lecturerID`)
+ 
 ) ;
 
 CREATE TABLE IF NOT EXISTS `lecturer` (
@@ -24,14 +25,19 @@ CREATE TABLE IF NOT EXISTS `lecturer` (
   `department` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `unitcode` varchar(40) NOT NULL,
+  `unitdesc` varchar(100) NOT NULL,
   `trimester` varchar(50) NOT NULL,
   PRIMARY KEY (`lecturerID`,`unitcode`)
 ) ;
+
+
 
 INSERT INTO `login` (`LecturerID`, `Password`) VALUES
  ('123456', '123456');
 
 INSERT INTO `lecturer`() VALUES
-('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS 2094','Jan2014');
+('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS2094','WEB APPLICATION DEVELOPMENT','Jan/2014'),
+('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS3333','WEB ENGINEERING','May/2014'),
+('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS2373','TEAM PROJECT','May/2014');
 
 
