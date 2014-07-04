@@ -7,21 +7,40 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 						. $mysqli->connect_error);
 			}
 
-		
-	$stmt=$mysqli->prepare("SELECT unitcode,trimester FROM lecturer WHERE lecturerid =?");
+	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc,trimester FROM lecturer WHERE lecturerid =?");
 	$stmt->bind_param('s',
 		$_SESSION['lecturerid']);
 	$stmt->execute();
-	$stmt->bind_result($unitcode,$trimester);
+	$stmt->bind_result($unitcode,$unitname,$trimester);
+	?>
+	<table border="1">
+			<tr>
+			<th>Unit</th>
+			<th>Year/Trimester</th>
+		    </tr>		
+<?php 
+	
 	while($stmt->fetch()){
+	
+	?> 
 
-	
-	
-		echo "$trimester<br>";
-		echo "<a href='home.php?unitcode=$unitcode&trimester=$trimester'>$unitcode</a><br>";
+		<tr>
+		<td>
+		<?php
+		
+		 echo "<a href='home.php?unitcode=$unitcode&trimester=$trimester'>$unitcode $unitname<br></a>"; 		 
+		?>
+		</td>
+		
+		<td>
+		<?php echo "$trimester<br>"; 
+		
+		?>	
+		</td>
+		</tr>
+		
+<?php
+		
 	}
-
-
-
-
 ?>
+		</table>
