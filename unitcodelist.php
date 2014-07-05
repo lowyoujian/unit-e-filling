@@ -7,40 +7,30 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 						. $mysqli->connect_error);
 			}
 
-	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc,trimester FROM lecturer WHERE lecturerid =?");
+	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc FROM lecturer WHERE lecturerid =?");
 	$stmt->bind_param('s',
 		$_SESSION['lecturerid']);
 	$stmt->execute();
-	$stmt->bind_result($unitcode,$unitname,$trimester);
+	$stmt->bind_result($unitcode,$unitname);
 	?>
-	<table border="1">
-			<tr>
-			<th>Unit</th>
-			<th>Year/Trimester</th>
-		    </tr>		
+	<form action="home.php" method="get">
+	    <p> Please select the unit that you wish to upload files. </p>
+		Unit 
+		<select name="unitcodeslist">
+		
 <?php 
 	
-	while($stmt->fetch()){
-	
-	?> 
-
-		<tr>
-		<td>
-		<?php
-		
-		 echo "<a href='home.php?unitcode=$unitcode&trimester=$trimester'>$unitcode $unitname<br></a>"; 		 
+	while($stmt->fetch()){	
+	?> 		
+		<?php		
+		 echo "<option value='$unitcode|$unitname'>$unitcode $unitname</option>";	 
 		?>
-		</td>
-		
-		<td>
-		<?php echo "$trimester<br>"; 
-		
-		?>	
-		</td>
-		</tr>
-		
-<?php
-		
-	}
+	
+<?php		
+	}	
+
 ?>
-		</table>
+	
+	</select>
+	<input type="submit" value="Next" onclick="home.php"/>
+	</form>
