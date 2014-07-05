@@ -4,8 +4,12 @@
 <?php 
 include('upload.php');
 include('uploadedlist.php');
-
-
+session_start();
+//Explode the unit code and unit name to individual variable
+$result = $_GET['unitcodeslist'];
+$result_explode = explode('|', $result);
+$unitcodez=$result_explode[0];
+$unitdescriptionz=$result_explode[1];
 ?>
 
 <head>
@@ -75,15 +79,15 @@ include('uploadedlist.php');
 					<div class="form-group">
 						<label for="unitcodes" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
 						<div class="col-sm-3">
-							<input type="text" name="unitcodes" required class="form-control" id="unitcodes" value="UECS 3333" placeholder="UECS3333">
+							<input type="text" name="unitcodes" required class="form-control" id="unitcodes" value="<?php echo $unitcodez?>" placeholder="UECS3333">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="unitnames" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitname'] ?></label>
 						<div class="col-sm-5">
-							<input type="text" name="unitnames" class="form-control" id="unitnames" value="Web Engineering" placeholder="Web Engineering">
+							<input type="text" name="unitnames" class="form-control" id="unitnames" value="<?php echo $unitdescriptionz ?>" placeholder="Web Engineering">
 						</div>
-					</div>
+					</div> 
 					<div class="form-group">
 						<label for="yearandtrimester" class="col-sm-2 control-label"><?php echo $upload_form_fields['trimester'] ?></label>
 						<div class="col-sm-3">
