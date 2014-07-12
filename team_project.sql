@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `lecturer` (
 INSERT INTO `login` (`LecturerID`, `Password`) VALUES
  ('123456', '123456');
 
-INSERT INTO `lecturer`() VALUES
+INSERT INTO `lecturer` VALUES
 ('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS2094','WEB APPLICATION DEVELOPMENT','Jan/2014'),
 ('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS3333','WEB ENGINEERING','May/2014'),
 ('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS2373','TEAM PROJECT','May/2014');

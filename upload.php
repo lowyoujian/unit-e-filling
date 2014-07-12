@@ -22,7 +22,7 @@ foreach($upload_form_fields as $key => $value)
 	$input[$key] = '';
 }
 
-if($_SERVER['REQUEST_METHOD']=="POST"){
+if($_SERVER['REQUEST_METHOD']=="POST" && !empty($_POST('submitFiles'))){
 
   $mysqli = new mysqli('localhost', 'root', '', 'team_project');
   if ($mysqli->connect_error) {
@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
   $hod = "Mr. Lim";
 
   for($i = 0 ; $i <$num_files; $i++){
-      $dir =  "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i];
+    $dir =  "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i];
     $date = date('Y-m-d h:i:s ', time());
     var_dump($date);
 
@@ -57,19 +57,19 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
       $stmt=$mysqli->prepare("INSERT INTO unitfile VAlUES(?,?,?,?,?,?,?,?) ");
       $stmt->bind_param('ssssssss',
-         $_FILES['file']['name'][$i],
-         $_GET['unitcode'],
-         $_GET['trimester'],
-         $_GET['unitcode'],
-         $date,
-         $status,
-         $hod,
-         $dir
-         );
+       $_FILES['file']['name'][$i],
+       $_GET['unitcode'],
+       $_GET['trimester'],
+       $_GET['unitcode'],
+       $date,
+       $status,
+       $hod,
+       $dir
+       );
       $stmt->execute();
-   
 
-    
+
+
       move_uploaded_file($_FILES["file"]["tmp_name"][$i],
         "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i]);
 
@@ -78,6 +78,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     }
   }
 }
+
 
 
 

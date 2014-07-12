@@ -1,29 +1,6 @@
-1-syllabus\syllabus UECS 3333
-2-teaching planteaching plan UECS 3333
-lecture1
-tutorial1
-tutorial_solution1
-assignment1
-assignment_solution1
-assignment2
-assignment_solution2
-assignment3
-assignment_solution3
-assignment4
-assignment_solution4
-practical1
-practical_solution1
-practical2
-practical_solution2
-practical3
-practical_solution3
-quiz1
-quiz_solution1
-test1
-test_solution1
-test2
-test_solution2
+1-syllabus\syllabus 
+2-teaching planteaching plan 
 main
-unit matrix UECS 3333
-academic report UECS 3333
-miscUECS 3333
+unit matrix 
+academic report 
+misc
