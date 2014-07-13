@@ -8,6 +8,7 @@ CREATE TABLE  `unitFile` (
   `fileStatus` tinyint(1) NOT NULL,
   `hod` varchar(100) NOT NULL,
   `url` varchar(1000) NOT NULL,
+  `content` mediumblob NOT NULL,
    PRIMARY KEY (`fileName`,`semester`)
 ) ;
 
