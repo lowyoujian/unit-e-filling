@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$hodid = $_SESSION['lecturerid'];
 $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
@@ -46,6 +46,27 @@ echo nl2br("\n");
 ?>
 
 <?php
+$mysqli = new mysqli('localhost', 'root', '', 'team_project');
+			if ($mysqli->connect_error) {
+				die('Connect Error (' . $mysqli->connect_errno . ') '
+						. $mysqli->connect_error);
+			}
+	$SQL = "SELECT hod FROM unitfile WHERE hod=?";
+	if($stmt=$mysqli->prepare($SQL)){
+	$stmt->bind_param('s',$hodid);
+	$stmt->execute();
+	$stmt->store_result();
+	$numrows = $stmt->num_rows;
+	if($numrows > 0) {
+	echo '*Head of department please select a unit to approve ';
+	}
+	else{
+	exit(0);
+	}
+}
+?>
+
+<?php
 
 $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 			if ($mysqli->connect_error) {
@@ -54,14 +75,12 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 			}
 
 	$stmt=$mysqli->prepare("SELECT unitCode,unitName FROM unitfile WHERE hod =?");
-	$stmt->bind_param('s',
-		$_SESSION['lecturerid']);
+	$stmt->bind_param('s',$_SESSION['lecturerid']);
 	$stmt->execute();
 	$stmt->bind_result($unitcode,$unitname);
 	?>
 	<form action="unitcodelist.php" method="get">
-	    <p> *Head of department please select a unit to approve </p>
-		
+	   
 		<select name="unitcodeslist;"select onmouseover="this.size=2;"onmouseout="this.size=1;">
 		
 <?php 
@@ -70,7 +89,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 	?> 		
 			
 		<?php
-		 echo "<option value='$unitcode|$unitname'>$unitcode $unitname</option>";	 
+    	echo "<option value='$unitcode|$unitname'>$unitcode $unitname</option>";			
 		?>
 	
 <?php		
