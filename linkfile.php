@@ -1,17 +1,20 @@
 <?php
 
+//For counting number of files in folder
+$directory = "C:/wamp/www/Testing/upload/";
+$filecount = count(glob($directory . "*.pdf"));
 
-
+//For finding .pdf files in the folder
 $phpfile = "C:/wamp/www/Testing/upload/";
-
 $phpfiles = glob($phpfile. "*.pdf");
-$download="download.php";
+
 
 foreach($phpfiles as $phpfile)
 {
-echo "<a href='download.php'>".basename($phpfile,".pdf")."</a>";
+$name=basename($phpfile);
+echo "<a href='upload/$name' download>".basename($phpfile,".pdf")."</a>";
 echo "<br/>";
 }
 
-
 ?>
+
