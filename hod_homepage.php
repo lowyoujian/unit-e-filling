@@ -1,22 +1,44 @@
 <?php
 session_start();
-
 $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
 						. $mysqli->connect_error);
 			}
-
-	$stmt=$mysqli->prepare("SELECT unitCode,unitName FROM unitfile WHERE hod =?");
+					
+					
+	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc FROM hod WHERE hodid =?");
 	$stmt->bind_param('s',
 		$_SESSION['lecturerid']);
 	$stmt->execute();
 	$stmt->bind_result($unitcode,$unitname);
+	
 	?>
-	<form action="result1.php" method="get">
+	<script>
+function showUser(str) {
+  if (str=="") {
+    document.getElementById("txtHint").innerHTML="";
+    return;
+  } 
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else { // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","trimesterOption.php?q="+str,true);
+  xmlhttp.send();
+}
+	</script>
+	<form>
 	    <p> Please select the unit that you want to select. </p>
 		Unit 
-		<select name="unitcodeslist;"select onmouseover="this.size=10;"onmouseout="this.size=5;">
+		<select name="unitcodelist" onchange="showUser(this.value)">
 		
 <?php 
 
@@ -24,7 +46,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 	?> 		
 			
 		<?php
-		 echo "<option value='$unitcode|$unitname'>$unitcode $unitname</option>";	 
+		 echo "<option value='$unitcode'>$unitcode $unitname</option>";	 
 		?>
 	
 <?php		
@@ -33,5 +55,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 ?>
 
 	</select>
+	<div id="txtHint"><b>Trimester info will be listed here.</b></div>
 	<input type="submit" value="Select" onclick="result1.php"/>
 	</form>
+	
