@@ -7,7 +7,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 						. $mysqli->connect_error);
 			}
 
-	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc FROM lecturer WHERE lecturerid =?");
+	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc FROM lecturer WHERE lecturerID =?");
 	$stmt->bind_param('s',
 		$_SESSION['lecturerid']);
 	$stmt->execute();
@@ -24,8 +24,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 	?> 		
 		<?php		
 		 echo "<option value='$unitcode|$unitname'>$unitcode $unitname</option>";	 
-		?>
-	
+		?>	
 <?php		
 	}	
 
