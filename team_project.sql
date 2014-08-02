@@ -34,9 +34,6 @@ CREATE TABLE IF NOT EXISTS `lecturer` (
 ) ;
 
 
-
-
-
 INSERT INTO `login` (`lecturerID`, `password`) VALUES
 ('1', '1'),
  ('2', '2' );
