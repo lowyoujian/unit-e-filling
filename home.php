@@ -2,7 +2,6 @@
 <html>
 <?php 
 include('upload.php');
-include('uploadedlist.php');
 session_start();
 //Explode the unit code and unit name to individual variable
 $result = $_GET['unitcodeslist'];

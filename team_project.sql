@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `lecturer` (
   `is_hod` BOOL,
   `hodunitcode` varchar(200),
   `hodunitdesc` varchar(200) ,
-  PRIMARY KEY (`lecturerID`,`unitcode`, `trimester`)
+  PRIMARY KEY (`lecturerID`,`unitcode`, `trimester`,`hodunitcode`,`hodunitdesc`)
 ) ;
 
 
@@ -43,4 +43,8 @@ INSERT INTO `login` (`lecturerID`, `password`) VALUES
 
 INSERT INTO `lecturer` VALUES
 ('1','Mr.James','FES','CS','jamesooi@utar.edu.my','UECS2094','WebApp','Jan/2014',FALSE,NULL,NULL),
-('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',NULL,NULL,NULL,TRUE,'UECS2094','Web Application Development');
+('1','Mr.James','FES','CS','jamesooi@utar.edu.my','UECS1094','TCPIP','Jan/2014',FALSE,NULL,NULL),
+('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',NULL,NULL,"Jan/2014",TRUE,'UECS2094','Web Application Development'),
+('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',NULL,NULL,"Jan/2014" ,TRUE,'UECS1094','TCPIP'),
+('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',"UECS9993","GameEngine","Jan/2014" ,TRUE,NULL,NULL),
+('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',"UECS1993","Software Testing","Jan/2014" ,TRUE,NULL,NULL);

@@ -12,9 +12,9 @@ $stmt->bind_param('s',
 	);
 $stmt->execute();
 $stmt->bind_result($hod);
-while($stmt->fetch()){
+$stmt->fetch();
 	echo json_encode($hod);
-}
+
 
 
 ?>
