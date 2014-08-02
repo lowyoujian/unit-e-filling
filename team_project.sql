@@ -1,61 +1,46 @@
 CREATE TABLE  `unitFile` (
+  `lecturerID` varchar(200) NOT NULL,
   `fileName` varchar(100) NOT NULL,
   `semester` varchar(10) NOT NULL,
   `unitCode` varchar(10) NOT NULL,
   `unitName` varchar(100) NOT NULL,
   `lastUpload` date NOT NULL,
-  `fileStatus` tinyint(1) NOT NULL,
+  `fileStatus` varchar(200) NOT NULL,
   `hod` varchar(100) NOT NULL,
   `url` varchar(1000) NOT NULL,
-   PRIMARY KEY (`fileName`,`semester`)
+   PRIMARY KEY (`lecturerID`,`fileName`,`semester`)
 ) ;
 
 CREATE TABLE IF NOT EXISTS `login` (
-  `lecturerID` varchar(15) NOT NULL,
-  `password` varchar(15) NOT NULL,
-  `user` varchar(15) NOT NULL,	
+  `lecturerID` varchar(150) NOT NULL,
+  `password` varchar(150) NOT NULL,
   PRIMARY KEY (`lecturerID`)
  ) ;
 
 
 CREATE TABLE IF NOT EXISTS `lecturer` (
-  `lecturerID` varchar(15) NOT NULL,
+  `lecturerID` varchar(20) NOT NULL,
   `lecturerName` varchar(100) NOT NULL,
   `faculty` varchar(100) NOT NULL,
   `department` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `unitcode` varchar(40) NOT NULL,
-  `unitdesc` varchar(100) NOT NULL,
-  `trimester` varchar(50) NOT NULL,
+  `unitcode` varchar(200) ,
+  `unitdesc` varchar(100),
+  `trimester` varchar(200) NOT NULL,
+  `is_hod` BOOL,
+  `hodunitcode` varchar(200),
+  `hodunitdesc` varchar(200) ,
   PRIMARY KEY (`lecturerID`,`unitcode`, `trimester`)
 ) ;
 
-CREATE TABLE  `hod` (
-  `hodID` varchar(100) NOT NULL,
-  `hodName` varchar(10) NOT NULL,
-  `password` varchar(15) NOT NULL,
-  `faculty` varchar(100) NOT NULL,
-  `department` varchar(100) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `unitcode` varchar(40) NOT NULL,
-  `unitdesc` varchar(100) NOT NULL,
-  `trimester` varchar(50) NOT NULL,
-  PRIMARY KEY (`hodID`,`unitcode`, `trimester`)
-  ) ;
 
 
-INSERT INTO `hod` VALUES
-('lol','Crazy Lai','lol','FES','CS' ,'lai@utar.edu.my','UECS2094','WEB APPLICATION DEVELOPMENT','Jan/2014'),
-('lol','Crazy Lai','lol','FES','CS' ,'lai@utar.edu.my','UECS2373','TEAM PROJECT','Jan/2014');
 
-INSERT INTO `hod` (`hodID`, `password`, `hodName`) VALUES
- ('lol', 'lol', 'Crazy Lai');
 
-INSERT INTO `login` (`lecturerID`, `password`, `user`) VALUES
-('123456', '123456', 'admin'),
- ('123456', '123456', 'lecturer');
+INSERT INTO `login` (`lecturerID`, `password`) VALUES
+('1', '1'),
+ ('2', '2' );
 
 INSERT INTO `lecturer` VALUES
-('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS2094','WEB APPLICATION DEVELOPMENT','Jan/2014'),
-('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS3333','WEB ENGINEERING','May/2014'),
-('123456','Mr. Ooi','FES','CS', 'ooieh@utar.edu.my','UECS2373','TEAM PROJECT','May/2014');
+('1','Mr.James','FES','CS','jamesooi@utar.edu.my','UECS2094','WebApp','Jan/2014',FALSE,NULL,NULL),
+('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',NULL,NULL,NULL,TRUE,'UECS2094','Web Application Development');
