@@ -51,36 +51,50 @@ if($_SERVER['REQUEST_METHOD']=="POST")
 						. $mysqli->connect_error);
 			}
 
-
+	$result= array();
 	
-	$stmt=$mysqli->prepare("SELECT lecturerid FROM login WHERE lecturerid =? AND password =?");
-	$stmt->bind_param('ss',
-		$_POST['lecturerid'],
-		$_POST['password']);
-	$stmt->execute();
-	$stmt->bind_result($loginid);
-	$stmt->fetch();
+	if ($stmt = $mysqli->prepare("SELECT * FROM login WHERE lecturerid=? AND password=?"))
+		{
+			$stmt->bind_param('ss',		
+				$_POST['lecturerid'],
+				$_POST['password']);
+			$stmt->execute();
+			$stmt->store_result();
+			$stmt->bind_result(
+				$result['lecturerID'],
+				$result['password'],
+				$result['user']
+				);
+				
+				if ( $stmt->num_rows>0)
+			{
 
-	if($loginid == false)
-	{
-		$message = 'Login Failed. Username or password incorrect';
-	}
-	
-	else
-	{
-		session_start();
-		
-		$_SESSION['lecturerid']=$loginid;
-		var_dump($_SESSION['lecturerid']);
-		header('Location:unitcodelist.php');
-	}
+				if($stmt->fetch())
+				{
+					if($result['user'] == 'lecturer')
+					{
+					session_start();
+					$_SESSION['lecturerid']=$result['lecturerID'];
+					var_dump($_SESSION['lecturerid']);
+					header('Location:unitcodelist.php');
+					}
+					else if($result['user'] == 'admin')
+					{
+					session_start();
+					$_SESSION['lecturerid']=$result['lecturerID'];
+					var_dump($_SESSION['lecturerid']);
+					header('Location:hod_homepage.php');
+					}
+					
+			
+				}
+			}
+		}
+			
 	echo "<div class='container'><span style=color:red>$message</span></div>";
-
 	
 }
 ?>
-
-
 
 	
 </body>
