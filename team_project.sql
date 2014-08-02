@@ -48,11 +48,11 @@ INSERT INTO `hod` VALUES
 ('lol','Crazy Lai','lol','FES','CS' ,'lai@utar.edu.my','UECS2094','WEB APPLICATION DEVELOPMENT','Jan/2014'),
 ('lol','Crazy Lai','lol','FES','CS' ,'lai@utar.edu.my','UECS2373','TEAM PROJECT','Jan/2014');
 
-INSERT INTO `hod` (`hodID`, `hodPassword`, `hodName`) VALUES
+INSERT INTO `hod` (`hodID`, `password`, `hodName`) VALUES
  ('lol', 'lol', 'Crazy Lai');
 
 INSERT INTO `login` (`lecturerID`, `password`, `user`) VALUES
-('123456', '123456', 'admin')
+('123456', '123456', 'admin'),
  ('123456', '123456', 'lecturer');
 
 INSERT INTO `lecturer` VALUES

@@ -41,19 +41,19 @@
 	</div>
 
 
-<?php
-if($_SERVER['REQUEST_METHOD']=="POST")
-{
-	
-	$mysqli = new mysqli('localhost', 'root', '', 'team_project');
-			if ($mysqli->connect_error) {
-				die('Connect Error (' . $mysqli->connect_errno . ') '
-						. $mysqli->connect_error);
-			}
+	<?php
+	if($_SERVER['REQUEST_METHOD']=="POST")
+	{
+		
+		$mysqli = new mysqli('localhost', 'root', '', 'team_project');
+		if ($mysqli->connect_error) {
+			die('Connect Error (' . $mysqli->connect_errno . ') '
+				. $mysqli->connect_error);
+		}
 
-	$result= array();
-	
-	if ($stmt = $mysqli->prepare("SELECT * FROM login WHERE lecturerid=? AND password=?"))
+		$result= array();
+		
+		if ($stmt = $mysqli->prepare("SELECT * FROM login WHERE lecturerid=? AND password=?"))
 		{
 			$stmt->bind_param('ss',		
 				$_POST['lecturerid'],
@@ -65,36 +65,36 @@ if($_SERVER['REQUEST_METHOD']=="POST")
 				$result['password'],
 				$result['user']
 				);
-				
-				if ( $stmt->num_rows>0)
+			
+			if ( $stmt->num_rows>0)
 			{
 
 				if($stmt->fetch())
 				{
 					if($result['user'] == 'lecturer')
 					{
-					session_start();
-					$_SESSION['lecturerid']=$result['lecturerID'];
-					var_dump($_SESSION['lecturerid']);
-					header('Location:unitcodelist.php');
+						session_start();
+						$_SESSION['lecturerid']=$result['lecturerID'];
+						var_dump($_SESSION['lecturerid']);
+						header('Location:unitcodelist.php');
 					}
 					else if($result['user'] == 'admin')
 					{
-					session_start();
-					$_SESSION['lecturerid']=$result['lecturerID'];
-					var_dump($_SESSION['lecturerid']);
-					header('Location:hod_homepage.php');
+						session_start();
+						$_SESSION['lecturerid']=$result['lecturerID'];
+						var_dump($_SESSION['lecturerid']);
+						header('Location:hod_homepage.php');
 					}
 					
-			
+					
 				}
 			}
 		}
-			
-	echo "<div class='container'><span style=color:red>$message</span></div>";
-	
-}
-?>
+		
+		echo "<div class='container'><span style=color:red>$message</span></div>";
+		
+	}
+	?>
 
 	
 </body>

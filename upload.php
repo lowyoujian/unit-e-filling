@@ -22,7 +22,7 @@ foreach($upload_form_fields as $key => $value)
 	$input[$key] = '';
 }
 
-if($_SERVER['REQUEST_METHOD']=="POST" && !empty($_POST('submitFiles'))){
+if($_SERVER['REQUEST_METHOD']=="POST" ){
 
   $mysqli = new mysqli('localhost', 'root', '', 'team_project');
   if ($mysqli->connect_error) {
