@@ -1,17 +1,16 @@
 <?php
 session_start();
-$mysqli = new mysqli('localhost', 'root', '', 'team_project');
-			if ($mysqli->connect_error) {
-				die('Connect Error (' . $mysqli->connect_errno . ') '
-						. $mysqli->connect_error);
-			}
-					
-					
-	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc FROM hod WHERE hodid =?");
-	$stmt->bind_param('s',
-		$_SESSION['loginid']);
-	$stmt->execute();
-	$stmt->bind_result($unitcode,$unitname);
+	$mysqli = new mysqli('localhost', 'root', '', 'team_project');
+	if ($mysqli->connect_error) {
+		die('Connect Error (' . $mysqli->connect_errno . ') '
+			. $mysqli->connect_error);
+	}
+	$stmt3=$mysqli->prepare("SELECT hodunitcode,hodunitdesc FROM lecturer WHERE lecturerid =?");
+	$stmt3->bind_param('s',
+		$_SESSION['lecturerid']
+		);
+	$stmt3->execute();
+	$stmt3->bind_result($hodunitcode,$hodunitname);
 	
 	?>
 	<script>
@@ -35,28 +34,23 @@ function showUser(str) {
   xmlhttp.send();
 }
 	</script>
-	<form>
-	    <p> Please select the unit that you want to select. </p>
-		Unit 
+	<form method="get" action="linkfile.php">
+	    <p> Please select the unit that you want to select for verify. </p>
+		Unit Code
 		<select name="unitcodelist" onchange="showUser(this.value)">
 		
-<?php 
-
-	while($stmt->fetch()){	
-	?> 		
-			
-		<?php
-		if($unitcode!='')
-		 echo "<option value='$unitcode'>$unitcode $unitname</option>";	 
-		?>
+<?php 	
+				echo "<option value =''> </option>";	
+				while($stmt3->fetch()){
+				if($hodunitcode!='')						
+				echo "<option value='$hodunitcode $hodunitname'>$hodunitcode $hodunitname</option>";
+				}
 	
-<?php		
-	}	
 
 ?>
 
 	</select>
 	<div id="txtHint"><b>Trimester info will be listed here.</b></div>
-	<input type="submit" value="Select" onclick="result1.php"/>
+	<input type="submit" value="Select" onclick="linkfile.php"/>
 	</form>
 	
