@@ -9,7 +9,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'team_project');
 					
 	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc FROM hod WHERE hodid =?");
 	$stmt->bind_param('s',
-		$_SESSION['lecturerid']);
+		$_SESSION['loginid']);
 	$stmt->execute();
 	$stmt->bind_result($unitcode,$unitname);
 	
