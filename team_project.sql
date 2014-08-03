@@ -1,13 +1,20 @@
 CREATE TABLE  `unitFile` (
-  `lecturerID` varchar(200) NOT NULL,
-  `fileName` varchar(100) NOT NULL,
-  `semester` varchar(10) NOT NULL,
-  `unitCode` varchar(10) NOT NULL,
-  `unitName` varchar(100) NOT NULL,
-  `lastUpload` date NOT NULL,
-  `fileStatus` varchar(200) NOT NULL,
-  `hod` varchar(100) NOT NULL,
-  `url` varchar(1000) NOT NULL,
+  `lecturerID` varchar(200) ,
+  `fileName` varchar(100) ,
+  `semester` varchar(10) ,
+  `programme`varchar(200),
+  `unitCode` varchar(10),
+  `unitName` varchar(100) ,
+  `lastUpload` date ,
+  `fileStatus` varchar(200),
+  `hod` varchar(100) ,
+  `url` varchar(255) ,
+  `lectures` INT,
+  `tutorials` INT,
+  `quizzes` INT,
+  `tests` INT,
+  `practicals` INT,
+  `assignments` INT,
    PRIMARY KEY (`lecturerID`,`fileName`,`semester`)
 ) ;
 
@@ -45,3 +52,7 @@ INSERT INTO `lecturer` VALUES
 ('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',NULL,NULL,"Jan/2014" ,TRUE,'UECS1094','TCPIP'),
 ('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',"UECS9993","GameEngine","Jan/2014" ,TRUE,NULL,NULL),
 ('2','Dr. Victor', 'FES','CS', 'victortan@utar.edu.my',"UECS1993","Software Testing","Jan/2014" ,TRUE,NULL,NULL);
+
+INSERT INTO `unitfile` VALUES
+('1','','Jan2014','Software Engineering','UECS2094','Web Application Development','','','victortan@utar.edu.my','',14,14,2,2,0,1
+  );

@@ -15,12 +15,9 @@
 		);
 	$stmt2->execute();
 	$stmt2->bind_result($unitcode,$unitname);
-	
 	?>
 </head>
 <script type="text/javascript">
-
-
 	function reqListener () {
 		console.log(this.responseText);
 	}
@@ -30,10 +27,11 @@
         //This is where you handle what to do with the response.
         //The actual data is found on this.responseText
         //The data from get_hod_status, 1= is a hod, 0= not hod
-        if(this.responseText==1){			
-			
-        	$("#approvelist").append("<fieldset><legend>HOD</legend>Proceed to HOD Home Page?<br/>Click <a href='hod_homepage.php'>here</a>");
-			$("#approvelist").append("</fieldset>");
+        if(this.responseText==1){
+        	$("#approvelist").append("Here are the list of files for you to verify<br><br>");
+        	$("#approvelist").append("Unit Code List: ");
+        	$("#approvelist").append("<select name='approvelist'><option value='unitcode'</option></select><input type='submit' value='next'/> ");
+
         }
     };
     oReq.open("get", "get_hod_status.php", true);
@@ -43,29 +41,22 @@
     oReq.send();
     </script>
 <body>
-	<form action="home.php" method="get">
+	<form action="home.php" method="GET">
 		<p> Please select the unit that you wish to upload files. </p>
-		Unit Code
+		Unit Code List
 		<select name="unitcodeslist">
-			echo "<option value =''> </option>";	
 			<?php 
 			while($stmt2->fetch()){
 				if($unitcode!='')
-				echo "<option value='$unitcode|$unitname'>$unitcode $unitname</option>";
-				}
+				echo "<option value='$unitcode'>$unitcode $unitname</option>";	 
+			}	
 			?>
 
 		</select>
-		<input type="submit" value="Next" name="home" onclick="home.php"/>		
+		<input type="submit" value="Next"/>
 	</form>
-	
-	
-
-
 	<div id="approvelist">
 	</div>
-	
-
 </body>
 
 </html>
