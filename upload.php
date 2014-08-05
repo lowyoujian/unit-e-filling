@@ -1,7 +1,5 @@
 <?php
-date_default_timezone_set('America/Los_Angeles');
-
-
+include('database_config.php');
 $input=array();
 $upload_form_fields = array(
 	'unitcode'  => 'Unit Code:',
@@ -24,57 +22,59 @@ foreach($upload_form_fields as $key => $value)
 
 if($_SERVER['REQUEST_METHOD']=="POST" ){
 
-  $mysqli = new mysqli('localhost', 'root', '', 'team_project');
+  $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
   if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') '
       . $mysqli->connect_error);
   }
 
-  $num_files = count($_FILES['file']['name']); 
-  $current_date = "test";
-  $status = "Unknown";
-  $hod = "Mr. Lim";
-
+  $num_files = count($_FILES['files']['name']); 
+  var_dump($num_files);
+  $upload_date=date("Y:M:D:H:M:s");
   for($i = 0 ; $i <$num_files; $i++){
-    $dir =  "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i];
+    $processed_filename=$_POST["unitcode"]."_" .$_POST["trimester"]."_". $_FILES["files"]["name"][$i];
+    $dir =  "upload/" .$_POST["unitcode"] . $_POST["trimester"]."/" . $_FILES["files"]["name"][$i];
     $date = date('Y-m-d h:i:s ', time());
-    var_dump($date);
-
-    echo "Upload: " . $_FILES["file"]["name"][$i] . "<br>";
-    echo "Type: " . $_FILES["file"]["type"][$i] . "<br>";
-    echo "Size: " . ($_FILES["file"]["size"][$i] / 1024) . " kB<br>";
-    echo "Temp file: " . $_FILES["file"]["tmp_name"][$i] . "<br>";
-    if (file_exists("upload/" .$_GET["unitcode"] . $_GET["trimester"] . $_FILES["file"]["name"][$i])) {
-      echo $_FILES["file"]["name"][$i] . " already exists. ";
+    //change these two lines to fit your server/storage
+    $file_destination="upload/" .$_POST["unitcode"] ."/".$_POST["trimester"]."/" .$processed_filename;
+    $folder_destination="upload/" .$_POST["unitcode"] ."/".$_POST["trimester"];
+    echo "Upload: " . $_FILES["files"]["name"][$i] . "<br>";
+    echo "Type: " . $_FILES["files"]["type"][$i] . "<br>";
+    echo "Size: " . ($_FILES["files"]["size"][$i] / 1024) . " kB<br>";
+    echo "Temp file: " . $_FILES["files"]["tmp_name"][$i] . "<br>";
+    if (file_exists($file_destination)) {
+      echo $_FILES["files"]["name"][$i] . " already exists. ";
     } else {
-      if (!is_dir("upload/" .$_GET["unitcode"] . $_GET["trimester"]."/")) 
+      if (!is_dir($folder_destination)) 
 // is_dir - tells whether the filename is a directory
       {
     //mkdir - tells that need to create a directory
-        mkdir("upload/" .$_GET['unitcode'] . $_GET['trimester']."/");
+        mkdir($folder_destination);
       }  
 
-
-      $stmt=$mysqli->prepare("INSERT INTO unitfile VAlUES(?,?,?,?,?,?,?,?) ");
-      $stmt->bind_param('ssssssss',
-       $_FILES['file']['name'][$i],
-       $_GET['unitcode'],
-       $_GET['trimester'],
-       $_GET['unitcode'],
-       $date,
-       $status,
+      $file_status="unapproved";
+      $stmt=$mysqli->prepare("INSERT INTO unitfile (lecturerid,filename,semester,programme,unitcode,unitname,uploaddate,filestatus,hod,url) VAlUES(?,?,?,?,?,?,?,?,?,?) ");
+      $stmt->bind_param('ssssssssss',
+       $lecturerid,
+       $file_name,
+       $semester,
+       $programme,
+       $unitcode,
+       $unitname,
+       $upload_date,
+       $file_status,
        $hod,
-       $dir
+       $file_destination
        );
       $stmt->execute();
 
 
 
-      move_uploaded_file($_FILES["file"]["tmp_name"][$i],
-        "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i]);
+      move_uploaded_file($_FILES["files"]["tmp_name"][$i],
+        $file_destination);
 
       
-      echo "Stored in: " . "upload/" .$_GET["unitcode"] . $_GET["trimester"]."/" . $_FILES["file"]["name"][$i];
+      echo "Stored in: " . "upload/" .$_POST["unitcode"] . $_POST["trimester"]."/" . $_FILES["files"]["name"][$i];
     }
   }
 }

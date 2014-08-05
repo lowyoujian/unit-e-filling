@@ -1,6 +1,6 @@
 <?php
-$server="localhost";
-  $user="root";
+$server="database["ip"]";
+  $user="database["username"]";
   $pass="";
   $database="team_project";
   

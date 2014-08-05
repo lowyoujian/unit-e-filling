@@ -3,8 +3,9 @@
 <script type="text/javascript" src="jquery-2.1.1.js"></script>
 <head>
 	<?php
+	include('database_config.php');
 	session_start();
-	$mysqli = new mysqli('localhost', 'root', '', 'team_project');
+	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') '
 			. $mysqli->connect_error);
@@ -27,7 +28,7 @@
         //This is where you handle what to do with the response.
         //The actual data is found on this.responseText
         //The data from get_hod_status, 1= is a hod, 0= not hod
-        if(this.responseText==1){
+        if(this.responseText){
         	$("#approvelist").append("Here are the list of files for you to verify<br><br>");
         	$("#approvelist").append("Unit Code List: ");
         	$("#approvelist").append("<select name='approvelist'><option value='unitcode'</option></select><input type='submit' value='next'/> ");
@@ -41,19 +42,19 @@
     oReq.send();
     </script>
 <body>
-	<form action="home.php" method="get">
+	<form action="home.php" method="GET">
 		<p> Please select the unit that you wish to upload files. </p>
 		Unit Code List
 		<select name="unitcodeslist">
 			<?php 
 			while($stmt2->fetch()){
 				if($unitcode!='')
-				echo "<option value='$unitcode|$unitname'>$unitcode $unitname</option>";	 
+				echo "<option value='$unitcode'>$unitcode $unitname</option>";	 
 			}	
 			?>
 
 		</select>
-		<input type="submit" value="Next" onclick="home.php"/>
+		<input type="submit" value="Next"/>
 	</form>
 	<div id="approvelist">
 	</div>

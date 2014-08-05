@@ -42,10 +42,11 @@
 
 
 	<?php
+	include('database_config.php');
 	if($_SERVER['REQUEST_METHOD']=="POST")
 	{
 		
-		$mysqli = new mysqli('localhost', 'root', '', 'team_project');
+		$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 		if ($mysqli->connect_error) {
 			die('Connect Error (' . $mysqli->connect_errno . ') '
 				. $mysqli->connect_error);
@@ -56,8 +57,8 @@
 		if ($stmt = $mysqli->prepare("SELECT * FROM login WHERE lecturerid=? AND password=?"))
 		{
 			$stmt->bind_param('ss',		
-				$_POST['lecturerid'],
-				$_POST['password']);
+			$_POST['lecturerid'],
+			$_POST['password']);
 			$stmt->execute();
 			$stmt->store_result();
 			$stmt->bind_result(
