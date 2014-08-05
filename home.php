@@ -28,16 +28,12 @@ if($date=="Jun"
 
 
 include('upload.php');
-
 $unitcode = $_GET['unitcodeslist'];
 
 
 // Retrieve relevant unitcode details.
+
 $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-if ($mysqli->connect_error) {
-	die('Connect Error (' . $mysqli->connect_errno . ') '
-		. $mysqli->connect_error);
-}
 $lecturerid=$_SESSION['lecturerid'];
 $stmt=$mysqli->prepare("SELECT unitname,semester,programme,hod,lectures,tutorials,quizzes,tests,practicals,assignments FROM unitfile WHERE unitcode=? AND semester=? AND lecturerid=?");
 $stmt->bind_param('sss',
@@ -113,6 +109,10 @@ include('generatefilelist.php');
 						<div class="col-sm-3">
 							<input type="text" readonly name="moderator" required class="form-control" id="moderator" value="<?php echo $hod?>" >
 						</div>
+						<div class="row">
+							<button  name="submitFiles" type="submit" value="uploadFiles" class="btn btn-default">Submit</button>
+						</div>				
+
 					</div>
 				</form>
 				<form>
@@ -127,7 +127,7 @@ include('generatefilelist.php');
 
 					</div>
 				</form>
-
+	
 				<form class="form-horizontal" id="numfiles" role="form" action="" method="POST" enctype="multipart/form-data">
 					<div class="panel panel-default">
 						<div class="panel-heading">Number of Files	</div>
@@ -175,7 +175,6 @@ include('generatefilelist.php');
 				</div>
 			</form>
 		</div>
-
 		<div   class="panel panel-default">
 			<div class="panel-heading">Uploading file</div>
 			<div id="uploadfilepanel" class="panel-body">

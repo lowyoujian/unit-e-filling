@@ -1,4 +1,5 @@
 <?php
+
 if (!file_exists("upload/UECS2094/$semester")) {
 	mkdir("upload/UECS2094//$semester", 0777, true);
 }
