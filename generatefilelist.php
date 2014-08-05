@@ -9,31 +9,31 @@ if(!file_exists("upload/UECS2094//$semester/$unitcode.txt")){
 	fwrite($file, "teaching plan"."\r\n");
 
 	for ($x=1; $x<=$lectures; $x++) {
-		fwrite($file,  "lecture".".pdf". "$x\r\n");
+		fwrite($file,  "lecture".$x. ".pdf\r\n");
 	} 
 
 	for ($x=1; $x<=$tutorials; $x++) {
-		fwrite($file,  "tutorial". "$x\r\n");
-		fwrite($file,  "tutorial_solution".".pdf". "$x\r\n");
+		fwrite($file,  "tutorial".$x. ".pdf\r\n");
+		fwrite($file,  "tutorial_solution".$x. ".pdf\r\n");
 	} 
 
 	for ($x=1; $x<=$assignments; $x++) {
-		fwrite($file,  "assignment".".pdf". "$x\r\n");
+		fwrite($file,  "assignment".$x. ".pdf\r\n");
 	}
 
 	for ($x=1; $x<=$practicals; $x++) {
-		fwrite($file,  "practical". "$x\r\n");
-		fwrite($file,  "practical_solution".".pdf". "$x\r\n");
+		fwrite($file,  "practical".$x. ".pdf\r\n");
+		fwrite($file,  "practical_solution".$x. ".pdf\r\n");
 	} 
 
 	for ($x=1; $x<=$quizzes; $x++) {
-		fwrite($file,  "quiz". "$x\r\n");
-		fwrite($file,  "quiz_solution".".pdf". "$x\r\n");
+		fwrite($file,  "quiz".$x. ".pdf\r\n");
+		fwrite($file,  "quiz_solution".$x. ".pdf\r\n");
 	} 
 
 	for ($x=1; $x<=$tests; $x++) {
-		fwrite($file,  "test". "$x\r\n");
-		fwrite($file,  "test_solution".".pdf". "$x\r\n");
+		fwrite($file,  "test".$x. ".pdf\r\n");
+		fwrite($file,  "test_solution".$x. ".pdf\r\n");
 	} 
 
 	fwrite($file,"main". "\r\n");

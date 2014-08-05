@@ -187,9 +187,9 @@ include('generatefilelist.php');
 			<?php
 			$neededFiles= array();
 			$file=fopen("upload/UECS2094//$semester/$unitcode.txt",'r');
-			while(! feof($file))
+			while(!feof($file))
 				{	 $str=fgets($file);
-					$str = str_replace(array('.', "\n", "\t", "\r"), '', $str);
+					$str = str_replace(array( "\n", "\t", "\r"), '', $str);
 					array_push($neededFiles,$str);
 				}
 				foreach($neededFiles as $key=>$value)
@@ -197,7 +197,7 @@ include('generatefilelist.php');
 				}
 				fclose($file);
 
-
+				var_dump($neededFiles);
 
 				?>
 				<script>
@@ -225,8 +225,10 @@ include('generatefilelist.php');
 				var fd = new FormData(form);
 				console.log(fd);
 				for(i=0 ; i<files.length ; i++){
-					if(inArray(files[i].name,js_neededFiles))
+					if(inArray(files[i].name,js_neededFiles)){
 						fd.append("files", files[i]);
+						console.log(files[i]);
+					}
 				}
   // These extra params aren't necessary but show that you can include other data.
 
