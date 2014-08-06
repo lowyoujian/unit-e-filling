@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD']=="POST" ){
       . $mysqli->connect_error);
   }
   
-    $num_files = count($_FILES['files']['name']); 
+    $num_files = count($_FILES['files']['name']);  
     var_dump($num_files);
     $upload_date=date("Y:M:D:H:M:s");
     for($i = 0 ; $i <$num_files; $i++){

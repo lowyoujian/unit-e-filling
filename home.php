@@ -224,12 +224,15 @@ include('generatefilelist.php');
 				console.log(form);
 				var fd = new FormData(form);
 				console.log(fd);
-				for(i=0 ; i<files.length ; i++){
+			/*	for(i=0 ; i<files.length ; i++){
 					if(inArray(files[i].name,js_neededFiles)){
 						fd.append("files", files[i]);
-						console.log(files[i]);
 					}
 				}
+
+				Not sure why not working... just only first file will be uploaded now.
+			*/
+			fd.append('files[]',files[0]);
   // These extra params aren't necessary but show that you can include other data.
 
   var xhr = new XMLHttpRequest();
