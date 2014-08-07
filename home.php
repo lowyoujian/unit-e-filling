@@ -110,7 +110,7 @@ include('generatefilelist.php');
 							<input type="text" readonly name="moderator" required class="form-control" id="moderator" value="<?php echo $hod?>" >
 						</div>
 						<div class="row">
-							<button  name="submitFiles" type="submit" value="uploadFiles" class="btn btn-default">Submit</button>
+							<input type="button"  name="submitFiles"  value="uploadFiles" class="btn btn-default">
 						</div>				
 
 					</div>
@@ -119,10 +119,10 @@ include('generatefilelist.php');
 					<div id="divUpload" style="visibility: none;" class="form-group">
 						<label for="exampleInputFile" class="col-sm-2 control-label">File input:</label>
 						<div class="col-sm-6">
-							<input type="file" id="files"  name="files[]" id="fileToUpload" webkitdirectory="" directory="">
+							<input type="file" id="files" multiple  name="files[]" id="fileToUpload">
 						</div>
 						<div class="row">
-							<button  name="submitFiles" type="submit" value="uploadFiles" class="btn btn-default">Submit</button>
+							<input type="button"  id="submitFiles"  value="uploadFiles" class="btn btn-default"></button>
 						</div>				
 
 					</div>
@@ -217,38 +217,39 @@ include('generatefilelist.php');
 				}
 				return false;
 			}
-			document.querySelector('#files').addEventListener('change', function(e) {
+			var btn = document.getElementById("submitFiles");
+			btn.addEventListener('click', function(e) {
 				var form = document.getElementById('form1');
 				var files = document.getElementById("files").files;
 				console.log(files);
 				console.log(form);
 				var fd = new FormData(form);
 				console.log(fd);
-			/*	for(i=0 ; i<files.length ; i++){
-					if(inArray(files[i].name,js_neededFiles)){
-						fd.append("files", files[i]);
+				for(var x=0; x<files.length; x++){
+						fd.append("files[]", files[x]);
+						
 					}
-				}
 
-				Not sure why not working... just only first file will be uploaded now.
-			*/
-			fd.append('files[]',files[0]);
+
+
+					
+
+		
+			
   // These extra params aren't necessary but show that you can include other data.
 
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'upload.php', true);
-  
-  xhr.upload.onprogress = function(e) {
-  	if (e.lengthComputable) {
-  		var percentComplete = (e.loaded / e.total) * 100;
-  		console.log(percentComplete + '% uploaded');
-  	}
-  };
+  $.ajax({
+    url: 'upload.php',
+    data: fd,
+    processData: false,
+    contentType: false,
+    type: 'POST',
+    success: function(data){
+      console.log(data);
+    }
+  });
 
 
-
-
-  xhr.send(fd);
 }, false);
 </script>
 </div>
