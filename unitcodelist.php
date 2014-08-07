@@ -19,37 +19,13 @@
 	$stmt2->bind_result($unitcode,$unitname);
 	?>
 </head>
-<script type="text/javascript">
-	function reqListener () {
-		console.log(this.responseText);
-	}
-
-    var oReq = new XMLHttpRequest(); //New request object
-    oReq.onload = function() {
-        //This is where you handle what to do with the response.
-        //The actual data is found on this.responseText
-        //The data from get_hod_status, 1= is a hod, 0= not hod
-        if(this.responseText==1){
-        	$("#approvelist").append("Here are the list of files for you to verify<br><br>");
-        	$("#approvelist").append("Unit Code List: ");
-        	$("#approvelist").append("<select name='approvelist'><option value='unitcode'</option></select><input type='submit' value='next'/> ");
-        	$("#approvelist").append("<input type='button' value='Next'/> ")
-
-
-        }
-    };
-    oReq.open("get", "get_hod_status.php", true);
-    //                               ^ Don't block the rest of the execution.
-    //                                 Don't wait until the request finishes to 
-    //                                 continue.
-    oReq.send();
-</script>
 <body>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">e-Unitfile</div>
 			<div class="panel-body">
 				<form action="home.php" method="GET">
+				<legend>Lecturer</legend><br>
 					<p> Please select the unit that you wish to upload files. </p>
 					Unit Code List
 					<select name="unitcodeslist">
@@ -68,6 +44,45 @@
 			</div>
 		</div>
 	</div>
+
+<?php
+	$stmt3=$mysqli->prepare("SELECT hodunitcode,hodunitdesc FROM lecturer WHERE lecturerid =?");
+	$stmt3->bind_param('s',
+		$_SESSION['lecturerid']
+		);
+	$stmt3->execute();
+	$stmt3->bind_result($hodunitcode,$hodunitname);
+	
+?>
+<script type="text/javascript">
+	function reqListener () {
+		console.log(this.responseText);
+	}
+
+    var oReq = new XMLHttpRequest(); //New request object
+    oReq.onload = function() {
+        //This is where you handle what to do with the response.
+        //The actual data is found on this.responseText
+        //The data from get_hod_status, 1= is a hod, 0= not hod
+        if(this.responseText==1){
+
+			$("#approvelist").append("<fieldset><legend>HOD</legend><form action='linkfile.php' method='GET'>Here are the list of files for you to verify. Please select unit.<br>Unit Code List: <select name='approvelist'><?php 
+			while($stmt3->fetch()){
+				if($hodunitcode!='')
+				echo "<option value='$hodunitcode'>$hodunitcode $hodunitname</option>";	 
+			}	
+			?></select><input type='submit' value='Next'/> ");
+			$("#approvelist").append("</form></fieldset>");
+
+        }
+    };
+    oReq.open("get", "get_hod_status.php", true);
+    //                               ^ Don't block the rest of the execution.
+    //                                 Don't wait until the request finishes to 
+    //                                 continue.
+    oReq.send();
+</script>
+
 
 </body>
 

@@ -36,16 +36,7 @@ $unitdescriptionz=$result_explode[1];
 		$("#btnSaveChange").text("Success");
 	})	;
 
-	  $("#editNumFiles").click(function(){
-	  	$(this).hide();
-	    $("#divSaveChange").show();
-	    $("#tutorial").removeAttr("readonly");
-	    $("#lecture").removeAttr("readonly");
-	    $("#quiz").removeAttr("readonly");
-	    $("#test").removeAttr("readonly");
-	    $("#practical").removeAttr("readonly");
-	    $("#assignment").removeAttr("readonly");
-	  });
+	
 	});
 </script>
 </head>
