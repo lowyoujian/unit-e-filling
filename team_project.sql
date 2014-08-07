@@ -1,11 +1,11 @@
 CREATE TABLE  `unitFile` (
   `lecturerid` varchar(200) ,
-  `fileName` varchar(100) ,
-  `semester` varchar(10) ,
+  `filename` varchar(100) ,
+  `semester` varchar(100) ,
   `programme`varchar(200),
-  `unitcode` varchar(10),
+  `unitcode` varchar(100),
   `unitname` varchar(100) ,
-  `uploaddate` date ,
+  `uploaddate` varchar(100) ,
   `filestatus` varchar(200),
   `hod` varchar(100) ,
   `url` varchar(255) ,
@@ -15,7 +15,7 @@ CREATE TABLE  `unitFile` (
   `tests` INT,
   `practicals` INT,
   `assignments` INT,
-   PRIMARY KEY (`lecturerID`,`fileName`,`semester`)
+   PRIMARY KEY (`lecturerID`,`unitcode`,`fileName`,`semester`)
 ) ;
 
 CREATE TABLE IF NOT EXISTS `login` (
