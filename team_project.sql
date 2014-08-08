@@ -18,7 +18,7 @@ CREATE TABLE  `unitFile` (
    PRIMARY KEY (`lecturerID`,`unitcode`,`fileName`,`semester`)
 ) ;
 
-CREATE TABLE IF NOT EXISTS `login` (
+CREATE TABLE IF NOT EXISTS `user` (
   `lecturerID` varchar(150) NOT NULL,
   `password` varchar(150) NOT NULL,
   PRIMARY KEY (`lecturerID`)

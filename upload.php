@@ -55,33 +55,14 @@ if($_SERVER['REQUEST_METHOD']=="POST" ){
 
       $file_status="unapproved";
 
-  var_dump($_POST['lecturerid']);
-  var_dump($_POST['trimester']);
-  var_dump($_POST['programme']);
-  var_dump($_POST['unitcode']);
-  var_dump($upload_date);
-  var_dump($file_status);
-  var_dump($_POST['unitname']);
-  var_dump($_POST['moderator']);
-  var_dump($file_destination);
-
-    $mysqli2 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-    $stmt2=$mysqli2->prepare("INSERT INTO `unitfile` (`lecturerid`,`filename`,`semester`,`programme`,`unitcode`,`unitname`,`uploaddate`,`filestatus`,`hod`,`url`) VALUES(?,?,?,?,?,?,?,?,?,?) ");
-    $stmt2->bind_param('ssssssssss',
-     $_POST['lecturerid'],
-     $file_name,
-     $_POST['trimester'],
-     $_POST['programme'],
-     $_POST['unitcode'],
-     $_POST['unitname'],
-     $upload_date,
-     $file_status,
-     $_POST['moderator'],
-     $file_destination
-     );
-    var_dump($stmt2);
+   if(!( $con = new mysqli($database['ip'], $database['username'], '', $database['database_name']))){ echo "prepare failed".$mysqli2-$mysqli2->error;}
+    $que = <<<SQL
+INSERT INTO unitfile VALUES ( "{$_POST['lecturerid']}","{$processed_filename}","{$_POST['trimester']}","{$_POST['programme']}","{$_POST['unitcode']}","{$_POST['unitname']}","{$upload_date}","{$file_status}",{$_POST['moderator']},{$file_destination});
+SQL;
+  echo $que;
+  mysql_query($que,$con);
+  mysql_close($con);
     
-    $stmt2->execute();
     move_uploaded_file($_FILES["files"]["tmp_name"][$i],
       $file_destination);
 
