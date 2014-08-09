@@ -22,12 +22,12 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 --
--- Table structure for table `lecturer_and_unit`
+-- Table structure for table `lecturer_and_unitfiles`
 --
-CREATE TABLE IF NOT EXISTS `lecturer_and_unit` (
+CREATE TABLE IF NOT EXISTS `lecturer_and_unit_files` (
   `ID` int(100) NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) NOT NULL,
-  `unit_id` varchar(30) NOT NULL,
+  `user_id` int(100) NOT NULL,
+  `unit_id` int(100) NOT NULL,
   `unit_code` varchar(20) NOT NUll,
   `trimester` varchar(100) NOT NULL,
   `num_lecture` int(100) ,
@@ -39,6 +39,17 @@ CREATE TABLE IF NOT EXISTS `lecturer_and_unit` (
   PRIMARY KEY (`ID`)
   )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+-- Table structure for table `mod_and_unit`
+--
+CREATE TABLE IF NOT EXISTS `mod_and_unit` (
+  `ID` int(100) NOT NULL AUTO_INCREMENT,
+  `user_id` int(100) NOT NULL,
+  `unit_id` int(100) NOT NULL,
+  `unit_code` varchar(20) NOT NUll,
+  `trimester` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID`)
+  )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 --
@@ -53,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(30) NOT NULL,
   `name` varchar(100) NOT NULL,
   `is_lecturer` int(3) NOT NULL,
-  `is_hod` int(3) NOT NULL,
+  `is_mod` int(3) NOT NULL,
   `is_admin` int(3) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -116,6 +127,22 @@ CREATE TABLE IF NOT EXISTS `unit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+
+-- -------------------------------------
+  ALTER TABLE `mod_and_unit`
+  ADD CONSTRAINT `md_unit_id` FOREIGN KEY (`unit_id`)
+    REFERENCES unit(id)
+    ON DELETE CASCADE;
+    -- -------------------------------------
+  ALTER TABLE `lecturer_and_unit_files`
+  ADD CONSTRAINT `luf_unit_id` FOREIGN KEY (`unit_id`)
+    REFERENCES unit(id)
+    ON DELETE CASCADE;
+     -- -------------------------------------
+  ALTER TABLE `lecturer_and_unit_files`
+  ADD CONSTRAINT `luf_user_id` FOREIGN KEY (`user_id`)
+    REFERENCES user(id)
+    ON DELETE CASCADE;
 -- -------------------------------------
   ALTER TABLE `department`
   ADD CONSTRAINT `dp_pg_id` FOREIGN KEY (`programme_id`)
