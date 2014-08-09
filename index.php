@@ -43,6 +43,7 @@
 
 	<?php
 	include('database_config.php');
+	session_start();
 	if($_SERVER['REQUEST_METHOD']=="POST")
 	{
 		
@@ -61,7 +62,6 @@
 			$stmt->execute();
 			$stmt->store_result();
 			$stmt->bind_result(
-				$result['dummy'],
 				$result['user_id'],
 				$result['password'],
 				$result['name'],
@@ -72,9 +72,9 @@
 			{
 
 				$stmt->fetch();
-				{
-					session_start();
-					$_SESSION['user_id']   = $result['lecturer_id'];
+				
+					
+					$_SESSION['user_id']   = $result['user_id'];
 					$_SESSION['user_name'] = $result['name_name'];
 					switch ($result['position']){
 						case 1:
@@ -93,7 +93,7 @@
 						default:exit();
 
 					}
-				}
+				
 			}
 			else{
 				echo "username password does not exist";

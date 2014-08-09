@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `files_of_unit` (
 
 CREATE TABLE IF NOT EXISTS `lecturer_and_unit_files` (
   `ID` int(100) NOT NULL AUTO_INCREMENT,
-  `user_id` int(100) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
   `unit_id` int(100) NOT NULL,
   `unit_code` varchar(255) NOT NULL,
   `trimester` varchar(100) NOT NULL,
@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS `lecturer_and_unit_files` (
 --
 
 INSERT INTO `lecturer_and_unit_files` (`ID`, `user_id`, `unit_id`, `unit_code`, `trimester`, `num_lecture`, `num_tutorial`, `num_practical`, `num_assignment`, `num_test`, `num_quiz`) VALUES
-(1, 1, 1, 'UECS2094', 'Jan2014', 14, 14, 14, 1, 2, 2),
-(2, 1, 2, 'UECS 2093', 'Jan2014', NULL, NULL, NULL, NULL, NULL, NULL);
+(1, "10101010", 1, 'UECS2094', 'Jan2014', 14, 14, 14, 1, 2, 2),
+(2, "10101010", 2, 'UECS 2093', 'Jan2014', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,7 +97,7 @@ INSERT INTO `lecturer_and_unit_files` (`ID`, `user_id`, `unit_id`, `unit_code`, 
 
 CREATE TABLE IF NOT EXISTS `mod_and_unit` (
   `ID` int(100) NOT NULL AUTO_INCREMENT,
-  `user_id` int(100) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
   `unit_id` int(100) NOT NULL,
   `unit_code` varchar(20) NOT NULL,
   `trimester` varchar(100) NOT NULL,
@@ -157,21 +157,20 @@ INSERT INTO `unit` (`ID`, `unit_code`, `unit_name`, `programme_id`, `department_
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `ID` int(100) NOT NULL AUTO_INCREMENT,
-  `user_id` int(100) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
   `password` varchar(30) NOT NULL,
   `name` varchar(100) NOT NULL,
   `position` int(3) NOT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID`, `user_id`, `password`, `name`, `position`) VALUES
-(1, 10101010, '10101010', 'Lim Ah Meh', 1),
-(2, 10101011, '10101011', 'Lim Ah Mei', 1);
+INSERT INTO `user` (`user_id`, `password`, `name`, `position`) VALUES
+("10101010", '10101010', 'Lim Ah Meh', 1),
+("10101011", '10101011', 'Lim Ah Mei', 1);
 
 --
 -- Constraints for dumped tables
@@ -187,7 +186,7 @@ ALTER TABLE `files_of_unit`
 -- Constraints for table `lecturer_and_unit_files`
 --
 ALTER TABLE `lecturer_and_unit_files`
-  ADD CONSTRAINT `luf_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `luf_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `luf_unit_id` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`ID`) ON DELETE CASCADE;
 
 --

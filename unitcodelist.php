@@ -11,12 +11,13 @@
 		die('Connect Error (' . $mysqli->connect_errno . ') '
 			. $mysqli->connect_error);
 	}
-	$stmt2=$mysqli->prepare("SELECT unitcode,unitdesc FROM lecturer WHERE lecturerid =?");
-	$stmt2->bind_param('s',
-		$_SESSION['lecturerid']
-		);
-	$stmt2->execute();
-	$stmt2->bind_result($unitcode,$unitname);
+	var_dump($_SESSION['user_id']);
+	$query = <<<SQL
+	SELECT id, unit_code, unit_name FROM unit WHERE id IN(SELECT unit_id FROM lecturer_and_unit_files WHERE user_id = {$_SESSION['user_id']});
+SQL;
+	$result = mysqli_query($mysqli,$query);
+	$result->fetch();
+	var_dump($result['id']);
 	?>
 </head>
 <body>
@@ -30,9 +31,9 @@
 					Unit Code List
 					<select name="unitcodeslist">
 						<?php 
-						while($stmt2->fetch()){
+						while($result->fetch()){
 							if($unitcode!='')
-								echo "<option value='$unitcode'>$unitcode $unitname</option>";	 
+								echo "<option value='$unit_code'>$unitcode $unitname</option>";	 
 						}	
 						?>
 
@@ -45,15 +46,7 @@
 		</div>
 	</div>
 
-<?php
-	$stmt3=$mysqli->prepare("SELECT hodunitcode,hodunitdesc FROM lecturer WHERE lecturerid =?");
-	$stmt3->bind_param('s',
-		$_SESSION['lecturerid']
-		);
-	$stmt3->execute();
-	$stmt3->bind_result($hodunitcode,$hodunitname);
-	
-?>
+
 <script type="text/javascript">
 	function reqListener () {
 		console.log(this.responseText);
