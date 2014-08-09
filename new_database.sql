@@ -76,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `department` (
   `ID` int(100) NOT NULL AUTO_INCREMENT,
   `department_name` varchar(255) NOT NULL,
-  `programme_id` int(255) NOT NULL,
   PRIMARY KEY (`ID`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -108,7 +107,6 @@ CREATE TABLE IF NOT EXISTS `files_of_unit` (
 CREATE TABLE IF NOT EXISTS `programme` (
   `ID` int(100) NOT NULL AUTO_INCREMENT,
   `programme_name` varchar(255) NOT NULL,
-  `unit_id` int(100) NOT NULL,
   `short_code` varchar(4) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -143,11 +141,6 @@ CREATE TABLE IF NOT EXISTS `unit` (
   ADD CONSTRAINT `luf_user_id` FOREIGN KEY (`user_id`)
     REFERENCES user(id)
     ON DELETE CASCADE;
--- -------------------------------------
-  ALTER TABLE `department`
-  ADD CONSTRAINT `dp_pg_id` FOREIGN KEY (`programme_id`)
-    REFERENCES programme(id)
-    ON DELETE CASCADE;
 -- ------------------------------------------------
 ALTER TABLE `files_of_unit`
   ADD CONSTRAINT `file_unit_id_fk` FOREIGN KEY (`unit_id`)
@@ -165,11 +158,18 @@ ALTER TABLE `files_of_unit`
     REFERENCES department(id)
     ON DELETE CASCADE;
  -- -----------------------------------------------------   
-  ALTER TABLE programme
-  ADD CONSTRAINT `pg_unit_id_fk` FOREIGN KEY (`unit_id`)
-    REFERENCES unit(id)
-    ON DELETE CASCADE;
+ 
 -- --------------------------------------------------------
+
+
+-- ---------------------------------------------------
+--dummy values
+
+  INSERT INTO UNIT VALUES("UECS2094","WEB APPLICATION DEVELOPMENT",1,1);
+
+  INSERT INTO DEPARTMENT VALUES("DEPARTMENT OF COMPUTER SCIENCES",1);
+
+  INSERT INTO programme VALUES("SOFTWARE ENGINEERING",)
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
