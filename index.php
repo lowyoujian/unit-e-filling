@@ -17,7 +17,7 @@
 						<label for="loginid" class="col-sm-2 control-label">Login ID:</label>
 						<div class="col-sm-3">
 
-							<input type="loginid" name="lecturerid" class="form-control" value="1" id="logindid" placeholder="ID">
+							<input type="loginid" name="login_id" class="form-control" value="10101010"  placeholder="ID">
 						</div>
 					</div>
 					
@@ -25,7 +25,7 @@
 					<div class="form-group">
 						<label for="password" class="col-sm-2 control-label">Password:</label>
 						<div class="col-sm-3">
-							<input type="password" name="password" class="form-control" value="1" id="inputEmail3" placeholder="Pas	sword">
+							<input type="password" name="password" class="form-control" value="10101010" id="inputEmail3" placeholder="Pas	sword">
 
 						</div>
 						<div class="row">
@@ -53,34 +53,52 @@
 		}
 
 		$result= array();
+	$stmt = $mysqli->prepare("SELECT * FROM user WHERE user_id=? AND password=?");
 		
-		if ($stmt = $mysqli->prepare("SELECT * FROM login WHERE lecturerid=? AND password=?"))
-		{
 			$stmt->bind_param('ss',		
-			$_POST['lecturerid'],
-			$_POST['password']);
+				$_POST['login_id'],
+				$_POST['password']);
 			$stmt->execute();
 			$stmt->store_result();
 			$stmt->bind_result(
-				$result['lecturerID'],
-				$result['password']
+				$result['dummy'],
+				$result['user_id'],
+				$result['password'],
+				$result['name'],
+				$result['position']
 				);
 			
 			if ( $stmt->num_rows>0)
 			{
 
-				if($stmt->fetch())
+				$stmt->fetch();
 				{
-				
-						session_start();
-						$_SESSION['lecturerid']=$result['lecturerID'];
-						header('Location:unitcodelist.php');
-					
-					
-					
+					session_start();
+					$_SESSION['user_id']   = $result['lecturer_id'];
+					$_SESSION['user_name'] = $result['name_name'];
+					switch ($result['position']){
+						case 1:
+							echo "ASd	";
+							header('Location:unitcodelist.php');
+							// lecturer page
+							break;
+						case 2:
+							header('Location:unitcodelist.php');
+							// Mod/lecturer page
+							break;
+						case 3: 
+							header('Location:admin.php');
+							break;
+							// Admin page
+						default:exit();
+
+					}
 				}
 			}
-		}
+			else{
+				echo "username password does not exist";
+			}
+		
 		
 		
 	}
