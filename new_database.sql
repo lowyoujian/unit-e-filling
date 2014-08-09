@@ -22,12 +22,34 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 --
+-- Table structure for table `lecturer_and_unit`
+--
+CREATE TABLE IF NOT EXISTS `lecturer_and_unit` (
+  `ID` int(100) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `unit_id` varchar(30) NOT NULL,
+  `unit_code` varchar(20) NOT NUll,
+  `trimester` varchar(100) NOT NULL,
+  `num_lecture` int(100) ,
+  `num_tutorial` int(100),
+  `num_practical` int(100),
+  `num_assignment` int(100),
+  `num_test` int(100),
+  `num_quiz` int(100),
+  PRIMARY KEY (`ID`)
+  )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+--
+-- --------------------------------------------------------
+--
 -- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
   `ID` int(100) NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) NOT NULL,
+  `user_id` int(100) NOT NULL,
   `password` varchar(30) NOT NULL,
   `name` varchar(100) NOT NULL,
   `is_lecturer` int(3) NOT NULL,
@@ -63,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `files_of_unit` (
   `unit_id` int(100) NOT NULL,
   `file_name` varchar(255) NOT NULL,
   `trimester` varchar(200) NOT NULL,
-  PRIMARY KEY (`ID`)
+    PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
