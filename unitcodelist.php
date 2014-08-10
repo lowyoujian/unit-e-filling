@@ -15,9 +15,10 @@
 	$query = <<<SQL
 	SELECT id, unit_code, unit_name FROM unit WHERE id IN(SELECT unit_id FROM lecturer_and_unit_files WHERE user_id = {$_SESSION['user_id']});
 SQL;
-	$result = mysqli_query($mysqli,$query);
-	$result->fetch();
-	var_dump($result['id']);
+	
+	$stmt = $mysqli->prepare($query);
+	$stmt->execute();
+	$stmt->bind_result($id,$unit_code,$unit_name);
 	?>
 </head>
 <body>
@@ -31,9 +32,9 @@ SQL;
 					Unit Code List
 					<select name="unitcodeslist">
 						<?php 
-						while($result->fetch()){
-							if($unitcode!='')
-								echo "<option value='$unit_code'>$unitcode $unitname</option>";	 
+						while($stmt->fetch()){
+							
+								echo "<option value='$unit_code'>$unit_code $unit_name</option>";	 
 						}	
 						?>
 
