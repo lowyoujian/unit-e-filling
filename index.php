@@ -83,7 +83,7 @@
 							// lecturer page
 							break;
 						case 2:
-							header('Location:unitcodelist.php');
+							header('Location:mod_homepage.php');
 							// Mod/lecturer page
 							break;
 						case 3: 
