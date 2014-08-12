@@ -100,10 +100,17 @@ CREATE TABLE IF NOT EXISTS `mod_and_unit` (
   `user_id` varchar(100) NOT NULL,
   `unit_id` int(100) NOT NULL,
   `unit_code` varchar(20) NOT NULL,
+  `unit_name` varchar(255) NOT NULL,
   `trimester` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `md_unit_id` (`unit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `mod_and_unit`
+--
+
+INSERT INTO `mod_and_unit`(`ID`, `user_id`, `unit_id`, `unit_code`, `unit_name`, `trimester`) VALUES (1, "10101011", 1, 'UECS 2094', 'Web Application Development','Jan2014'); 
 
 -- --------------------------------------------------------
 
@@ -170,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`user_id`, `password`, `name`, `position`) VALUES
 ("10101010", '10101010', 'Lim Ah Meh', 1),
-("10101011", '10101011', 'Lim Ah Mei', 1);
+("10101011", '10101011', 'Lim Ah Mei', 2);
 
 --
 -- Constraints for dumped tables

@@ -8,9 +8,9 @@ $mysqli = new mysqli($database['ip'], $database['username'], '', $database['data
 			}
 					
 					
-	$stmt=$mysqli->prepare("SELECT unitcode,unitdesc FROM hod WHERE hodid =?");
+	$stmt=$mysqli->prepare("SELECT unit_code,unit_name FROM mod_and_unit WHERE user_id=?");
 	$stmt->bind_param('s',
-		$_SESSION['loginid']);
+		$_SESSION['user_id']);
 	$stmt->execute();
 	$stmt->bind_result($unitcode,$unitname);
 	
@@ -58,6 +58,6 @@ function showUser(str) {
 
 	</select>
 	<div id="txtHint"><b>Trimester info will be listed here.</b></div>
-	<input type="submit" value="Select" onclick="result1.php"/>
+	<input type="submit" value="Select" onclick="linkfile.php"/>
 	</form>
 	

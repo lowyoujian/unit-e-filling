@@ -2,8 +2,7 @@
 <html>
 <?php
 session_start();
-// error here
-if($_SERVER['REQUEST_METHOD']=="posts"){
+if($_SERVER['REQUEST_METHOD']=="post"){
 		$query = <<<SQL
 	SELECT id, unit_code, unit_name FROM unit WHERE id IN(SELECT unit_id FROM lecturer_and_unit_files WHERE user_id = {$_SESSION['user_id']});
 SQL;
