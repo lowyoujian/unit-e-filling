@@ -2,6 +2,16 @@
 <html>
 <?php
 session_start();
+// error here
+if($_SERVER['REQUEST_METHOD']=="posts"){
+		$query = <<<SQL
+	SELECT id, unit_code, unit_name FROM unit WHERE id IN(SELECT unit_id FROM lecturer_and_unit_files WHERE user_id = {$_SESSION['user_id']});
+SQL;
+	
+	$stmt = $mysqli->prepare($query);
+	$stmt->execute();
+	$stmt->bind_result($id,$unit_code,$unit_name);
+}
 include('database_config.php');
 $date=date('M');
 
