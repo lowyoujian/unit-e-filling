@@ -1,4 +1,3 @@
-
 <html>
 <script type="text/javascript" src="jquery-2.1.1.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -30,7 +29,7 @@ SQL;
 				<legend>Lecturer</legend><br>
 					<p> Please select the unit that you wish to upload files. </p>
 					Unit Code List
-					<select name="unitcodeslist">
+					<select name="unitcodeslist" id="unitcodeslist">
 						<?php 
 						while($stmt->fetch()){
 							
@@ -54,7 +53,3 @@ SQL;
 </body>
 
 </html>
-
-
-
-
