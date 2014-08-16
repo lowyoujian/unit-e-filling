@@ -10,9 +10,9 @@ $upload_form_fields = array(
 	'quizzes'   => 'Number of Quizzes:',
 	'tutorials'   => 'Number of Tutorials:',
 	'tests'     => 'Number of Tests:',
-	'lectures'     => 'Number of Lectures:',
+	'num_lecture'     => 'Number of num_lecture:',
 	'practicals'      => 'Number of Practicals:',
-	'assignments'=> 'Number of Assignments:' 
+	'num_assignment'=> 'Number of num_assignment:' 
 	);
 
 foreach($upload_form_fields as $key => $value)
@@ -22,11 +22,6 @@ foreach($upload_form_fields as $key => $value)
 
 if($_SERVER['REQUEST_METHOD']=="POST" ){
 
-  $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-  if ($mysqli->connect_error) {
-    die('Connect Error (' . $mysqli->connect_errno . ') '
-      . $mysqli->connect_error);
-  }
   
   $num_files = count($_FILES['files']['name']);  
   var_dump($num_files);
@@ -57,7 +52,7 @@ if($_SERVER['REQUEST_METHOD']=="POST" ){
 
    if(!( $con = new mysqli($database['ip'], $database['username'], '', $database['database_name']))){ echo "prepare failed".$mysqli2-$mysqli2->error;}
     $que = <<<SQL
-INSERT INTO unitfile VALUES ( "{$_POST['lecturerid']}","{$processed_filename}","{$_POST['trimester']}","{$_POST['programme']}","{$_POST['unitcode']}","{$_POST['unitname']}","{$upload_date}","{$file_status}",{$_POST['moderator']},{$file_destination});
+INSERT INTO unitfile VALUES ( "{$_POST['user_id']}","{$processed_filename}","{$_POST['trimester']}","{$_POST['programme']}","{$_POST['unitcode']}","{$_POST['unitname']}","{$upload_date}","{$file_status}",{$_POST['moderator']},{$file_destination});
 SQL;
   echo $que;
   mysql_query($que,$con);

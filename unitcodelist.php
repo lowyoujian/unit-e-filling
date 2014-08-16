@@ -30,11 +30,11 @@ SQL;
 				<legend>Lecturer</legend><br>
 					<p> Please select the unit that you wish to upload files. </p>
 					Unit Code List
-					<select name="unitcodeslist">
+					<select name="unit_code">
 						<?php 
 						while($stmt->fetch()){
 							
-								echo "<option value='$id'>$unit_code $unit_name</option>";	 
+								echo "<option name='unit_code' value='$unit_code'>$unit_code $unit_name</option>";	 
 						}	
 						?>
 

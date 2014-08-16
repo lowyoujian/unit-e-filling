@@ -1,51 +1,51 @@
 <?php
 
-if (!file_exists("upload/UECS2094/$semester")) {
-	mkdir("upload/UECS2094//$semester", 0777, true);
+if (!file_exists("upload/$unit_code/$trimester")) {
+	mkdir("upload/$unit_code/$trimester", 0777, true);
 }
-if(!file_exists("upload/UECS2094//$semester/$unitcode.txt")){
-	$file = fopen("upload/UECS2094//$semester/$unitcode.txt","w"); 
+if(!file_exists("upload/$unit_code/$trimester/$unit_code.txt")){
+	$file = fopen("upload/$unit_code/$trimester/$unit_code.txt","w"); 
 	
 
-	for ($x=1; $x<=$assignments; $x++) {
+	for ($x=1; $x<=$num_assignment; $x++) {
 		fwrite($file,  "assignment".$x. ".pdf\r\n");
 	}
-	for ($x=1; $x<=$lectures; $x++) {
+	for ($x=1; $x<=$num_lecture; $x++) {
 		fwrite($file,  "lecture".$x. ".pdf\r\n");
 	} 
 
 
-	for ($x=1; $x<=$practicals; $x++) {
+	for ($x=1; $x<=$num_practical; $x++) {
 		fwrite($file,  "practical".$x. ".pdf\r\n");
 	} 
-	for ($x=1; $x<=$practicals; $x++) {
+	for ($x=1; $x<=$num_practical; $x++) {
 		fwrite($file,  "practical_solution".$x. ".pdf\r\n");
 	} 
-	for ($x=1; $x<=$quizzes; $x++) {
+	for ($x=1; $x<=$num_quiz; $x++) {
 	fwrite($file,  "quiz_solution".$x. ".pdf\r\n");		
 	} 
-	for ($x=1; $x<=$quizzes; $x++) {
+	for ($x=1; $x<=$num_quiz; $x++) {
 		fwrite($file,  "quiz".$x. ".pdf\r\n");
 	} 
-	for ($x=1; $x<=$tests; $x++) {
+	for ($x=1; $x<=$num_test; $x++) {
 		fwrite($file,  "test".$x. ".pdf\r\n");
 	} 
-	for ($x=1; $x<=$tests; $x++) {
+	for ($x=1; $x<=$num_test; $x++) {
 		fwrite($file,  "test_solution".$x. ".pdf\r\n");
 	} 
-	for ($x=1; $x<=$tutorials; $x++) {
+	for ($x=1; $x<=$num_tutorial; $x++) {
 		fwrite($file,  "tutorial".$x. ".pdf\r\n");
 	} 
-	for ($x=1; $x<=$tutorials; $x++) {
+	for ($x=1; $x<=$num_tutorial; $x++) {
 		fwrite($file,  "tutorial_solution".$x. ".pdf\r\n");	
 	} 
 
 	fwrite($file,"main". "\r\n");
-	fwrite($file, "unit matrix ". $unitcode.".pdf". "\r\n");
-	fwrite($file, "academic report ". $unitcode.".pdf". "\r\n");
-	fwrite($file, "misc". $unitcode.".pdf"."\r\n");
+	fwrite($file, "unit matrix ". $unit_code.".pdf". "\r\n");
+	fwrite($file, "academic report ". $unit_code.".pdf". "\r\n");
+	fwrite($file, "misc". $unit_code.".pdf"."\r\n");
 	fwrite($file, "syllabus"."\r\n"); 
-	fwrite($file, "teaching plan"."\r\n");
+	fwrite($file, "teaching plan"."\r");
 
 	fclose($file); 
 }
