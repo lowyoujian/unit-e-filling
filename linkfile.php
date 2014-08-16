@@ -1,4 +1,7 @@
 <?php
+$dpt=$_GET['department'];
+$prog=$_GET['programme'];
+$unit=$_GET['unit'];
 include('database_config.php');
 	session_start();
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
@@ -7,26 +10,29 @@ include('database_config.php');
 				die('Connect Error (' . $mysqli->connect_errno . ') '
 						. $mysqli->connect_error);
 			}
-					
-	$stmt=$mysqli->prepare("SELECT unitcode,semester FROM unitFile");	
+	$stmt=$mysqli->prepare("SELECT trimester FROM mod_and_unit WHERE user_id=? AND unit_code=?");
+	$stmt->bind_param('ss',
+		$_SESSION['user_id'],
+		$unit);
 	$stmt->execute();
-	$stmt->bind_result($uc,$sem);
-	
-$approvelist= $_GET['approvelist'];
+	$stmt->bind_result($sem);
+	$stmt->fetch();	
+
+
 
 //For counting number of files in folder
-$directory = "upload/$approvelist/May2014/"; 
+$directory = "upload/$unit/$sem/"; 
 $filecount = count(glob($directory . "*.pdf"));
 
 //For finding .pdf files in the folder
-$phpfile = "upload/$approvelist/May2014/";
+$phpfile = "upload/$unit/$sem/";
 $phpfiles = glob($phpfile. "*.pdf");
 $a=0;
 foreach($phpfiles as $phpfile)
 {
 
 $name=basename($phpfile);
-$filehref[$a]="upload/$approvelist/May2014/$name";
+$filehref[$a]="upload/$unit/$sem/$name";
 $filename[$a]=$name;
 $a++;
 }
@@ -46,7 +52,7 @@ padding:5px;
 	</style>
 	<body>
 		<fieldset>
-		<legend><?php echo $approvelist;?></legend>
+		<legend><?php echo $unit;?></legend>
 		
 			
 <?php
