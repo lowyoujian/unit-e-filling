@@ -81,3 +81,4 @@ include('database_config.php');
 	<input type="submit" value="Next" onclick="linkfile.php"/>
 	</form>
 	
+<a href="password.php">Change password?</a>

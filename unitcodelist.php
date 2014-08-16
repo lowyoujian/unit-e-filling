@@ -48,9 +48,7 @@ SQL;
 		</div>
 	</div>
 
-
-
-
+<a href="password.php">Change password?</a>
 
 </body>
 
