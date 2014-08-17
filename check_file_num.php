@@ -8,15 +8,15 @@
 function check(){
 <?php
 var_dump($_POST);
-$code = $_POST['unitcodeslist'];
+$code = $_POST['unit_code'];
 include('database_config.php');
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') '
 			. $mysqli->connect_error);
 	}
-	$stmt=$mysqli->prepare("SELECT num_lecture, num_tutorial, num_practical, num_assignment, num_test, num_quiz FROM lecturer_and_unit_files WHERE unit_id=?");
-	$stmt->bind_param('s', $_POST['unitcodeslist']);
+	$stmt=$mysqli->prepare("SELECT num_lecture, num_tutorial, num_practical, num_assignment, num_test, num_quiz FROM lecturer_and_unit_files WHERE unit_code=?");
+	$stmt->bind_param('s', $_POST['unit_code']);
 	$stmt->execute();
 	$stmt->bind_result($lectures, $tutorials, $practicals, $assignments, $tests, $quizes);
 ?>
@@ -24,7 +24,7 @@ include('database_config.php');
 <?php
 while($stmt->fetch()){
 	if($lectures == NULL && $tutorials == NULL && $practicals == NULL && $assignments == NULL && $tests == NULL && $quizes == NULL ){
-	header("Location:set_file.php?unitcode=$code");
+	header("Location:set_file.php?unit_code=$code");
 	}
 }
 ?>

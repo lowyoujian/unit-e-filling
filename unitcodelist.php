@@ -30,7 +30,7 @@ SQL;
 					<p> Please select the unit that you wish to upload files. </p>
 					Unit Code List
 
-					<select name="unit_code">
+					<select name="unit_code" id="unit_code">
 
 						<?php 
 						while($stmt->fetch()){

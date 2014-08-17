@@ -1,6 +1,38 @@
 <!DOCTYPE HTML>
 <html>
 <?php
+include('check_file_num.php');
+	
+	$lecture=$_POST['numOfLectures'];
+	$tutorial=$_POST['numOfTutorials'];
+	$practical=$_POST['numOfPracticals'];
+	$assignment=$_POST['numOfAssignments'];
+	$test=$_POST['numOfTests'];
+	$quiz=$_POST['numOfQuizes'];
+	$code2 = $_POST['unitcode'];
+	include('database_config.php');
+	$getDate = new Upload();
+	$getDate->getCurrentTrimester();
+	if($_SERVER['REQUEST_METHOD'] == "POST") {
+		$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+		if ($mysqli3->connect_error) {
+		die('Connect Error (' . $mysqli3->connect_errno . ') '
+			. $mysqli3->connect_error);
+	}
+
+			$sql = <<<SQL
+			UPDATE `lecturer_and_unit_files`
+SET `num_lecture`=$lecture, `num_tutorial`=$tutorial, `num_practical`=$practical, `num_assignment`=$assignment, `num_test`=$test, `num_quiz`=$quiz
+WHERE `unit_code`='$code2' AND `trimester`= '$getDate->date';
+SQL;
+
+$results = mysqli_query($mysqli3, $sql);
+
+		}
+	
+?>
+<?php
+var_dump($_POST);
 session_start();
 $unit_code = $_POST['unit_code'];
 $uploadHandler = new Upload();
