@@ -17,7 +17,7 @@
 	?>	
 </head>
 <body>
-
+<?php include 'title_bar.php'; ?>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">Assign Lecturer</div>

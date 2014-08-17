@@ -3,7 +3,14 @@ session_start();
 include('database_config.php');	
 ?>
 
-	<form method="get" action="linkfile.php">
+<body>
+<?php include 'title_bar.php'; ?>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">e-Unitfile</div>
+			<div class="panel-body">
+			<legend>Moderator</legend><br>
+				<form method="get" action="linkfile.php">
 	    <p> Please provide the unit information that you wish to verify files. </p>
 		<table style="width:800px" border="1">
 		<tr>
@@ -80,5 +87,9 @@ include('database_config.php');
 	</table>
 	<input type="submit" value="Next" onclick="linkfile.php"/>
 	</form>
+		</div>
+		</div>
+	</div>
+
 	
 <a href="password.php">Change password?</a>
