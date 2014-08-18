@@ -24,7 +24,6 @@ if($_SERVER['REQUEST_METHOD']=="POST" ){
 
   
   $num_files = count($_FILES['files']['name']);  
-  var_dump($num_files);
   $upload_date=date("Y:M:D:H:M:s");
   for($i = 0 ; $i <$num_files; $i++){
     $processed_filename=$_POST["unitcode"]."_" .$_POST["trimester"]."_". $_FILES["files"]["name"][$i];

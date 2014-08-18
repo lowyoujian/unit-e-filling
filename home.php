@@ -1,15 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <?php
-include('check_file_num.php');
 	
-	$lecture=$_POST['numOfLectures'];
-	$tutorial=$_POST['numOfTutorials'];
-	$practical=$_POST['numOfPracticals'];
-	$assignment=$_POST['numOfAssignments'];
-	$test=$_POST['numOfTests'];
-	$quiz=$_POST['numOfQuizes'];
-	$code2 = $_POST['unitcode'];
+	
 	include('database_config.php');
 	$getDate = new Upload();
 	$getDate->getCurrentTrimester();
@@ -20,19 +13,13 @@ include('check_file_num.php');
 			. $mysqli3->connect_error);
 	}
 
-			$sql = <<<SQL
-			UPDATE `lecturer_and_unit_files`
-SET `num_lecture`=$lecture, `num_tutorial`=$tutorial, `num_practical`=$practical, `num_assignment`=$assignment, `num_test`=$test, `num_quiz`=$quiz
-WHERE `unit_code`='$code2' AND `trimester`= '$getDate->date';
-SQL;
 
-$results = mysqli_query($mysqli3, $sql);
+
 
 		}
 	
 ?>
 <?php
-var_dump($_POST);
 session_start();
 $unit_code = $_POST['unit_code'];
 $uploadHandler = new Upload();
@@ -111,6 +98,9 @@ $stmt->bind_param('sss',
 $stmt->execute();
 $stmt->bind_result($unit_id,$trimester,$num_lecture,$num_tutorial,$num_quiz,$num_test,$num_practical,$num_assignment);
 $stmt->fetch();
+if($num_lecture == NULL){
+header("Location:set_file.php?unit_code={$_POST['unit_code']}");
+}
 
 
 $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
@@ -229,6 +219,7 @@ include('php_files/generatefilelist.php');
         <div  class="panel panel-default">
             <div class="panel-heading">Uploading file</div>
             <div id="uploadfilepanels" style="display: inline-block; float:left;" >
+            <table id="files_table" class="table" border='1'> </table>
             <div id="uploadfilepanelscheckbox" style="display: inline-block; float:left;">
 
             </div>
@@ -250,9 +241,6 @@ include('php_files/generatefilelist.php');
         $str = str_replace(array( "\n", "\t", "\r"), '', $str);
         array_push($neededFiles,$str);
     }
-    foreach($neededFiles as $key=>$value)
-    {
-}
 fclose($file);
 
 
@@ -274,11 +262,17 @@ fclose($file);
 }
 return false;
 }
-
+ $("#files_table").append('<tr id=Title><td>File</td><td>Exist</td><td>Exists</td><td>Status</td><td>Upload</td></tr>');
 for(var i=0; i<js_neededFiles.length; i++){
-    $("#uploadfilepanel").append('<span id='+'filelist'+i+' style="color:red">'+js_neededFiles[i]+'</span><br>');
-    $("#uploadfilepanelscheckbox").append('<img id='+'checkbox'+i+' width="12px"  src="images/cross.jpg"  /><br>');
+    $("#files_table").append('<tr id='+'tr'+i+'>'+js_neededFiles[i]);
+    $("#"+"tr"+i).append('<td id='+'tr'+i+'td0'+'>'+js_neededFiles[i]+'</span></td>');
+    $("#"+"tr"+i).append('<td id='+'tr'+i+'td2'+'>'+'<img id='+'checkbox'+i+' width="12px"  src="images/cross.jpg"  /></td>');
+    $("#"+"tr"+i).append('<td id='+'tr'+i+'td3'+'>'+"Not Found"+'</span></td>');
+    $("#"+"tr"+i).append('<td id='+'tr'+i+'td1'+'>'+"Not Available"+'</td>');
+    $("#"+"tr"+i).append('<td id='+'tr'+i+'td1'+'>'+'<input type="button" style="visibility:hidden;" disabled="true" value="Add to Upload"/>'+'</td>');
 
+    $("#files_table").append('</tr>');
+    
 }
 
 
@@ -295,7 +289,7 @@ $("#files").change(function(){
         foundfiles++;
                 // change from red to green if expected file in folder is found
         for(var i =0; i<js_neededFiles.length; i++){
-            if($("#"+'filelist'+i).text()==files[x].name){
+            if($("#"+'tr'+i+'td0').text()==files[x].name){
                 $("#"+'filelist'+i).css("color","green");
                 $("#"+'filelist'+i).css("font-weight","bold");
                 $("#"+'checkbox'+i).prop("src","images/tick.jpg");
