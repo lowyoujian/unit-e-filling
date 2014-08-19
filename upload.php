@@ -22,7 +22,7 @@ foreach($upload_form_fields as $key => $value)
 
 if($_SERVER['REQUEST_METHOD']=="POST" ){
 
-  
+
   $num_files = count($_FILES['files']['name']);  
   $upload_date=date("Y:M:D:H:M:s");
   for($i = 0 ; $i <$num_files; $i++){
@@ -47,22 +47,23 @@ if($_SERVER['REQUEST_METHOD']=="POST" ){
       mkdir($folder_destination);
     } 
 
-      $file_status="unapproved";
-
-   if(!( $con = new mysqli($database['ip'], $database['username'], '', $database['database_name']))){ echo "prepare failed".$mysqli2-$mysqli2->error;}
+    $file_status="unapproved";
+    $date = date('Y-m-d H:i:s', strtotime(str_replace('-', '/', $date)));
     $que = <<<SQL
-INSERT INTO unitfile VALUES ( "{$_POST['user_id']}","{$processed_filename}","{$_POST['trimester']}","{$_POST['programme']}","{$_POST['unitcode']}","{$_POST['unitname']}","{$upload_date}","{$file_status}",{$_POST['moderator']},{$file_destination});
+    INSERT INTO files_of_unit(user_id, datetime_uploaded, file_status, location, unit_id, file_name, trimester) VALUES ( {$_POST['user_id']},"{$date}",0,"{$folder_destination}",{$_POST['unit_id']},"{$processed_filename}","{$_POST['trimester']}");
 SQL;
-  echo $que;
-  mysql_query($que,$con);
-  mysql_close($con);
-    
-    move_uploaded_file($_FILES["files"]["tmp_name"][$i],
-      $file_destination);
+    echo $que;
+
+    $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+    $stmt5=$mysqli->prepare($que); 
+    $stmt5->execute();
+
+move_uploaded_file($_FILES["files"]["tmp_name"][$i],
+  $file_destination);
 
 
-    echo "Stored in: " . "upload/" .$_POST["unitcode"] . $_POST["trimester"]."/" . $_FILES["files"]["name"][$i];
-  }
+echo "Stored in: " . "upload/" .$_POST["unitcode"] . $_POST["trimester"]."/" . $_FILES["files"]["name"][$i];
+}
 
 }
 

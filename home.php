@@ -198,9 +198,20 @@ include('php_files/generatefilelist.php');
                         </div>
                         <div class="row">
                             
-                        </div>              
+                        </div>    <div class = "extra info for ajax">
+                    <input type="text" readonly name="unit_id" style="display:none;" required class="form-control"  value="<?php echo $unit_id?>" >
+                    <input type="text" readonly name="date" style="display:none;" required class="form-control"  value="<?php echo $uploadHandler->date?>" >
+                    <input type="text" readonly name="user_id" style="display:none;" required class="form-control"  value="<?php echo $user_id?>" >
+                    <input type="text" readonly name="trimester" style="display:none;" required class="form-control"  value="<?php echo $trimester?>" >
+                    </div>          
 
                     </div>
+
+
+
+
+
+
                 </form>
                 <form>
                     <div id="divUpload" style="visibility: none;" class="form-group">
@@ -235,6 +246,8 @@ include('php_files/generatefilelist.php');
 
         <?php
         $neededFiles= array();
+        $file_status= array();
+
         $file=fopen("upload/$unit_code/$trimester/$unit_code.txt",'r');
         while(!feof($file))
             {    $str=fgets($file);
@@ -244,6 +257,15 @@ include('php_files/generatefilelist.php');
 fclose($file);
 
 
+
+/*$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$stmt3= $mysqli->prepare("SELECT file_name, file_status, date_uploade from files_of_unit WHERE unit_id = {$unit_id} AND trimester = {$uploadHandler->date} ORDER BY date_uploaded ;");
+   $stmt3->bind_param('s',
+    $unit_code);
+    $stmt3->execute();
+$stmt3->bind_result($programme_name);
+$stmt3->fetch();
+*/
 ?>
 <script>
     var js_neededFiles = <?php echo json_encode($neededFiles);?>;
@@ -289,7 +311,7 @@ $("#files").change(function(){
         foundfiles++;
                 // change from red to green if expected file in folder is found
         for(var i =0; i<js_neededFiles.length; i++){
-            if($("#"+'tr'+i+'td0').text()==files[x].name){
+            if($("#"+'tr'+i+'td0     ').text()==files[x].name){
                 $("#"+'filelist'+i).css("color","green");
                 $("#"+'filelist'+i).css("font-weight","bold");
                 $("#"+'checkbox'+i).prop("src","images/tick.jpg");

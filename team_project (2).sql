@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2014 at 12:29 PM
+-- Generation Time: Aug 19, 2014 at 06:17 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -47,8 +47,8 @@ INSERT INTO `department` (`ID`, `department_name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `files_of_unit` (
   `ID` int(100) NOT NULL AUTO_INCREMENT,
-  `lecturer_id` int(100) NOT NULL,
-  `date_uploaded` date NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `datetime_uploaded` datetime NOT NULL,
   `file_status` int(11) NOT NULL,
   `location` varchar(255) NOT NULL,
   `unit_id` int(100) NOT NULL,
@@ -56,7 +56,14 @@ CREATE TABLE IF NOT EXISTS `files_of_unit` (
   `trimester` varchar(200) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `file_unit_id_fk` (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `files_of_unit`
+--
+
+INSERT INTO `files_of_unit` (`ID`, `user_id`, `datetime_uploaded`, `file_status`, `location`, `unit_id`, `file_name`, `trimester`) VALUES
+(1, '10101010', '2014-08-19 09:32:59', 0, 'upload/UECS 2094/May2014', 1, 'UECS 2094_May2014_lecture1.pdf', 'May2014'),
 
 -- --------------------------------------------------------
 
@@ -86,8 +93,8 @@ CREATE TABLE IF NOT EXISTS `lecturer_and_unit_files` (
 --
 
 INSERT INTO `lecturer_and_unit_files` (`ID`, `user_id`, `unit_id`, `unit_code`, `trimester`, `num_lecture`, `num_tutorial`, `num_practical`, `num_assignment`, `num_test`, `num_quiz`) VALUES
-(1, "10101010", 1, 'UECS2094', 'Jan2014', 14, 14, 14, 1, 2, 2),
-(2, "10101010", 2, 'UECS 2093', 'Jan2014', NULL, NULL, NULL, NULL, NULL, NULL);
+(1, '10101010', 1, 'UECS 2094', 'May2014', 14, 14, 14, 1, 2, 2),
+(2, '10101010', 2, 'UECS 2093', 'May2014', 4, 2, 3, 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -100,17 +107,17 @@ CREATE TABLE IF NOT EXISTS `mod_and_unit` (
   `user_id` varchar(100) NOT NULL,
   `unit_id` int(100) NOT NULL,
   `unit_code` varchar(20) NOT NULL,
-  `unit_name` varchar(255) NOT NULL,
   `trimester` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `md_unit_id` (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `mod_and_unit`
 --
 
-INSERT INTO `mod_and_unit`(`ID`, `user_id`, `unit_id`, `unit_code`, `unit_name`, `trimester`) VALUES (1, "10101011", 1, 'UECS 2094', 'Web Application Development','Jan2014'); 
+INSERT INTO `mod_and_unit` (`ID`, `user_id`, `unit_id`, `unit_code`, `trimester`) VALUES
+(1, '20202020', 1, 'UECS 2094', 'May2014');
 
 -- --------------------------------------------------------
 
@@ -123,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `programme` (
   `programme_name` varchar(255) NOT NULL,
   `short_code` varchar(4) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `programme`
@@ -169,15 +176,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(100) NOT NULL,
   `position` int(3) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `password`, `name`, `position`) VALUES
-("10101010", '10101010', 'Lim Ah Meh', 1),
-("10101011", '10101011', 'Lim Ah Mei', 2);
+('10101010', '10101010', 'Lim Ah Meh', 1),
+('10101011', '10101011', 'Lim Ah Mei', 1),
+('20202020', '20202020', 'Mod1', 2);
 
 --
 -- Constraints for dumped tables
@@ -193,8 +201,8 @@ ALTER TABLE `files_of_unit`
 -- Constraints for table `lecturer_and_unit_files`
 --
 ALTER TABLE `lecturer_and_unit_files`
-  ADD CONSTRAINT `luf_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `luf_unit_id` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`ID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `luf_unit_id` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `luf_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `mod_and_unit`
