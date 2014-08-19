@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Unit e-Filling</title>	
-
+	<script src="script.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<?php
 	include('database_config.php');
@@ -27,7 +27,7 @@
 					<div class="form-group">
 						<label for="lecturerid" class="col-sm-2 control-label">Lecturer ID</label>
 						<div class="col-sm-3">
-							<input type="text" id="lecturerId" name="lecturerId" placeholder="10101010" size="35"/>							
+							<input class="form-control" type="text" id="lecturerId" name="lecturerId" placeholder="10101010" size="35"/>															
 						</div>
 					</div>
 					
@@ -56,7 +56,7 @@
 					</div>
 					
 				<div id="div-save" class="input-attr">
-					<button type="submit">Save</button>
+					<button type="submit" onclick="unitAssignValidation()">Save</button>
 				</div>
 				</form>
 

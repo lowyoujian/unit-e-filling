@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Unit e-Filling</title>	
-
+	<script src="script.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	
 </head>
@@ -17,17 +17,17 @@
 					<div class="form-group">
 						<label for="programmeName" class="col-sm-2 control-label">Programme Name</label>
 						<div class="col-sm-3">
-							<input class="form-control" type="text" id="programmeNames" name="programmeNames" placeholder="Software Engineering" size="35"/>							
+							<input class="form-control" type="text" id="programmeNames" name="programmeNames" placeholder="Software Engineering" size="35"/>	
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="shortCode" class="col-sm-2 control-label">Short Code</label>
 						<div class="col-sm-3">
-							<input class="form-control" type="text" id="shortCodes" name="shortCodes" placeholder="SE" size="35"/>							
+							<input class="form-control" type="text" id="shortCodes" name="shortCodes" placeholder="SE" size="35"/>														
 						</div>
 					</div>
 				<div id="div-save" class="input-attr">
-					<button type="submit">Save</button>
+					<button type="submit" onclick="programmeAssignValidation()">Save</button>
 				</div>
 				</form>
 
@@ -44,7 +44,8 @@
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
 	}
-
+if($_POST['programmeNames']!=NULL && $_POST['shortCodes']!= NULL)
+{
 			$sql = <<<SQL
 INSERT INTO `programme` (`programme_name`, `short_code`)
 VALUES (?, ?)
@@ -67,6 +68,7 @@ SQL;
 					. $mysqli3->error);	
 			}			
 		
+	}
 	}
 	?>
 </body>

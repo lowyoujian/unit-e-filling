@@ -3,7 +3,7 @@
 <?php include('database_config.php');?>
 <head>
 	<title>Unit e-Filling</title>	
-
+	<script src="script.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 </head>
 <body>
@@ -29,25 +29,25 @@ $code = $_GET['unit_code'];
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="numOfPractical" class="col-sm-2 control-label">Number of Lecture</label>
+						<label for="numOfPractical" class="col-sm-2 control-label">Number of Practical</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" id="numOfPracticals" name="numOfPracticals"  size="35"/>							
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="numOfAssignment" class="col-sm-2 control-label">Number of Lecture</label>
+						<label for="numOfAssignment" class="col-sm-2 control-label">Number of Assignment</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" id="numOfAssignments" name="numOfAssignments"  size="35"/>							
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="numOfTest" class="col-sm-2 control-label">Number of Lecture</label>
+						<label for="numOfTest" class="col-sm-2 control-label">Number of Test</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" id="numOfTests" name="numOfTests"  size="35"/>							
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="numOfQuiz" class="col-sm-2 control-label">Number of Lecture</label>
+						<label for="numOfQuiz" class="col-sm-2 control-label">Number of Quiz</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" id="numOfQuizes" name="numOfQuizes" size="35"/>							
 						</div>
@@ -56,7 +56,7 @@ $code = $_GET['unit_code'];
 						<input type="hidden" name="unitcode" id="unitcode" value="<?php echo $code;?>">
 						
 				<div id="div-save" class="input-attr">
-					<button type="submit">Save</button>
+					<button type="submit" onclick="setFileNumValidation()">Save</button>
 				</div>
 				</form>
 				
