@@ -22,7 +22,7 @@
 <?php include 'title_bar.php'; ?>
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading">Assign Unit</div>
+			<div class="panel-heading">Add Unit</div>
 			<div class="panel-body">
 
 				<form class="form-horizontal" name="form1" id="form1" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
