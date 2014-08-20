@@ -4,7 +4,7 @@ include('database_config.php');
 ?>
 
 <body>
-<?php include 'title_bar.php'; ?>
+<?php include 'title_bar_2.php'; ?>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">e-Unitfile</div>

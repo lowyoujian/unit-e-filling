@@ -5,7 +5,6 @@
 	<script src="script.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<?php
-	var_dump($_POST);
 	include('database_config.php');
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli->connect_error) {
@@ -21,14 +20,14 @@
 <?php include 'title_bar.php'; ?>
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading">Assign Lecturer</div>
+			<div class="panel-heading">Assign Moderator</div>
 			<div class="panel-body">
 
 				<form class="form-horizontal" name="form1" id="form1" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="lecturerid" class="col-sm-2 control-label">Lecturer ID</label>
+						<label for="moderatorid" class="col-sm-2 control-label">Moderator ID</label>
 						<div class="col-sm-3">
-							<input class="form-control" type="text" id="lecturerId" name="lecturerId" placeholder="10101010" size="35"/>															
+							<input class="form-control" type="text" id="moderatorId" name="moderatorId" placeholder="10101010" size="35"/>															
 						</div>
 					</div>
 					
@@ -64,10 +63,9 @@
 
 			</div>
 	</div>
-		
+	
 		<?php
 	if($_SERVER['REQUEST_METHOD'] == "POST") {
-		
 		$mysqli2 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli2->connect_error) {
 		die('Connect Error (' . $mysqli2->connect_errno . ') '
@@ -75,37 +73,26 @@
 	}
 	$stmt2=$mysqli2->prepare("SELECT * FROM user WHERE user_id = ?");
 	$stmt2->bind_param('s',		
-			$_POST['lecturerId']);
+			$_POST['moderatorId']);
 	$stmt2->execute();
 	if($stmt2 != NULL){
-	
-	$mysqli4 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-	if ($mysqli4->connect_error) {
-		die('Connect Error (' . $mysqli4->connect_errno . ') '
-			. $mysqli4->connect_error);
-	}
-	$stmt4=$mysqli4->prepare("SELECT unit_code FROM unit WHERE ID =1");
-	$stmt4->execute();
-	$stmt4->bind_result($unitCode);
 			
 			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli3->connect_error) {
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
 	}
-	
-	
-		
-		$sql = <<<SQL
-INSERT INTO `lecturer_and_unit_files` (`user_id`, `unit_id`, `unit_code`, `trimester`)
+
+			$sql = <<<SQL
+INSERT INTO `mod_and_unit` (`user_id`, `unit_id`, `unit_code`, `trimester`)
 VALUES (?, ?, ?, ?)
 SQL;
 
 			if ($stmt3 = $mysqli3->prepare($sql)) {
 				$stmt3->bind_param('sdss', 
-					$_POST['lecturerId'],
+					$_POST['moderatorId'],
 					$_POST['unitlist'],
-					$unitCode,
+					$unit_code,
 					$_POST['trimesterList']
 				);
 				
@@ -122,7 +109,6 @@ SQL;
 		}
 		echo "ERROR" ;
 	}
-	
 	?>
 </body>
 </html>
