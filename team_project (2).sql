@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `files_of_unit` (
 --
 
 INSERT INTO `files_of_unit` (`ID`, `user_id`, `datetime_uploaded`, `file_status`, `location`, `unit_id`, `file_name`, `trimester`) VALUES
-(1, '10101010', '2014-08-19 09:32:59', 0, 'upload/UECS 2094/May2014', 1, 'UECS 2094_May2014_lecture1.pdf', 'May2014'),
+(1, '10101010', '2014-08-19 09:32:59', 0, 'upload/UECS 2094/May2014', 1, 'UECS 2094_May2014_lecture1.pdf', 'May2014');
 
 -- --------------------------------------------------------
 

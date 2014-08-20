@@ -1,24 +1,8 @@
 <?php
 include('database_config.php');
 $input=array();
-$upload_form_fields = array(
-	'unitcode'  => 'Unit Code:',
-	'unitname'  => 'Unit Name:',
-	'trimester' => 'Trimester/Year:',
-	'programme' => 'Programme:',
-	'moderator' => 'Moderator:',
-	'quizzes'   => 'Number of Quizzes:',
-	'tutorials'   => 'Number of Tutorials:',
-	'tests'     => 'Number of Tests:',
-	'num_lecture'     => 'Number of num_lecture:',
-	'practicals'      => 'Number of Practicals:',
-	'num_assignment'=> 'Number of num_assignment:' 
-	);
 
-foreach($upload_form_fields as $key => $value)
-{
-	$input[$key] = '';
-}
+var_dump($_SERVER['REQUEST_METHOD']);
 
 if($_SERVER['REQUEST_METHOD']=="POST" ){
 

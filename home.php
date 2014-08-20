@@ -24,6 +24,24 @@ session_start();
 $unit_code = $_POST['unit_code'];
 $uploadHandler = new Upload();
 $uploadHandler->getCurrentTrimester();
+$upload_form_fields = array(
+    'unitcode'  => 'Unit Code:',
+    'unitname'  => 'Unit Name:',
+    'trimester' => 'Trimester/Year:',
+    'programme' => 'Programme:',
+    'moderator' => 'Moderator:',
+    'quizzes'   => 'Number of Quizzes:',
+    'tutorials'   => 'Number of Tutorials:',
+    'tests'     => 'Number of Tests:',
+    'num_lecture'     => 'Number of num_lecture:',
+    'practicals'      => 'Number of Practicals:',
+    'num_assignment'=> 'Number of num_assignment:' 
+    );
+
+foreach($upload_form_fields as $key => $value)
+{
+    $input[$key] = '';
+}
 if($_SERVER['REQUEST_METHOD']=="post"){
     $query = <<<SQL
     SELECT id, unit_code, unit_name FROM unit WHERE id IN(SELECT unit_id FROM lecturer_and_unit_files WHERE user_id = {$_SESSION['user_id']});
@@ -82,7 +100,6 @@ class Upload {
 }
 
 
-include('upload.php');
 
 
 
@@ -130,6 +147,14 @@ $stmt4= $mysqli->prepare("SELECT name from user WHERE user_id IN(SELECT user_id 
 $stmt4->bind_result($mod_name);
 $stmt4->fetch();
 
+$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$stmt5= $mysqli->prepare("SELECT file_name, datetime_uploaded, file_status from ( SELECT file_name, max(datetime_uploaded),file_status, datetime_uploaded from files_of_unit where unit_id =? AND user_id=? group by file_name DESC) as name ORDER BY file_name");
+   $stmt4->bind_param('ss',
+    $unit_code,
+    $trimester);
+    $stmt4->execute();
+$stmt4->bind_result($mod_name);
+$stmt4->fetch();
 
 include('php_files/generatefilelist.php');
 
