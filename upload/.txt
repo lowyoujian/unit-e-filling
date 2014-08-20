@@ -1,6 +1,0 @@
-main
-unit matrix .pdf
-academic report .pdf
-misc.pdf
-syllabus
-teaching plan

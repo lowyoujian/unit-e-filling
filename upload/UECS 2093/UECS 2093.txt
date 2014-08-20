@@ -1,6 +1,0 @@
-main
-unit matrix UECS 2093.pdf
-academic report UECS 2093.pdf
-miscUECS 2093.pdf
-syllabus
-teaching plan
