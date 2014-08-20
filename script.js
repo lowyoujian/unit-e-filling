@@ -1,8 +1,32 @@
-	function unitAssignValidation(){
+	function lecturerAssignValidation(){
 		var input1 = document.getElementById("lecturerId").value;
 		if(input1.length == 0){
-			alert("Please make sure Unit Code is not null. Please try again.");
+			alert("Please make sure Lecturer ID is not null. Please try again.");
 
+			}
+				
+	}
+	
+		function moderatorAssignValidation(){
+		var inputModerator = document.getElementById("moderatorId").value;
+		if(inputModerator.length == 0){
+			alert("Please make sure Moderator ID is not null. Please try again.");
+
+			}
+				
+	}
+	
+	function unitAssignValidation(){
+		var inputUnitCode = document.getElementById("unitCodes").value;
+		var inputUnitName = document.getElementById("unitNames").value;
+		if(inputUnitCode.length == 0 && inputUnitName.length == 0){
+			alert("Please make sure Unit Code and Unit Name are not null. Please try again.");
+			}else
+		if(inputUnitCode.length == 0){
+			alert("Please make sure Unit Code is not null. Please try again.");
+			}else			
+			if(inputUnitName.length == 0){
+			alert("Please make sure Unit Name is not null. Please try again.");
 			}
 				
 	}

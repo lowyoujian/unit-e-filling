@@ -56,7 +56,7 @@
 					</div>
 					
 				<div id="div-save" class="input-attr">
-					<button type="submit" onclick="unitAssignValidation()">Save</button>
+					<button type="submit" onclick="moderatorAssignValidation()">Save</button>
 				</div>
 				</form>
 
@@ -75,7 +75,20 @@
 	$stmt2->bind_param('s',		
 			$_POST['moderatorId']);
 	$stmt2->execute();
-	if($stmt2 != NULL){
+	
+	$mysqli4 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	if ($mysqli4->connect_error) {
+		die('Connect Error (' . $mysqli4->connect_errno . ') '
+			. $mysqli4->connect_error);
+	}
+	$stmt4=$mysqli4->prepare("SELECT unit_code FROM unit WHERE id = ?");
+	$stmt4->bind_param('s',		
+			$_POST['unitlist']);
+	$stmt4->execute();
+	$stmt4->bind_result($unitc);
+	$stmt4->fetch();
+	
+	if($stmt2 != NULL && $stmt4 != NULL){
 			
 			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli3->connect_error) {
@@ -92,7 +105,7 @@ SQL;
 				$stmt3->bind_param('sdss', 
 					$_POST['moderatorId'],
 					$_POST['unitlist'],
-					$unit_code,
+					$unitc,
 					$_POST['trimesterList']
 				);
 				

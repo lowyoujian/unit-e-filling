@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Unit e-Filling</title>	
-
+	<script src="script.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<?php
 	include('database_config.php');
@@ -78,7 +78,7 @@
 					</div>
 					
 				<div id="div-save" class="input-attr">
-					<button type="submit">Save</button>
+					<button type="submit" onclick="unitAssignValidation()">Save</button>
 				</div>
 				</form>
 
@@ -94,7 +94,7 @@
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
 	}
-
+if($_POST['unitCodes'] != NULL && $_POST['unitNames'] != NULL){
 			$sql = <<<SQL
 INSERT INTO `unit` (`unit_code`, `unit_name`, `programme_id`, `department_id`)
 VALUES (?, ?, ?, ?)
@@ -119,6 +119,7 @@ SQL;
 					. $mysqli3->error);	
 			}			
 		
+	}
 	}
 	?>
 </body>
