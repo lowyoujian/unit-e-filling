@@ -11,18 +11,24 @@ if (isSet($_POST["newPassword"]) && isSet($_POST["currentPassword"]) && $_POST["
 $new = $_POST["newPassword"];				
 $cur = $_POST["currentPassword"];
 $user = $_SESSION["user_id"];
-$q = mysqli_query($mysqli, "SELECT * FROM `user` WHERE `user_id`='$user'");
+	if (strlen ($new)>10 || strlen ($new)<6)
+        	{
+           		echo "<script type='text/javascript'>alert('Password must be between 6 and 10 characters!');  window.history.go(-1);	</script>";	
+     	}else
+	{
+		$q = mysqli_query($mysqli, "SELECT * FROM `user` WHERE `user_id`='$user'");
 		if (mysqli_num_rows($q) > 0) {
 			$info = mysqli_fetch_array($q);
 			if ($info['password'] == $cur) {
 				$qq = mysqli_query($mysqli, "UPDATE `user` SET `password`='$new' WHERE `user_id`='$user'") or die(mysql_error());				
 				if ($qq) {
-					echo "<script type='text/javascript'>alert('Updated password!')</script>";		
+					echo "<script type='text/javascript'>alert('Updated password!');  window.history.go(-1);</script>";		
 				}else
-					echo "<script type='text/javascript'>alert('Failed to update your password.')</script>";
+					echo "<script type='text/javascript'>alert('Failed to update your password.');  window.history.go(-1);</script>";
 			}else
-				echo "<script type='text/javascript'>alert('Your entered current password was not correct. Please try again.')</script>";	
+				echo "<script type='text/javascript'>alert('Your entered current password was not correct. Please try again.');  window.history.go(-1);</script>";	
 		}
+	}
 }
 ?>
 
