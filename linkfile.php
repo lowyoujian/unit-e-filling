@@ -52,10 +52,7 @@ foreach($phpfiles as $phpfile)
 $name=basename($phpfile);
 $filehref[$a]="upload/$unit/$sem/$name";
 $filename[$a]=$name;
-echo $filehref[$a];
-echo "<br/>";
-echo $filename[$a];
-echo "<br/>";
+
 $a++;
 }
 
@@ -194,8 +191,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_assignment$j.pdf</td>";
 				echo "<td><img id='checkbox1[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists1[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve1[$j]' disabled='true'  /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove1[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true'  /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				}
@@ -219,8 +216,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_lecture$j.pdf</td>";
 				echo "<td><img id='checkbox2[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists2[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve2[$j]' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove2[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				}
@@ -242,8 +239,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_quiz$j.pdf</td>";
 				echo "<td><img id='checkbox3[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists3[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve3[$j]' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove3[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}	
 				}
@@ -264,8 +261,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_quiz_solution$j.pdf</td>";
 				echo "<td><img id='checkbox4[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists4[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve4[$j]' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove4[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve' disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}								
 				}
@@ -286,8 +283,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_test$j.pdf</td>";
 				echo "<td><img id='checkbox2[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists2[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve5[$j]' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove5[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
@@ -309,8 +306,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_test_solution$j.pdf</td>";
 				echo "<td><img id='checkbox6[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists6[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve6[$j]' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove6[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
@@ -332,8 +329,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_tutorial$j.pdf</td>";
 				echo "<td><img id='checkbox7[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists7[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve7[$j]' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove7[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 					
@@ -355,8 +352,8 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_tutorial_solution$j.pdf</td>";
 				echo "<td><img id='checkbox8[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists8[$j]'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve8[$j]' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove8[$j]' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
@@ -365,7 +362,7 @@ $matchFileName8[$s]='';
 				echo "<div id='c' style='margin-bottom:5px;'><tr>";
 				if($filestatus[9] && $matchFileNameMAIN == "main.pdf")
 				{	
-				echo "<td><a href='upload/$unit/$sem/$matchFileNameMAIN' id='fileName9' name='fileName9' download>main</a></td>";
+				echo "<td><a href='upload/$unit/$sem/$matchFileNameMAIN' id='fileName9' name='fileName9' download>main.pdf</a></td>";
 				echo "<td><img id='checkbox9' width='12px'  src='images/tick.jpg'  /></td>";	
 				echo "<td><div id='exists9'>Found</div></td>";	
 				echo "<td><input class='approve' type='submit' value='Approve' id='approve9' style='color:black; background-color:green;'/></td>";
@@ -377,8 +374,8 @@ $matchFileName8[$s]='';
 				echo "<td>main</td>";
 				echo "<td><img id='checkbox9' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists9'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve9' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove9' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
@@ -397,8 +394,8 @@ $matchFileName8[$s]='';
 				echo "<td>unit matrix $unit.pdf</td>";
 				echo "<td><img id='checkbox10' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists10'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve10' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove10' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve' disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove' disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
@@ -417,8 +414,8 @@ $matchFileName8[$s]='';
 				echo "<td>academic report $unit.pdf</td>";
 				echo "<td><img id='checkbox11' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists11'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve11' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove11' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
@@ -437,15 +434,15 @@ $matchFileName8[$s]='';
 				echo "<td>misc$unit.pdf</td>";
 				echo "<td><img id='checkbox12' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists12'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve12' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove12' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve' disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove' disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
 				echo "<div id='c' style='margin-bottom:5px;'><tr>";	
 				if($filestatus[13] && $matchFileNameSYL == "syllabus.pdf")
 				{	
-				echo "<td><a href='upload/$unit/$sem/$matchFileNameSYL' id='fileName13' name='fileName13' download>syllabus</a></td>";
+				echo "<td><a href='upload/$unit/$sem/$matchFileNameSYL' id='fileName13' name='fileName13' download>syllabus.pdf</a></td>";
 				echo "<td><img id='checkbox13' width='12px'  src='images/tick.jpg'  /></td>";
 				echo "<td><div id='exists13'>Found</div></td>";	
 				echo "<td><input class='approve' type='submit' value='Approve' id='approve13' style='color:black; background-color:green;'/></td>";
@@ -457,15 +454,15 @@ $matchFileName8[$s]='';
 				echo "<td>syllabus</td>";
 				echo "<td><img id='checkbox13' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists13'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve13' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove13' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
 				echo "<div id='c' style='margin-bottom:5px;'><tr>";
 				if($filestatus[14] && $matchFileNameTP == "teaching plan.pdf")
 				{	
-				echo "<td><a href='upload/$unit/$sem/$matchFileNameTP' id='fileName14' name='fileName14' download>teaching plan</a></td>";
+				echo "<td><a href='upload/$unit/$sem/$matchFileNameTP' id='fileName14' name='fileName14' download>teaching plan.pdf</a></td>";
 				echo "<td><img id='checkbox14' width='12px'  src='images/tick.jpg'  /></td>";	
 				echo "<td><div id='exists14'>Found</div></td>";	
 				echo "<td><input class='approve' type='submit' value='Approve' id='approve14' style='color:black; background-color:green;'/></td>";
@@ -477,8 +474,8 @@ $matchFileName8[$s]='';
 				echo "<td>teaching plan</td>";
 				echo "<td><img id='checkbox14' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists14'>Not Found</div></td>";
-				echo "<td><input class='approve' type='submit' value='Approve' id='approve14' disabled='true' /></td>";
-				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove14' disabled='true' /></div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
 				}
 				
@@ -512,8 +509,9 @@ for($p=1;$p<=8;$p++)
 $(document).ready(function () { 
 $(document.getElementById("approve<?php echo $p;?>[<?php echo $i;?>]")).click(function(){
 var ths = this;
-var str = $(ths).siblings(document.getElementById("fileName<?php echo $p;?>[<?php echo $i;?>]")).attr("href");
+var str = $(document.getElementById("fileName<?php echo $p;?>[<?php echo $i;?>]")).text();	
 $.post("approve.php", {t:str}, function(value){
+
 document.getElementById("box<?php echo $p;?>[<?php echo $i;?>]").style.backgroundColor="#33FF33";
 document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").innerHTML="Approved";
 document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").style.color="green";
@@ -525,8 +523,9 @@ document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").style.color="g
 $(document).ready(function () { 
 $(document.getElementById("disapprove<?php echo $p;?>[<?php echo $i;?>]")).click(function(){
 var ths = this;
-var str = $(ths).siblings(document.getElementById("fileName<?php echo $p;?>[<?php echo $i;?>]")).attr("href");
+var str = $(document.getElementById("fileName<?php echo $p;?>[<?php echo $i;?>]")).text();
 $.post("disapprove.php", {t:str}, function(value){
+
 document.getElementById("box<?php echo $p;?>[<?php echo $i;?>]").style.backgroundColor="#FF0000";
 document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").innerHTML="Disapproved";
 document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").style.color="red";
@@ -548,7 +547,7 @@ for($o=9;$o<=14;$o++)
 $(document).ready(function () { 
 $(document.getElementById("approve<?php echo $o;?>")).click(function(){
 var ths = this;
-var str = $(ths).siblings(document.getElementById("fileName<?php echo $o;?>")).attr("href");
+var str = $(document.getElementById("fileName<?php echo $o;?>")).text();	
 $.post("approve.php", {t:str}, function(value){
 document.getElementById("box<?php echo $o;?>").style.backgroundColor="#33FF33";
 document.getElementById("text<?php echo $o;?>").innerHTML="Approved";
@@ -561,7 +560,7 @@ document.getElementById("text<?php echo $o;?>").style.color="green";
 $(document).ready(function () { 
 $(document.getElementById("disapprove<?php echo $o;?>")).click(function(){
 var ths = this;
-var str = $(ths).siblings(document.getElementById("fileName<?php echo $o;?>")).attr("href");
+var str = $(document.getElementById("fileName<?php echo $o;?>")).text();	
 $.post("disapprove.php", {t:str}, function(value){
 document.getElementById("box<?php echo $o;?>").style.backgroundColor="#FF0000";
 document.getElementById("text<?php echo $o;?>").innerHTML="Disapproved";

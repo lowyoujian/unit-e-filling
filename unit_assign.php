@@ -19,7 +19,7 @@
 	
 </head>
 <body>
-
+<?php include 'title_bar.php'; ?>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">Assign Unit</div>
@@ -35,7 +35,7 @@
 					<div class="form-group">
 						<label for="unitnames" class="col-sm-2 control-label">Unit Name</label>
 						<div class="col-sm-5">
-							<input type="text" id="unitNames "name="unitNames" placeholder="Software Project Management" size="35"/>	
+							<input type="text" id="unitNames" name="unitNames" placeholder="Software Project Management" size="35"/>	
 						</div>
 					</div>
 					

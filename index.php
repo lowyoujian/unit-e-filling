@@ -87,7 +87,7 @@
 							// Mod/lecturer page
 							break;
 						case 3: 
-							header('Location:admin.php');
+							header('Location:lecturer_assign.php');
 							break;
 							// Admin page
 						default:exit();
