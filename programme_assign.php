@@ -44,7 +44,7 @@
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
 	}
-if($_POST['programmeNames']!=NULL && $_POST['shortCodes']!= NULL)
+if($_POST['programmeNames']!=NULL && $_POST['shortCodes']!= NULL && strlen($_POST['programmeNames']) < 50 && strlen($_POST['shortCodes']) < 5)
 {
 			$sql = <<<SQL
 INSERT INTO `programme` (`programme_name`, `short_code`)

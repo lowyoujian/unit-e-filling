@@ -22,6 +22,9 @@
 		if(inputUnitCode.length == 0 && inputUnitName.length == 0){
 			alert("Please make sure Unit Code and Unit Name are not null. Please try again.");
 			}else
+		if(inputUnitCode.length > 10){
+			alert("Please make sure Unit Code should not more than 10 characters. Please try again.");
+			}else
 		if(inputUnitCode.length == 0){
 			alert("Please make sure Unit Code is not null. Please try again.");
 			}else			
@@ -37,8 +40,14 @@
 		if(input2.length == 0 && input3.length == 0){
 			alert("Please make sure Programme Name and Short Code is not null. Please try again.");
 			}else
+		if(input2.length > 50){
+			alert("Please make sure Programme Name should not more than 50 characters. Please try again.");
+			}else
 		if(input2.length == 0){
 			alert("Please make sure Programme Name is not null. Please try again.");
+			}else			
+			if(input3.length > 4){
+			alert("Please make sure Short Code should not more than 4 characters. Please try again.");
 			}else			
 			if(input3.length == 0){
 			alert("Please make sure Short Code is not null. Please try again.");

@@ -94,7 +94,7 @@
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
 	}
-if($_POST['unitCodes'] != NULL && $_POST['unitNames'] != NULL){
+if($_POST['unitCodes'] != NULL && $_POST['unitNames'] != NULL && strlen($_POST['unitCodes']) < 10){
 			$sql = <<<SQL
 INSERT INTO `unit` (`unit_code`, `unit_name`, `programme_id`, `department_id`)
 VALUES (?, ?, ?, ?)
