@@ -57,7 +57,7 @@
 					</div>
 					
 				<div id="div-save" class="input-attr">
-					<button type="submit" onclick="unitAssignValidation()">Save</button>
+					<button type="submit" onclick="lecturerAssignValidation()">Save</button>
 				</div>
 				</form>
 
@@ -79,15 +79,6 @@
 	$stmt2->execute();
 	if($stmt2 != NULL){
 	
-	$mysqli4 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-	if ($mysqli4->connect_error) {
-		die('Connect Error (' . $mysqli4->connect_errno . ') '
-			. $mysqli4->connect_error);
-	}
-	$stmt4=$mysqli4->prepare("SELECT unit_code FROM unit WHERE ID =1");
-	$stmt4->execute();
-	$stmt4->bind_result($unitCode);
-			
 			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli3->connect_error) {
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
@@ -105,7 +96,7 @@ SQL;
 				$stmt3->bind_param('sdss', 
 					$_POST['lecturerId'],
 					$_POST['unitlist'],
-					$unitCode,
+					$unit_code,
 					$_POST['trimesterList']
 				);
 				
