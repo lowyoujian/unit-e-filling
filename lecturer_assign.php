@@ -5,7 +5,6 @@
 	<script src="script.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<?php
-	var_dump($_POST);
 	include('database_config.php');
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli->connect_error) {
@@ -19,8 +18,6 @@
 </head>
 <body>
 <?php include 'title_bar.php'; ?>
-<?php echo $_POST['unitlist'] ?>
-
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">Assign Lecturer</div>
@@ -51,9 +48,9 @@
 						<label for="trimester" class="col-sm-2 control-label">Trimester</label>
 						<div class="col-sm-5">
 						<select name="trimesterList" id="trimesterList">
-						<option value='Jan/2014'>Jan/2014</option>
-						<option value='May/2014'>May/2014</option>
-						<option value='Oct/2014'>Oct/2014</option>
+						<option value='Jan2014'>Jan2014</option>
+						<option value='May2014'>May2014</option>
+						<option value='Oct2014'>Oct2014</option>
 						</select>
 						</div>
 					</div>
@@ -79,7 +76,20 @@
 	$stmt2->bind_param('s',		
 			$_POST['lecturerId']);
 	$stmt2->execute();
-	if($stmt2 != NULL){
+	
+		$mysqli4 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	if ($mysqli4->connect_error) {
+		die('Connect Error (' . $mysqli2->connect_errno . ') '
+			. $mysqli4->connect_error);
+	}
+	$stmt4=$mysqli4->prepare("SELECT unit_code FROM unit WHERE id = ?");
+	$stmt4->bind_param('s',		
+			$_POST['unitlist']);
+	$stmt4->execute();
+	$stmt4->bind_result($unitc);
+	$stmt4->fetch();	
+	
+	if($stmt2 != NULL && $stmt4 != NULL){
 	
 			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli3->connect_error) {
@@ -87,18 +97,18 @@
 			. $mysqli3->connect_error);
 	}
 	
-	
+		
 		
 		$sql = <<<SQL
 INSERT INTO `lecturer_and_unit_files` (`user_id`, `unit_id`, `unit_code`, `trimester`)
 VALUES (?, ?, ?, ?)
 SQL;
-
+		
 			if ($stmt3 = $mysqli3->prepare($sql)) {
 				$stmt3->bind_param('sdss', 
 					$_POST['lecturerId'],
 					$_POST['unitlist'],
-					$unit_code,
+					$unitc,
 					$_POST['trimesterList']
 				);
 				
