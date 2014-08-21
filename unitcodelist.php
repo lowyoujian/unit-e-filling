@@ -49,6 +49,9 @@ SQL;
 
 					</select>
 					<input type="submit" value="Next"/>
+					<div class="container">
+<a href="password.php">Change password?</a>
+</div>
 				</form>
 				<div id="approvelist">
 				</div>
@@ -56,8 +59,7 @@ SQL;
 		</div>
 	</div>
 
-<a href="password.php">Change password?</a>
-
+	
 </body>
 
 </html>
