@@ -3,7 +3,6 @@
 <?php
 session_start();
 $_SESSION['unit_code']=$_POST['unit_code'];
-var_dump($_SESSION['unit_code']);
     include('database_config.php');
     $getDate = new Upload();
     $getDate->getCurrentTrimester();
@@ -371,6 +370,14 @@ for(var i=0; i<js_neededFiles.length; i++){
              if(js_file_status_array[x]=='0')
              {
                 $("#"+"tr"+i+"td1").html("Not approved or rejected");
+             }
+             else if(js_file_status_array[x]=='1')
+             {
+                $("#"+"tr"+i+"td1").html("Approved");
+             }
+             else if(js_file_status_array[x]=='-1')
+             {
+                $("#"+"tr"+i+"td1").html("Rejected");
              }
              
             }
