@@ -19,6 +19,27 @@ $prog=$_GET['programme'];
 $unit=$_GET['unit'];
 include('database_config.php');
 	session_start();
+	
+	//Match unit table information to determine unit_name exists 
+	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+			if ($mysqli->connect_error) {
+				die('Connect Error (' . $mysqli->connect_errno . ') '
+						. $mysqli->connect_error);
+			}
+
+					
+	$stmts=$mysqli->prepare("SELECT unit_name FROM unit WHERE unit_code=? AND programme_id=? AND department_id=?");
+	$stmts->bind_param('sss',
+		$unit,
+		$prog,
+		$dpt);
+	$stmts->execute();
+	$stmts->bind_result($unitname);
+	$stmts->fetch();	
+	
+	if($unitname != null)
+	{
+	
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	
 			if ($mysqli->connect_error) {
@@ -85,7 +106,7 @@ th#status
 	</style>
 	<body>
 		<fieldset>
-		<legend><?php echo $unit;?></legend>
+		<legend><?php echo "$unit $unitname"?></legend>
 		
 			
 <?php
@@ -578,6 +599,21 @@ document.getElementById("text<?php echo $o;?>").style.color="red";
 });
 
 </script>
+
+<?php
+}
+}
+else
+{
+?>
+<script>
+	alert("Invalid unit selection.");
+	setTimeout(function () 
+	{  
+		window.location.href= 'mod_homepage.php'; // the redirect goes here 
+	},0);
+</script>
+
 
 <?php
 }
