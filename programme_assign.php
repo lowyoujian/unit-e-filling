@@ -10,7 +10,7 @@
 <?php include 'title_bar.php'; ?>
 <div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading">Assign Programme</div>
+			<div class="panel-heading">Add Programme</div>
 			<div class="panel-body">
 
 				<form class="form-horizontal" name="form1" id="form1" role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
 	}
-if($_POST['programmeNames']!=NULL && $_POST['shortCodes']!= NULL)
+if($_POST['programmeNames']!=NULL && $_POST['shortCodes']!= NULL && strlen($_POST['programmeNames']) < 50 && strlen($_POST['shortCodes']) < 5)
 {
 			$sql = <<<SQL
 INSERT INTO `programme` (`programme_name`, `short_code`)

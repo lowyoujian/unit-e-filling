@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<?php
 	include('database_config.php');
+	$date=date('Y');
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') '
@@ -48,15 +49,15 @@
 						<label for="trimester" class="col-sm-2 control-label">Trimester</label>
 						<div class="col-sm-5">
 						<select name="trimesterList" id="trimesterList">
-						<option value='Jan/2014'>Jan/2014</option>
-						<option value='May/2014'>May/2014</option>
-						<option value='Oct/2014'>Oct/2014</option>
+						<option value='Jan/2014'>Jan<?php echo $date ?></option>
+						<option value='May/2014'>May<?php echo $date ?></option>
+						<option value='Oct/2014'>Oct<?php echo $date ?></option>
 						</select>
 						</div>
 					</div>
 					
 				<div id="div-save" class="input-attr">
-					<button type="submit" onclick="unitAssignValidation()">Save</button>
+					<button type="submit" onclick="moderatorAssignValidation()">Save</button>
 				</div>
 				</form>
 
@@ -75,7 +76,20 @@
 	$stmt2->bind_param('s',		
 			$_POST['moderatorId']);
 	$stmt2->execute();
-	if($stmt2 != NULL){
+	
+	$mysqli4 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	if ($mysqli4->connect_error) {
+		die('Connect Error (' . $mysqli4->connect_errno . ') '
+			. $mysqli4->connect_error);
+	}
+	$stmt4=$mysqli4->prepare("SELECT unit_code FROM unit WHERE id = ?");
+	$stmt4->bind_param('s',		
+			$_POST['unitlist']);
+	$stmt4->execute();
+	$stmt4->bind_result($unitc);
+	$stmt4->fetch();
+	
+	if($stmt2 != NULL && $stmt4 != NULL && strlen($_POST['moderatorId']) != NULL){
 			
 			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli3->connect_error) {
@@ -92,7 +106,7 @@ SQL;
 				$stmt3->bind_param('sdss', 
 					$_POST['moderatorId'],
 					$_POST['unitlist'],
-					$unit_code,
+					$unitc,
 					$_POST['trimesterList']
 				);
 				
