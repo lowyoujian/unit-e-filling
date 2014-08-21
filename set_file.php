@@ -1,6 +1,56 @@
 <!DOCTYPE HTML>
 <html>
-<?php include('database_config.php');?>
+<?php include('database_config.php');
+session_start();
+if(isset($_GET['unit_code'])){
+$_SESSION['code']=$_GET['unit_code'];
+}
+?>
+<?php
+$code = $_SESSION['code'];
+
+		if($_SERVER['REQUEST_METHOD'] == "POST") {
+	$date=date('M');
+
+        if($date=="Oct"
+            ||"Nov"
+            ||"Dec"
+            )
+            {$date="Oct".date('Y');}
+
+        if($date=="Jan"
+            ||"Feb"
+            ||"Mac"
+            ||"Apr"
+            ||"May"
+            )
+            {$date="Jan".date('Y');}
+
+        if($date=="Jun"
+            ||"Jul"
+            ||"Aug"
+            ||"Sept"
+            )
+            {$date="May".date('Y');}
+
+$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+		if ($mysqli3->connect_error) {
+		die('Connect Error (' . $mysqli3->connect_errno . ') '
+			. $mysqli3->connect_error);
+	}
+			$sql = <<<SQL
+			UPDATE `lecturer_and_unit_files`
+SET `num_lecture`={$_POST['numOfLectures']}, `num_tutorial`= {$_POST['numOfTutorials']}, `num_practical`={$_POST['numOfPracticals']}, `num_assignment`={$_POST['numOfAssignments']}, `num_test`={$_POST['numOfTests']}, `num_quiz`={$_POST['numOfQuizes']}
+WHERE `unit_code`='$code' AND `trimester`= '$date';
+SQL;
+
+mysqli_query($mysqli3, $sql);
+
+header("location:home.php");
+
+}
+
+	?>
 <head>
 	<title>Unit e-Filling</title>	
 	<script src="script.js"></script>
@@ -8,14 +58,14 @@
 </head>
 <body>
 <?php
-$code = $_GET['unit_code'];
+
 ?>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">Number of File Setting for Unit <?php echo $code?></div>
 			<div class="panel-body">
 
-				<form class="form-horizontal" name="form1" id="form1" role="form" action="" method="POST" enctype="multipart/form-data">
+				<form class="form-horizontal" name="form1" action="<?php echo $_SERVER['PHP_SELF']?>" id="form1" role="form" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="numOfLecture" class="col-sm-2 control-label">Number of Lecture </label>
 						<div class="col-sm-3">
@@ -65,49 +115,7 @@ $code = $_GET['unit_code'];
 			</div>
 	</div>
 
-	<?php
-		if($_SERVER['REQUEST_METHOD'] == "POST") {
-		$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-		if ($mysqli3->connect_error) {
-		die('Connect Error (' . $mysqli3->connect_errno . ') '
-			. $mysqli3->connect_error);
-	}
-
-	$date=date('M');
-
-        if($date=="Oct"
-            ||"Nov"
-            ||"Dec"
-            )
-            {$date="Oct".date('Y');}
-
-        if($date=="Jan"
-            ||"Feb"
-            ||"Mac"
-            ||"Apr"
-            ||"May"
-            )
-            {$date="Jan".date('Y');}
-
-        if($date=="Jun"
-            ||"Jul"
-            ||"Aug"
-            ||"Sept"
-            )
-            {$date="May".date('Y');}
-
-			$sql = <<<SQL
-			UPDATE `lecturer_and_unit_files`
-SET `num_lecture`={$_POST['numOfLectures']}, `num_tutorial`= {$_POST['numOfTutorials']}, `num_practical`={$_POST['numOfPracticals']}, `num_assignment`={$_POST['numOfAssignments']}, `num_test`={$_POST['numOfTests']}, `num_quiz`={$_POST['numOfQuizes']}
-WHERE `unit_code`='$code' AND `trimester`= '$date';
-SQL;
-
-
-$results = mysqli_query($mysqli3, $sql);
-header("Location:home.php");
-}
-
-	?>
+	
 
 	
 </body>

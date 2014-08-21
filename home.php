@@ -117,7 +117,7 @@ $stmt->execute();
 $stmt->bind_result($unit_id,$trimester,$num_lecture,$num_tutorial,$num_quiz,$num_test,$num_practical,$num_assignment);
 $stmt->fetch();
 $date=$uploadHandler->date;
-if($num_lecture == NULL){
+if($num_lecture == null && $num_tutorial == null){
 header("Location:set_file.php?unit_code={$_POST['unit_code']}");
 }
 
@@ -289,7 +289,7 @@ var js_file_status_array =<?php echo json_encode($file_status_array);?>;
             <div class="row">
                 <div style="margin:20px" id="filesMatched"></div>
                 <input style="margin-left:30px" type="button"  id="submitFiles" disabled="disabled" value="UploadFiles" class="btn btn-hidden"></button>
-                <div style="margin:20px" id="filesMatched"></div>
+                <div style="margin:20px" id="addedFile"></div>
             </div>
         </div>
 
@@ -340,7 +340,7 @@ for(var i=0;i<js_neededFiles.length;i++){
     js_neededFiles_with_unitcode[i]= js_neededFiles[i];
     js_neededFiles_with_unitcode[i] = "<?php echo $unit_code."_"; echo $date."_";?>"+js_neededFiles_with_unitcode[i];
 }
- $("#files_table").append('<tr id=Title><td>File</td><td>Exist</td><td>Exists</td><td>Status</td><td>Upload</td></tr>');
+ $("#files_table").append('<tr id=Title><td>File</td><td>On Server</td><td>Exists in your folder</td><td>Status</td><td>Upload</td></tr>');
 for(var i=0; i<js_neededFiles.length; i++){
     $("#files_table").append('<tr id='+'tr'+i+'>'+js_neededFiles[i]);
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td0'+'>'+js_neededFiles[i]+'</span></td>');
@@ -358,7 +358,6 @@ for(var i=0; i<js_neededFiles.length; i++){
 
     for(var x=1; x<=count; x++){
         if(js_file_name_array[x]==js_neededFiles_with_unitcode[i]){
-             $("#"+"tr"+i+"td3").html("Found");
              $("#"+"tr"+i+"td2").html("<img width=12px src='images/tick.jpg'/>");
              if(js_file_status_array[x]=='0')
              {
@@ -372,9 +371,9 @@ for(var i=0; i<js_neededFiles.length; i++){
 }
 
 $( document ).ready(function() {
-    var form = document.getElementById('form1');
+  var form = document.getElementById('form1');
   var fd = new FormData(form);
-
+  var added_file_count = 0;
 var uploadbtn = document.getElementById("submitFiles");
 uploadbtn.addEventListener('click', function(e) {
     var files = document.getElementById("files").files;  
@@ -407,10 +406,8 @@ $("#files").change(function(){
         
                 // change from red to green if expected file in folder is found
         for(var i =0; i<js_neededFiles.length; i++){
-            if($("#"+'tr'+i+'td0     ').text()==files[x].name){
-                $("#"+'filelist'+i).css("color","green");
-                $("#"+'filelist'+i).css("font-weight","bold");
-                $("#"+'checkbox'+i).prop("src","images/tick.jpg");
+            if($("#"+'tr'+i+'td0').text()==files[x].name){
+                $("#"+"tr"+i+"td3").html("Found");
                  $("#"+"tr"+i+"td4").html('<input id="'+i+'" type="button" class="addToUpload" value="Add to Upload"/>');
 
         }
@@ -426,12 +423,16 @@ $(".addToUpload").click(function(){
     for(var x=0; x<files.length; x++){
         if(file1name==files[x].name){
             fd.append("files[]", files[x]);
-            console.log("Asd");
-    }
+        added_file_count++;    }
+    $('#addedFile').html('<p>Total added files for upload is ' +added_file_count);
+
 
 }})
 
-$("#filesMatched").append(foundfiles+" out of "+js_neededFiles.length+" files found.");
+$("#filesMatched").append(foundfiles+" out of "+js_neededFiles.length+" files found.<br>");
+
+
+
 if(foundfiles>0){
     $("#submitFiles").removeAttr('disabled');
 $("#submitFiles").attr('class','btn btn-normal')
