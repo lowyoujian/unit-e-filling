@@ -20,6 +20,14 @@ SQL;
 	?>
 </head>
 <body>
+<div class="container">
+	<table>
+		<tr>			
+			<td align='center'><a href='unitcodelist.php' class="btn btn-default">Home</a></td>			
+			<td align='center'><a href="logout.php" class="btn btn-default">Logout</a></td>
+		</tr>
+	</table>
+</div>
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">e-Unitfile</div>
@@ -40,6 +48,9 @@ SQL;
 
 					</select>
 					<input type="submit" value="Next"/>
+					<div class="container">
+<a href="password.php">Change password?</a>
+</div>
 				</form>
 				<div id="approvelist">
 				</div>
@@ -47,8 +58,7 @@ SQL;
 		</div>
 	</div>
 
-<a href="password.php">Change password?</a>
-
+	
 </body>
 
 </html>

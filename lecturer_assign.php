@@ -80,7 +80,7 @@
 	
 		$mysqli4 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli4->connect_error) {
-		die('Connect Error (' . $mysqli2->connect_errno . ') '
+		die('Connect Error (' . $mysqli4->connect_errno . ') '
 			. $mysqli4->connect_error);
 	}
 	$stmt4=$mysqli4->prepare("SELECT unit_code FROM unit WHERE id = ?");
@@ -90,7 +90,28 @@
 	$stmt4->bind_result($unitc);
 	$stmt4->fetch();	
 	
-	if($stmt2 != NULL && $stmt4 != NULL && strlen($_POST['lecturerId']) != NULL){
+	$mysqli5 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	if ($mysqli5->connect_error) {
+		die('Connect Error (' . $mysqli5->connect_errno . ') '
+			. $mysqli5->connect_error);
+	}
+	
+
+	$stmt5=$mysqli5->prepare("SELECT ID FROM lecturer_and_unit_files WHERE user_id = ? AND unit_id = ? AND trimester = ? ");
+	$stmt5->bind_param('sds',		
+			$_POST['lecturerId'],
+			$_POST['unitlist'],
+			$_POST['trimesterList']);
+	$stmt5->execute();
+	$stmt5->store_result();
+	$stmt5->fetch();
+	if($stmt5->num_rows()){
+	?>
+	<script>
+	alert("Same Value Existing");
+	</script><?php
+	exit;
+	}else {
 	
 			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli3->connect_error) {
@@ -124,9 +145,10 @@ SQL;
 					. $mysqli3->error);	
 			}			
 		}
-		echo "ERROR" ;
+		
 	}
 	
-	?>
+	
+	?>	
 </body>
 </html>
