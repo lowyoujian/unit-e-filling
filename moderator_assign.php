@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<?php
 	include('database_config.php');
+	$date=date('Y');
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') '
@@ -48,9 +49,9 @@
 						<label for="trimester" class="col-sm-2 control-label">Trimester</label>
 						<div class="col-sm-5">
 						<select name="trimesterList" id="trimesterList">
-						<option value='Jan/2014'>Jan/2014</option>
-						<option value='May/2014'>May/2014</option>
-						<option value='Oct/2014'>Oct/2014</option>
+						<option value='Jan/2014'>Jan<?php echo $date ?></option>
+						<option value='May/2014'>May<?php echo $date ?></option>
+						<option value='Oct/2014'>Oct<?php echo $date ?></option>
 						</select>
 						</div>
 					</div>
