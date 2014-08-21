@@ -31,17 +31,8 @@
 						<div class="row">
 							<button type="submit" class="btn btn-success">Submit</button>
 						</div>
-					</div>
-					
-					
-					
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-	<?php
+					<div class="col-md-4">
+							<?php
 	include('database_config.php');
 	session_start();
 	if($_SERVER['REQUEST_METHOD']=="POST")
@@ -78,7 +69,6 @@
 					$_SESSION['user_name'] = $result['name_name'];
 					switch ($result['position']){
 						case 1:
-							echo "ASd	";
 							header('Location:unitcodelist.php');
 							// lecturer page
 							break;
@@ -96,14 +86,24 @@
 				
 			}
 			else{
-				echo "username password does not exist";
+				echo "<p style='color:red'>username password does not exist</p>";
 			}
 		
 		
 		
 	}
 	?>
+						</div></div>
+					
+					
+					
+				</form>
+			</div>
+		</div>
+	</div>
 
+
+	
 	
 </body>
 </html>
