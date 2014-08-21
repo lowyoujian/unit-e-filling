@@ -90,7 +90,7 @@
 	$stmt4->bind_result($unitc);
 	$stmt4->fetch();	
 	
-	if($stmt2 != NULL && $stmt4 != NULL){
+	if($stmt2 != NULL && $stmt4 != NULL && strlen($_POST['lecturerId']) != NULL){
 	
 			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 	if ($mysqli3->connect_error) {
