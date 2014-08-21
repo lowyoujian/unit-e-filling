@@ -10,7 +10,6 @@
 		die('Connect Error (' . $mysqli->connect_errno . ') '
 			. $mysqli->connect_error);
 	}
-	var_dump($_SESSION['user_id']);
 	$query = <<<SQL
 	SELECT id, unit_code, unit_name FROM unit WHERE id IN(SELECT unit_id FROM lecturer_and_unit_files WHERE user_id = {$_SESSION['user_id']});
 SQL;

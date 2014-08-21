@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <?php
-    
-    
+session_start();
+$_SESSION['unit_code']=$_POST['unit_code'];
+var_dump($_SESSION['unit_code']);
     include('database_config.php');
     $getDate = new Upload();
     $getDate->getCurrentTrimester();
@@ -20,8 +21,8 @@
     
 ?>
 <?php
-session_start();
-$unit_code = $_POST['unit_code'];
+
+$unit_code = $_SESSION['unit_code'];
 $uploadHandler = new Upload();
 $uploadHandler->getCurrentTrimester();
 $upload_form_fields = array(
@@ -215,12 +216,12 @@ var js_file_status_array =<?php echo json_encode($file_status_array);?>;
         <div class="panel panel-default">
             <div class="panel-heading">e-Unitfile</div>
             <div class="panel-body">
-
+    
                 <form class="form-horizontal" id="form1" role="form" action="" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="unitcodes" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
                         <div class="col-sm-3">
-                            <input type="text" readonly name="unitcode" required class="form-control" id="unitcodes" value="<?php echo $unit_code?>" >
+                            <input type="text" readonly name="unit_code" required class="form-control" id="unitcodes" value="<?php echo $unit_code?>" >
                         </div>
                     </div>
                     <div class="form-group">
@@ -289,6 +290,7 @@ var js_file_status_array =<?php echo json_encode($file_status_array);?>;
             <div class="row">
                 <div style="margin:20px" id="filesMatched"></div>
                 <input style="margin-left:30px" type="button"  id="submitFiles" disabled="disabled" value="UploadFiles" class="btn btn-hidden"></button>
+                <progress id="progress_bar" value="0" max="100"></progress>
                 <div style="margin:20px" id="addedFile"></div>
             </div>
         </div>
@@ -378,6 +380,16 @@ var uploadbtn = document.getElementById("submitFiles");
 uploadbtn.addEventListener('click', function(e) {
     var files = document.getElementById("files").files;  
     $.ajax({
+      
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+            xhr.addEventListener('progress', function(e) {
+                if (e.lengthComputable) {
+                    $('#progress_bar').prop("value","100 * e.loaded / e.total");
+                }
+            });
+            return xhr;
+        }, 
     url: 'upload.php',
     data: fd,
     processData: false,
@@ -386,8 +398,7 @@ uploadbtn.addEventListener('click', function(e) {
     success: function(data){
     $("#submitFiles").removeAttr('class');
     $("#submitFiles").attr('class','btn btn-success');
-    $("#submitFiles").prop('value','Success');
-    console.log(data);
+    $("#submitFiles").prop('value','Successfully uploaded');
 }
 }
 )
@@ -425,6 +436,10 @@ $(".addToUpload").click(function(){
             fd.append("files[]", files[x]);
         added_file_count++;    }
     $('#addedFile').html('<p>Total added files for upload is ' +added_file_count);
+    if(added_file_count>0){
+    $("#submitFiles").removeAttr('disabled');
+$("#submitFiles").attr('class','btn btn-normal')
+}
 
 
 }})
@@ -433,10 +448,7 @@ $("#filesMatched").append(foundfiles+" out of "+js_neededFiles.length+" files fo
 
 
 
-if(foundfiles>0){
-    $("#submitFiles").removeAttr('disabled');
-$("#submitFiles").attr('class','btn btn-normal')
-}
+
 
 });
 
