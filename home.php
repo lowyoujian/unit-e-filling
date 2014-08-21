@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 <?php
-	
-	
-	include('database_config.php');
-	$getDate = new Upload();
-	$getDate->getCurrentTrimester();
-	if($_SERVER['REQUEST_METHOD'] == "POST") {
-		$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-		if ($mysqli3->connect_error) {
-		die('Connect Error (' . $mysqli3->connect_errno . ') '
-			. $mysqli3->connect_error);
-	}
+    
+    
+    include('database_config.php');
+    $getDate = new Upload();
+    $getDate->getCurrentTrimester();
+    if($_SERVER['REQUEST_METHOD'] == "POST") {
+        $mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+        if ($mysqli3->connect_error) {
+        die('Connect Error (' . $mysqli3->connect_errno . ') '
+            . $mysqli3->connect_error);
+    }
 
 
 
 
-		}
-	
+        }
+    
 ?>
 <?php
 session_start();
@@ -37,6 +37,7 @@ $upload_form_fields = array(
     'practicals'      => 'Number of Practicals:',
     'num_assignment'=> 'Number of num_assignment:' 
     );
+
 
 foreach($upload_form_fields as $key => $value)
 {
@@ -115,6 +116,7 @@ $stmt->bind_param('sss',
 $stmt->execute();
 $stmt->bind_result($unit_id,$trimester,$num_lecture,$num_tutorial,$num_quiz,$num_test,$num_practical,$num_assignment);
 $stmt->fetch();
+$date=$uploadHandler->date;
 if($num_lecture == NULL){
 header("Location:set_file.php?unit_code={$_POST['unit_code']}");
 }
@@ -148,18 +150,41 @@ $stmt4->bind_result($mod_name);
 $stmt4->fetch();
 
 $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-$stmt5= $mysqli->prepare("SELECT file_name, datetime_uploaded, file_status from ( SELECT file_name, max(datetime_uploaded),file_status, datetime_uploaded from files_of_unit where unit_id =? AND user_id=? group by file_name DESC) as name ORDER BY file_name");
-   $stmt4->bind_param('ss',
-    $unit_code,
+$stmt5= $mysqli->prepare("SELECT file_name, datetime_uploaded, file_status from ( SELECT file_name, max(datetime_uploaded),file_status, datetime_uploaded from files_of_unit where unit_id =? AND user_id=? AND trimester = ? group by file_name DESC) as name ORDER BY file_name");
+   $stmt5->bind_param('sss',
+    $unit_id,
+    $user_id,
     $trimester);
-    $stmt4->execute();
-$stmt4->bind_result($mod_name);
-$stmt4->fetch();
+    $stmt5->execute();
+$stmt5->bind_result($file_name,$datetime_uploaded,$file_status);
+$file_name_array=array();
+$datetime_uploaded_array=array();
+$file_status_array=array();
 
-include('php_files/generatefilelist.php');
+$i=0;
+while($stmt5->fetch()){
+    $i++;
+    $file_name_array[$i]=$file_name;
+    $datetime_uploaded_array[$i]=$datetime_uploaded;
+    $file_status_array[$i]=$file_status;
 
-
+}
 ?>
+<script>
+var js_datetime_uploaded_array = <?php echo json_encode($datetime_uploaded_array) ;?>;
+
+var js_file_name_array =<?php echo json_encode($file_name_array) ;?>;
+
+var js_file_status_array =<?php echo json_encode($file_status_array);?>;
+
+</script>
+
+<?php include('php_files/generatefilelist.php'); ?>
+
+
+
+
+</script>
 
 
 
@@ -309,6 +334,12 @@ $stmt3->fetch();
 }
 return false;
 }
+var js_neededFiles_with_unitcode = new Array('');
+for(var i=0;i<js_neededFiles.length;i++){
+    
+    js_neededFiles_with_unitcode[i]= js_neededFiles[i];
+    js_neededFiles_with_unitcode[i] = "<?php echo $unit_code."_"; echo $date."_";?>"+js_neededFiles_with_unitcode[i];
+}
  $("#files_table").append('<tr id=Title><td>File</td><td>Exist</td><td>Exists</td><td>Status</td><td>Upload</td></tr>');
 for(var i=0; i<js_neededFiles.length; i++){
     $("#files_table").append('<tr id='+'tr'+i+'>'+js_neededFiles[i]);
@@ -316,60 +347,38 @@ for(var i=0; i<js_neededFiles.length; i++){
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td2'+'>'+'<img id='+'checkbox'+i+' width="12px"  src="images/cross.jpg"  /></td>');
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td3'+'>'+"Not Found"+'</span></td>');
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td1'+'>'+"Not Available"+'</td>');
-    $("#"+"tr"+i).append('<td id='+'tr'+i+'td1'+'>'+'<input type="button" style="visibility:hidden;" disabled="true" value="Add to Upload"/>'+'</td>');
-
+    $("#"+"tr"+i).append('<td id='+'tr'+i+'td4'+'>'+'<input type="button" style="visibility:hidden;" disabled="true" value="Add to Upload"/>'+'</td>');
     $("#files_table").append('</tr>');
     
 }
 
 
-$("#files").change(function(){
-    var foundfiles=0;
-    var form = document.getElementById('form1');
-    var files = document.getElementById("files").files;
-    console.log(files);
-    console.log(form);
-    var fd = new FormData(form);
-    for(var x=0; x<files.length; x++){
-        if(inArray(files[x].name,js_neededFiles)){
-            fd.append("files[]", files[x]);
-        foundfiles++;
-                // change from red to green if expected file in folder is found
-        for(var i =0; i<js_neededFiles.length; i++){
-            if($("#"+'tr'+i+'td0     ').text()==files[x].name){
-                $("#"+'filelist'+i).css("color","green");
-                $("#"+'filelist'+i).css("font-weight","bold");
-                $("#"+'checkbox'+i).prop("src","images/tick.jpg");
+var count = Object.keys(js_file_name_array).length;
+for(var i=0; i<js_neededFiles.length; i++){
 
-        }
+    for(var x=1; x<=count; x++){
+        if(js_file_name_array[x]==js_neededFiles_with_unitcode[i]){
+             $("#"+"tr"+i+"td3").html("Found");
+             $("#"+"tr"+i+"td2").html("<img width=12px src='images/tick.jpg'/>");
+             if(js_file_status_array[x]=='0')
+             {
+                $("#"+"tr"+i+"td1").html("Not approved or rejected");
+             }
+             
+            }
+        
     }
-}
-}
-$("#filesMatched").append(foundfiles+" out of "+js_neededFiles.length+" files found.");
-if(foundfiles>0){
-    $("#submitFiles").removeAttr('disabled');
-$("#submitFiles").attr('class','btn btn-normal')
+
 }
 
-});
+$( document ).ready(function() {
+    var form = document.getElementById('form1');
+  var fd = new FormData(form);
 
 var uploadbtn = document.getElementById("submitFiles");
 uploadbtn.addEventListener('click', function(e) {
-
-    var form = document.getElementById('form1');
-    var files = document.getElementById("files").files;
-    console.log(files);
-    console.log(form);
-    var fd = new FormData(form);
-    console.log(fd);
-    for(var x=0; x<files.length; x++){
-        if(inArray(files[x].name,js_neededFiles)){
-            fd.append("files[]", files[x]);
-    }
-}
-
-
-$.ajax({
+    var files = document.getElementById("files").files;  
+    $.ajax({
     url: 'upload.php',
     data: fd,
     processData: false,
@@ -382,9 +391,66 @@ $.ajax({
     console.log(data);
 }
 }
-)})
+)
+})
+
+$("#files").change(function(){
+    var foundfiles=0;
+    var form = document.getElementById('form1');
+    var files = document.getElementById("files").files;
+    
+    
+    for(var x=0; x<files.length; x++){
+        if(inArray(files[x].name,js_neededFiles)){
+            foundfiles++; 
+           }
+        
+                // change from red to green if expected file in folder is found
+        for(var i =0; i<js_neededFiles.length; i++){
+            if($("#"+'tr'+i+'td0     ').text()==files[x].name){
+                $("#"+'filelist'+i).css("color","green");
+                $("#"+'filelist'+i).css("font-weight","bold");
+                $("#"+'checkbox'+i).prop("src","images/tick.jpg");
+                 $("#"+"tr"+i+"td4").html('<input id="'+i+'" type="button" class="addToUpload" value="Add to Upload"/>');
+
+        }
+    }
+
+}
+
+$(".addToUpload").click(function(){
+    $(this).prop("value","ADDED");
+    $(this).prop("disabled","true");
+    var id = this.id;
+    var file1name = $("#"+"tr"+id+"td0").text();
+    for(var x=0; x<files.length; x++){
+        if(file1name==files[x].name){
+            fd.append("files[]", files[x]);
+            console.log("Asd");
+    }
+
+}})
+
+$("#filesMatched").append(foundfiles+" out of "+js_neededFiles.length+" files found.");
+if(foundfiles>0){
+    $("#submitFiles").removeAttr('disabled');
+$("#submitFiles").attr('class','btn btn-normal')
+}
+
+});
 
 
+
+
+
+
+
+
+
+
+
+
+})
 </script>
 </body>
 </html>

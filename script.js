@@ -36,23 +36,24 @@
 		var num6 = document.getElementById("numOfQuizes").value;
 		var result = "";
 		if(num1.length == 0){
-			result += text1 + ", ";
+		alert(text1+"is required. Please try again.");
+
 		}
-		if(num2.length == 0){
-			result += text2 + ", ";
+		else if(num2.length == 0){
+			alert(text2+"is required. Please try again.");
 		}
-		if(num3.length == 0){
-			result += text3 + ", ";
+		else if(num3.length == 0){
+			alert(text3+"is required. Please try again.");
 		}
-		if(num4.length == 0){
-			result += text4 + ", ";
+		else if(num4.length == 0){
+			alert(text4+"is required. Please try again.");
 		}
-		if(num5.length == 0){
-			result += text5 + ", ";
+		else if(num5.length == 0){
+			alert(text5+"is required. Please try again.");
 		}
-		if(num6.length == 0){
-			result += text6 + ", ";
+		else if(num6.length == 0){
+			alert(text6+"is required. Please try again.");
 		}
-		result = result + "is required. Please try again.";
-		alert(result);
+		
+		
 	}

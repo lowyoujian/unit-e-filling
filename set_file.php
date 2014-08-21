@@ -12,12 +12,12 @@ $code = $_GET['unit_code'];
 ?>
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading">Number of File Setting</div>
+			<div class="panel-heading">Number of File Setting for Unit <?php echo $code?></div>
 			<div class="panel-body">
 
 				<form class="form-horizontal" name="form1" id="form1" role="form" action="" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="numOfLecture" class="col-sm-2 control-label">Number of Lecture</label>
+						<label for="numOfLecture" class="col-sm-2 control-label">Number of Lecture </label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" id="numOfLectures" name="numOfLectures" size="35"/>							
 						</div>
@@ -101,10 +101,10 @@ $code = $_GET['unit_code'];
 SET `num_lecture`={$_POST['numOfLectures']}, `num_tutorial`= {$_POST['numOfTutorials']}, `num_practical`={$_POST['numOfPracticals']}, `num_assignment`={$_POST['numOfAssignments']}, `num_test`={$_POST['numOfTests']}, `num_quiz`={$_POST['numOfQuizes']}
 WHERE `unit_code`='$code' AND `trimester`= '$date';
 SQL;
-var_dump($sql);
 
 
 $results = mysqli_query($mysqli3, $sql);
+header("Location:home.php");
 }
 
 	?>
