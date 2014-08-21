@@ -4,7 +4,6 @@
 			alert("Please make sure Lecturer ID is not null. Please try again.");
 
 			}
-				
 	}
 	
 		function moderatorAssignValidation(){
@@ -67,7 +66,6 @@
 		var num4 = document.getElementById("numOfAssignments").value;
 		var num5 = document.getElementById("numOfTests").value;
 		var num6 = document.getElementById("numOfQuizes").value;
-		var result = "";
 		if(num1.length == 0){
 		alert(text1+"is required. Please try again.");
 
