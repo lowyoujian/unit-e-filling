@@ -6,6 +6,7 @@
 			<td align='center'><a href='moderator_assign.php' class="btn btn-default">Assign Moderator</a></td>
 			<td align='center'><a href='programme_assign.php' class="btn btn-default">Add Programme</a></td>
 			<td align='center'><a href="unit_assign.php" class="btn btn-default">Add Unit</a></td>
+			<td align='center'><a href="add_user.php" class="btn btn-default">Add User</a></td>
 			<td align='center'><a href="logout.php" class="btn btn-default">Logout</a></td>
 		</tr>
 	</table>
