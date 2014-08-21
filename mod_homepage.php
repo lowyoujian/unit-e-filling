@@ -44,7 +44,7 @@ include('database_config.php');
 	$stmt2->bind_result($department_id,$department_name);
 		while($stmt2->fetch()){	
 	
-		echo "<option value='$department_name'>$department_name</option>";
+		echo "<option value='$department_id'>$department_name</option>";
 		
 	}	
 ?>
@@ -63,7 +63,7 @@ include('database_config.php');
 	$stmt3->bind_result($programme_id,$programme_name,$short_code);
 		while($stmt3->fetch()){	
 		
-		echo "<option value='$programme_name'>".$programme_name."</option>";
+		echo "<option value='$programme_id'>".$programme_name."</option>";
 		
 	}	
 ?>
