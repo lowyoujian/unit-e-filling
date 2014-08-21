@@ -65,7 +65,7 @@ header("location:home.php");
 			<div class="panel-heading">Number of File Setting for Unit <?php echo $code?></div>
 			<div class="panel-body">
 
-				<form class="form-horizontal" name="form1" action="<?php echo $_SERVER['PHP_SELF']?>" id="form1" role="form" method="POST" enctype="multipart/form-data">
+				<form class="form-horizontal" name="form1" action="redirect.php" id="form1" role="form" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="numOfLecture" class="col-sm-2 control-label">Number of Lecture </label>
 						<div class="col-sm-3">
