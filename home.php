@@ -211,7 +211,14 @@ var js_file_status_array =<?php echo json_encode($file_status_array);?>;
 </script>
 </head>
 <body>
-
+    <div class="container">
+	<table>
+		<tr>
+			<td align='center'><a href='unitcodelist.php' class="btn btn-default">Home</a></td>			
+			<td align='center'><a href="logout.php" class="btn btn-default">Logout</a></td>
+		</tr>
+	</table>
+	</div>
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">e-Unitfile</div>
