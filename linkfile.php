@@ -20,7 +20,7 @@ $unit=$_GET['unit'];
 include('database_config.php');
 	session_start();
 	
-	//Obtain Department table information
+	//Match unit table information to determine unit_name exists 
 	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
