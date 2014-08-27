@@ -82,7 +82,10 @@ SQL;
 				
 				$stmt3->execute();
 				$stmt3->close();
-				
+				?>
+				<script>
+	alert("Successful Add User!!!");
+	</script><?php
 				
 				exit;
 			}

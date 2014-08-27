@@ -110,6 +110,10 @@ SQL;
 				
 				$stmt3->execute();
 				$stmt3->close();
+				?>
+				<script>
+	alert("Successful Add Unit");
+	</script><?php
 				
 				
 				exit;

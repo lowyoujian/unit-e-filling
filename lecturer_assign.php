@@ -136,9 +136,15 @@ SQL;
 				
 				$stmt3->execute();
 				$stmt3->close();
+				?>
+				<script>
+	alert("Successful Assign Lecturer!!!");
+	</script><?php
 				
 				
 				exit;
+				
+				
 			}
 			else {
 				die('Database Error (' . $mysqli3->errno . ') '

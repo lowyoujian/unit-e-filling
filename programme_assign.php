@@ -59,6 +59,10 @@ SQL;
 				
 				$stmt3->execute();
 				$stmt3->close();
+				?>
+				<script>
+	alert("Successful Add Programme!!!");
+	</script><?php
 				
 				
 				exit;
