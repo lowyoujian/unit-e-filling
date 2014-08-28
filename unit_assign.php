@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<?php
 	include('database_config.php');
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') '
 			. $mysqli->connect_error);
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<?php
-	$mysqli2 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli2 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli2->connect_error) {
 		die('Connect Error (' . $mysqli2->connect_errno . ') '
 			. $mysqli2->connect_error);
@@ -89,7 +89,7 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST") {
 		
 			
-			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+			$mysqli3 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli3->connect_error) {
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);

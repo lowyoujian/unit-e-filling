@@ -183,8 +183,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `password`, `name`, `position`) VALUES
-('10101010', '10101010', 'Lim Ah Meh', 1),
-('10101011', '10101011', 'Lim Ah Mei', 1),
+('10101010', '10101010', 'lec1', 1),
+('10101011', '10101011', 'lec2', 1),
+('12345678', '12345678', 'admin', 3),
 ('20202020', '20202020', 'Mod1', 2);
 
 --

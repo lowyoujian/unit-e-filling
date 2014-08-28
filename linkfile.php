@@ -21,7 +21,7 @@ include('database_config.php');
 	session_start();
 	
 	//Match unit table information to determine unit_name exists 
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
 						. $mysqli->connect_error);
@@ -40,7 +40,7 @@ include('database_config.php');
 	if($unitname != null)
 	{
 	
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
@@ -54,7 +54,7 @@ include('database_config.php');
 	$stmt->bind_result($unit_id,$sem);
 	$stmt->fetch();	
 
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 $user_id=$_SESSION['user_id'];
 $stmt2=$mysqli->prepare("SELECT trimester,num_lecture,num_tutorial,num_quiz,num_test,num_practical,num_assignment FROM lecturer_and_unit_files WHERE unit_code=? AND unit_id=?");
 $stmt2->bind_param('ss',

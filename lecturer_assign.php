@@ -7,7 +7,7 @@
 		<?php
 	include('database_config.php');
 	$date=date('Y');
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli->connect_error) {
 		die('Connect Error (' . $mysqli->connect_errno . ') '
 			. $mysqli->connect_error);
@@ -68,7 +68,7 @@
 		<?php
 	if($_SERVER['REQUEST_METHOD'] == "POST") {
 		
-		$mysqli2 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+		$mysqli2 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli2->connect_error) {
 		die('Connect Error (' . $mysqli2->connect_errno . ') '
 			. $mysqli2->connect_error);
@@ -78,7 +78,7 @@
 			$_POST['lecturerId']);
 	$stmt2->execute();
 	
-		$mysqli4 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+		$mysqli4 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli4->connect_error) {
 		die('Connect Error (' . $mysqli4->connect_errno . ') '
 			. $mysqli4->connect_error);
@@ -90,7 +90,7 @@
 	$stmt4->bind_result($unitc);
 	$stmt4->fetch();	
 	
-	$mysqli5 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli5 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli5->connect_error) {
 		die('Connect Error (' . $mysqli5->connect_errno . ') '
 			. $mysqli5->connect_error);
@@ -113,7 +113,7 @@
 	exit;
 	}else {
 	
-			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+			$mysqli3 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli3->connect_error) {
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);

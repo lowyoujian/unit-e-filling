@@ -32,7 +32,7 @@ include('database_config.php');
 
 	
 	//Obtain Department table information
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
 						. $mysqli->connect_error);
@@ -51,7 +51,7 @@ include('database_config.php');
 	</select></td><td><select name='programme'>
 <?php
 	//Obtain Programme table information
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
 						. $mysqli->connect_error);
@@ -71,7 +71,7 @@ include('database_config.php');
 <?php
 
 	//Obtain Unit table information	
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '
 						. $mysqli->connect_error);

@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD']=="POST" ){
 SQL;
     echo $que;
 
-    $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+    $mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
     $stmt5=$mysqli->prepare($que); 
     $stmt5->execute();
 

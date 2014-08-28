@@ -1,7 +1,7 @@
 <?php
 include('database_config.php');
 	session_start();
-	$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+	$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	
 			if ($mysqli->connect_error) {
 				die('Connect Error (' . $mysqli->connect_errno . ') '

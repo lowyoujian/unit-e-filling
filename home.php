@@ -2,25 +2,20 @@
 <html>
 <?php
 session_start();
+if(isset($_POST['unit_code'])){
 $_SESSION['unit_code']=$_POST['unit_code'];
+}
     include('database_config.php');
     $getDate = new Upload();
     $getDate->getCurrentTrimester();
-    if($_SERVER['REQUEST_METHOD'] == "POST") {
-        $mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-        if ($mysqli3->connect_error) {
-        die('Connect Error (' . $mysqli3->connect_errno . ') '
-            . $mysqli3->connect_error);
-    }
-
-
-
-
-        }
     
 ?>
 <?php
-
+ $mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
+        // Check connection
+        if (mysqli_connect_errno()) {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
 $unit_code = $_SESSION['unit_code'];
 $uploadHandler = new Upload();
 $uploadHandler->getCurrentTrimester();
@@ -43,7 +38,7 @@ foreach($upload_form_fields as $key => $value)
 {
     $input[$key] = '';
 }
-if($_SERVER['REQUEST_METHOD']=="post"){
+if($_SERVER['REQUEST_METHOD']=="POST"){
     $query = <<<SQL
     SELECT id, unit_code, unit_name FROM unit WHERE id IN(SELECT unit_id FROM lecturer_and_unit_files WHERE user_id = {$_SESSION['user_id']});
 SQL;
@@ -90,7 +85,7 @@ class Upload {
     }
 
     function connect_db(){
-      $mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+      $mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
         // Check connection
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -106,7 +101,7 @@ class Upload {
 
 // Retrieve relevant unitcode details.
 
-$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 $user_id=$_SESSION['user_id'];
 $stmt=$mysqli->prepare("SELECT unit_id,trimester,num_lecture,num_tutorial,num_quiz,num_test,num_practical,num_assignment FROM lecturer_and_unit_files WHERE unit_code=? AND trimester=? AND user_id=?");
 $stmt->bind_param('sss',
@@ -122,7 +117,7 @@ header("Location:set_file.php?unit_code={$_POST['unit_code']}");
 }
 
 
-$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 
  $stmt2=$mysqli->prepare("SELECT unit_name FROM unit WHERE unit_code =?"); 
     $stmt2->bind_param('s',
@@ -132,7 +127,7 @@ $mysqli = new mysqli($database['ip'], $database['username'], '', $database['data
 $stmt2->bind_result($unit_name);
 $stmt2->fetch();
 
-$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 $stmt3= $mysqli->prepare("SELECT programme_name from programme WHERE id IN(SELECT programme_id from unit where unit_code = ?) ");
    $stmt3->bind_param('s',
     $unit_code);
@@ -140,7 +135,7 @@ $stmt3= $mysqli->prepare("SELECT programme_name from programme WHERE id IN(SELEC
 $stmt3->bind_result($programme_name);
 $stmt3->fetch();
 
-$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 $stmt4= $mysqli->prepare("SELECT name from user WHERE user_id IN(SELECT user_id from mod_and_unit where unit_code = ? AND trimester=? ) ");
    $stmt4->bind_param('ss',
     $unit_code,
@@ -149,7 +144,7 @@ $stmt4= $mysqli->prepare("SELECT name from user WHERE user_id IN(SELECT user_id 
 $stmt4->bind_result($mod_name);
 $stmt4->fetch();
 
-$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$mysqli = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 $stmt5= $mysqli->prepare("SELECT file_name, datetime_uploaded, file_status from ( SELECT file_name, max(datetime_uploaded),file_status, datetime_uploaded from files_of_unit where unit_id =? AND user_id=? AND trimester = ? group by file_name DESC) as name ORDER BY file_name");
    $stmt5->bind_param('sss',
     $unit_id,
@@ -228,6 +223,8 @@ var js_file_status_array =<?php echo json_encode($file_status_array);?>;
                         <label for="unitcodes" class="col-sm-2 control-label"><?php echo $upload_form_fields['unitcode'] ?></label>
                         <div class="col-sm-3">
                             <input type="text" readonly name="unit_code" required class="form-control" id="unitcodes" value="<?php echo $unit_code?>" >
+
+                            <input type="text" style="display:none;" name="unitcode" required class="form-control" id="unitcodes" value="<?php echo $unit_code?>" >
                         </div>
                     </div>
                     <div class="form-group">
@@ -315,15 +312,6 @@ var js_file_status_array =<?php echo json_encode($file_status_array);?>;
 fclose($file);
 
 
-
-/*$mysqli = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
-$stmt3= $mysqli->prepare("SELECT file_name, file_status, date_uploade from files_of_unit WHERE unit_id = {$unit_id} AND trimester = {$uploadHandler->date} ORDER BY date_uploaded ;");
-   $stmt3->bind_param('s',
-    $unit_code);
-    $stmt3->execute();
-$stmt3->bind_result($programme_name);
-$stmt3->fetch();
-*/
 ?>
 <script>
     var js_neededFiles = <?php echo json_encode($neededFiles);?>;
@@ -348,11 +336,11 @@ for(var i=0;i<js_neededFiles.length;i++){
     js_neededFiles_with_unitcode[i]= js_neededFiles[i];
     js_neededFiles_with_unitcode[i] = "<?php echo $unit_code."_"; echo $date."_";?>"+js_neededFiles_with_unitcode[i];
 }
- $("#files_table").append('<tr id=Title><td>File</td><td>On Server</td><td>Exists in your folder</td><td>Status</td><td>Upload</td></tr>');
+ $("#files_table").append('<tr id=Title><td>File</td><td>Exist On Server</td><td>Exists in your local folder</td><td>Status</td><td>Upload</td></tr>');
 for(var i=0; i<js_neededFiles.length; i++){
     $("#files_table").append('<tr id='+'tr'+i+'>'+js_neededFiles[i]);
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td0'+'>'+js_neededFiles[i]+'</span></td>');
-    $("#"+"tr"+i).append('<td id='+'tr'+i+'td2'+'>'+'<img id='+'checkbox'+i+' width="12px"  src="images/cross.jpg"  /></td>');
+    $("#"+"tr"+i).append('<td id='+'tr'+i+'td2'+'>'+'<span style="color:black;">Not Found</span>');
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td3'+'>'+"Not Found"+'</span></td>');
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td1'+'>'+"Not Available"+'</td>');
     $("#"+"tr"+i).append('<td id='+'tr'+i+'td4'+'>'+'<input type="button" style="visibility:hidden;" disabled="true" value="Add to Upload"/>'+'</td>');
@@ -366,7 +354,7 @@ for(var i=0; i<js_neededFiles.length; i++){
 
     for(var x=1; x<=count; x++){
         if(js_file_name_array[x]==js_neededFiles_with_unitcode[i]){
-             $("#"+"tr"+i+"td2").html("<img width=12px src='images/tick.jpg'/>");
+             $("#"+"tr"+i+"td2").html("<span style='color:green;font-size:18px;font-weight:bold;'>Found</span>");
              if(js_file_status_array[x]=='0')
              {
                 $("#"+"tr"+i+"td1").html("Not approved or rejected");
@@ -392,18 +380,11 @@ $( document ).ready(function() {
   var added_file_count = 0;
 var uploadbtn = document.getElementById("submitFiles");
 uploadbtn.addEventListener('click', function(e) {
+    $("#submitFiles").prop('value',"uploading Files");
+  
     var files = document.getElementById("files").files;  
     $.ajax({
       
-        xhr: function() {
-            var xhr = new window.XMLHttpRequest();
-            xhr.addEventListener('progress', function(e) {
-                if (e.lengthComputable) {
-                    $('#progress_bar').prop("value","100 * e.loaded / e.total");
-                }
-            });
-            return xhr;
-        }, 
     url: 'upload.php',
     data: fd,
     processData: false,
@@ -411,8 +392,15 @@ uploadbtn.addEventListener('click', function(e) {
     type: 'POST',
     success: function(data){
     $("#submitFiles").removeAttr('class');
+    $("#progress_bar").prop('value','100');
     $("#submitFiles").attr('class','btn btn-success');
     $("#submitFiles").prop('value','Successfully uploaded');
+    setTimeout(
+  function() 
+  {
+     window.location.reload(true);
+  }, 500);
+   
 }
 }
 )
@@ -432,7 +420,7 @@ $("#files").change(function(){
                 // change from red to green if expected file in folder is found
         for(var i =0; i<js_neededFiles.length; i++){
             if($("#"+'tr'+i+'td0').text()==files[x].name){
-                $("#"+"tr"+i+"td3").html("Found");
+                $("#"+"tr"+i+"td3").html("<span style='color:green;font-size:18px'>Found</span>");
                  $("#"+"tr"+i+"td4").html('<input id="'+i+'" type="button" class="addToUpload" value="Add to Upload"/>');
 
         }

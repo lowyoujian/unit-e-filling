@@ -1,7 +1,5 @@
 <?php
 include('database_config.php');
-var_dump($_POST);
-
 
 		if($_SERVER['REQUEST_METHOD'] == "POST") {
 	$date=date('M');
@@ -27,7 +25,7 @@ var_dump($_POST);
             )
             {$date="May".date('Y');}
 
-$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+$mysqli3 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 		if ($mysqli3->connect_error) {
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
@@ -46,7 +44,7 @@ mysqli_query($mysqli3, $sql);
 ?>
 <html>
 <body>
-<form id="form1" action="home.php" method="post"/>
+<form style="display:none;" id="form1" action="home.php" method="post"/>
 <input name="unit_code" value="<?php echo $_POST['unitcode'];?>"/>
 </form>
 

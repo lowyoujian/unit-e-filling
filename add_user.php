@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -61,7 +62,7 @@
 	if($_SERVER['REQUEST_METHOD'] == "POST") {
 		
 			
-			$mysqli3 = new mysqli($database['ip'], $database['username'], '', $database['database_name']);
+			$mysqli3 = new mysqli($database['ip'], $database['username'], $database['password'], $database['database_name']);
 	if ($mysqli3->connect_error) {
 		die('Connect Error (' . $mysqli3->connect_errno . ') '
 			. $mysqli3->connect_error);
