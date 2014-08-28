@@ -40,12 +40,12 @@ if(!file_exists("upload/$unit_code/$trimester/$unit_code.txt")){
 		fwrite($file,  "tutorial_solution".$x. ".pdf\r\n");	
 	} 
 
-	fwrite($file,"main". "\r\n");
+	fwrite($file,"main".".pdf". "\r\n");
 	fwrite($file, "unit matrix ". $unit_code.".pdf". "\r\n");
 	fwrite($file, "academic report ". $unit_code.".pdf". "\r\n");
 	fwrite($file, "misc". $unit_code.".pdf"."\r\n");
-	fwrite($file, "syllabus"."\r\n"); 
-	fwrite($file, "teaching plan"."\r");
+	fwrite($file, "syllabus"."pdf"."\r\n"); 
+	fwrite($file, "teaching plan"."pdf"."\r");
 
 	fclose($file); 
 }
