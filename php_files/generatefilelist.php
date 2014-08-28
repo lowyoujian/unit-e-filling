@@ -44,8 +44,8 @@ if(!file_exists("upload/$unit_code/$trimester/$unit_code.txt")){
 	fwrite($file, "unit matrix ". $unit_code.".pdf". "\r\n");
 	fwrite($file, "academic report ". $unit_code.".pdf". "\r\n");
 	fwrite($file, "misc". $unit_code.".pdf"."\r\n");
-	fwrite($file, "syllabus"."pdf"."\r\n"); 
-	fwrite($file, "teaching plan"."pdf"."\r");
+	fwrite($file, "syllabus".".pdf"."\r\n"); 
+	fwrite($file, "teaching plan".".pdf"."\r");
 
 	fclose($file); 
 }
