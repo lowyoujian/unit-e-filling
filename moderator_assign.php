@@ -134,7 +134,10 @@ SQL;
 				
 				$stmt3->execute();
 				$stmt3->close();
-				
+				?>
+				<script>
+	alert("Successful Assign Moderator!!!");
+	</script><?php
 				
 				exit;
 			}
