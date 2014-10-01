@@ -111,7 +111,7 @@ th#status
 			
 <?php
 //Initialize all file status as false			
-for($s=1;$s<=14;$s++)
+for($s=1;$s<=16;$s++)
 {
 $filestatus[$s]=false;
 $matchFileName[$s]='';
@@ -122,6 +122,8 @@ $matchFileName5[$s]='';
 $matchFileName6[$s]='';
 $matchFileName7[$s]='';
 $matchFileName8[$s]='';
+$matchFileName9[$s]='';
+$matchFileName10[$s]='';
 }
 		
 				echo "<table class='table' border='1'>";
@@ -170,6 +172,7 @@ $matchFileName8[$s]='';
 						$matchFileName8[$j]=$filename[$x];
 						$filestatus[8]=true;
 					}
+				
 					if($filename[$x]=="main.pdf")
 					{
 						$matchFileNameMAIN=$filename[$x];
@@ -200,6 +203,16 @@ $matchFileName8[$s]='';
 						$matchFileNameTP=$filename[$x];
 						$filestatus[14]=true;
 					}
+					if($filename[$x]=="$unit"."_"."$sem"."_"."practical"."$j".".pdf")
+					{
+						$matchFileName9[$j]=$filename[$x];
+						$filestatus[15]=true;
+					}
+					if($filename[$x]=="$unit"."_"."$sem"."_"."practical"."_"."solution"."$j".".pdf")
+					{
+						$matchFileName10[$j]=$filename[$x];
+						$filestatus[16]=true;
+					}	
 					
 				}
 				}
@@ -381,6 +394,51 @@ $matchFileName8[$s]='';
 				echo "<td>$unit","_$sem","_tutorial_solution$j.pdf</td>";
 				echo "<td><img id='checkbox8[$j]' width='12px'  src='images/cross.jpg'  /></td>";
 				echo "<td><div id='exists8[$j]'>Not Found</div></td>";
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
+				echo "<td>Not Available</td></tr>";
+				}
+				}
+				
+				for($j=1;$j<=$num_practical ; $j++){				
+				echo "<div id='c' style='margin-bottom:5px;'><tr>";	
+				if($filestatus[15] && $matchFileName9[$j] == "$unit"."_"."$sem"."_"."practical"."$j".".pdf")
+				{	
+				echo "<td><a href='upload/$unit/$sem/$matchFileName9[$j]' id='fileName15[$j]' name='fileName15[$j]' download>$unit","_$sem","_practical$j.pdf</a></td>";
+				echo "<td><img id='checkbox15[$j]' width='12px'  src='images/tick.jpg'  /></td>";	
+				echo "<td><div id='exists15[$j]'>Found</div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve' id='approve15[$j]' style='color:black; background-color:green;'/></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove15[$j]' style='color:black; background-color:red;'/></div></td>";	
+				echo "<td><div id='box15[$j]' class='box' style='width:20px; height:20px; background-color:black; </div>'><div id='text15[$j]' style='margin-left:30px;'></div></td></tr>";
+				}
+				else
+				{
+				echo "<td>$unit","_$sem","_practical$j.pdf</td>";
+				echo "<td><img id='checkbox15[$j]' width='12px'  src='images/cross.jpg'  /></td>";
+				echo "<td><div id='exists15[$j]'>Not Found</div></td>";
+				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
+				echo "<td>Not Available</td></tr>";
+				}
+					
+				}
+			
+				for($j=1;$j<=$num_practical ; $j++){				
+				echo "<div id='c' style='margin-bottom:5px;'><tr>";		
+				if($filestatus[16] && $matchFileName10[$j] == "$unit"."_"."$sem"."_"."practical"."_"."solution"."$j".".pdf")
+				{	
+				echo "<td><a href='upload/$unit/$sem/$matchFileName10[$j]' id='fileName16[$j]' name='fileName16[$j]' download>$unit","_$sem","_practical_solution$j.pdf</a></td>";
+				echo "<td><img id='checkbox16[$j]' width='12px'  src='images/tick.jpg'  /></td>";
+				echo "<td><div id='exists16[$j]'>Found</div></td>";	
+				echo "<td><input class='approve' type='submit' value='Approve' id='approve16[$j]' style='color:black; background-color:green;'/></td>";
+				echo "<td><input class='disapprove' type='submit' value='Disapprove' id='disapprove16[$j]' style='color:black; background-color:red;'/></div></td>";	
+				echo "<td><div id='box16[$j]' class='box' style='width:20px; height:20px; background-color:black; </div>'><div id='text16[$j]' style='margin-left:30px;'></div></td></tr>";
+				}
+				else
+				{
+				echo "<td>$unit","_$sem","_practical_solution$j.pdf</td>";
+				echo "<td><img id='checkbox16[$j]' width='12px'  src='images/cross.jpg'  /></td>";
+				echo "<td><div id='exists16[$j]'>Not Found</div></td>";
 				echo "<td><input class='approve' type='submit' value='Approve'  disabled='true' /></td>";
 				echo "<td><input class='disapprove' type='submit' value='Disapprove'  disabled='true' /></div></td>";	
 				echo "<td>Not Available</td></tr>";
@@ -567,6 +625,50 @@ document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").style.color="r
 <?php 
 }
 }
+?>
+<?php for($i=1;$i<=20;$i++)
+{
+//to obtain fileName9 to fileName10 id 
+for($p=15;$p<=16;$p++)
+{
+//Loop the function for every buttons
+?>
+<script src="jquery-2.1.1.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () { 
+$(document.getElementById("approve<?php echo $p;?>[<?php echo $i;?>]")).click(function(){
+var ths = this;
+var str = $(document.getElementById("fileName<?php echo $p;?>[<?php echo $i;?>]")).text();	
+$.post("approve.php", {t:str}, function(value){
+
+document.getElementById("box<?php echo $p;?>[<?php echo $i;?>]").style.backgroundColor="#33FF33";
+document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").innerHTML="Approved";
+document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").style.color="green";
+});
+});
+});
+
+
+$(document).ready(function () { 
+$(document.getElementById("disapprove<?php echo $p;?>[<?php echo $i;?>]")).click(function(){
+var ths = this;
+var str = $(document.getElementById("fileName<?php echo $p;?>[<?php echo $i;?>]")).text();
+$.post("disapprove.php", {t:str}, function(value){
+
+document.getElementById("box<?php echo $p;?>[<?php echo $i;?>]").style.backgroundColor="#FF0000";
+document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").innerHTML="Disapproved";
+document.getElementById("text<?php echo $p;?>[<?php echo $i;?>]").style.color="red";
+});
+});
+});
+
+</script>
+
+<?php 
+}
+}
+
 for($o=9;$o<=14;$o++)
 {
 ?>
